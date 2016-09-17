@@ -1,3 +1,6 @@
+//TODO set a binary server route
+//TODO use routes instead of controllers
+
 //what do bower and toastr do?
 
 var express = require('express'),
@@ -11,8 +14,10 @@ var express = require('express'),
     async = require('async'),
     request = require('request'),
     path = require('path'),
-    drive = require('./app/services/googleDrive');
+    drive = require('./app/services/googleDrive'),
+    http = require('http');
 var app = express();
+var binaryServer = require("./app/binary-server/binary-server");
 
 //set your environment variable? what does this effect?
 var env = process.env.NODE_ENV = process.env.NODE_ENV || 'developmen';
@@ -35,7 +40,6 @@ app.use(stylus.middleware(
         }
 	}
 ));
-app.use(multer({ dest: './tmp/' }).single('file'));
 //static route handling
 app.use(express.static(__dirname + "/public"));
 
@@ -98,25 +102,7 @@ app.get('/', function(req, res){
 drive.init(function() {
     console.log("Initializing folder structure...");
     drive.queueRequest(function(callback) {
-        drive.mkdir(["eLab", "Stimuli"], null, function(err){
-            if(err) {
-                console.error(err);
-                return;
-            }
-            callback();
-        })
-    });
-    drive.queueRequest(function(callback) {
         drive.mkdir(["eLab", "avData"], null, function(err){
-            if(err) {
-                console.error(err);
-                return;
-            }
-            callback();
-        })
-    });
-    drive.queueRequest(function(callback) {
-        drive.mkdir(["eLab", "sessionData"], null, function(err){
             if(err) {
                 console.error(err);
                 return;
@@ -127,5 +113,7 @@ drive.init(function() {
 })
 
 const port = process.env.PORT || 3030;
-app.listen(port);
+//app.listen(port);
+var server = http.createServer(app).listen(port);
+require('./app/binary-server/binary-server.js')(server, "/api/upload");
 console.log("Listening on port " + port + "...");

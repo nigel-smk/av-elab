@@ -1,5 +1,8 @@
-angular.module('app').controller('ssMainCtrl', function($rootScope, $scope, $window, $document, $interval, $http, $location, $sce, audioRecorderService, UM_Event, sessionAuth){
+angular.module('app').controller('ssMainCtrl', function($rootScope, $scope, $window, $document, $interval, $http, $location, $sce, audioRecorderService, videoRecorderSvc, UM_Event, sessionAuth){
     'use strict';
+
+    //TODO use events and listeners to drive the movement of the app. No giant if-then block.
+    //TODO use the video streaming
 
     //VARIABLES
     var ctrl = this;
@@ -31,35 +34,35 @@ angular.module('app').controller('ssMainCtrl', function($rootScope, $scope, $win
     };
 
     //HANDLE A/V DATA
-    //captures player stop time. This seems like the right way to do this. Maybe not the right place.
-    var playerTimeListener = $scope.$on('playerTime', function(event, data){
-        var time = Math.floor( data * 1000 ); //convert to milliseconds and remove decimals
-        $scope.sessionData.stopTime = time;
-        playerTimeListener();
-    });
-
-    $scope.$on('audioDoneEncoding', function(event, data){
-        if ($scope.sessionData.sid != 'demo') {
-            var fd = new FormData();
-            fd.append('file', data, 'audio.wav');
-            var postUrl = '/api/avData?sid=' + $scope.sessionData.sid + '&pid=' + $scope.sessionData.pid;
-            $http.post(postUrl, fd,
-                {
-                    transformRequest: function (data) {
-                        return data;
-                    },
-                    headers: {
-                        'Content-Type': undefined,
-                        'x-access-token': $scope.sessionData.token
-                    }
-                }).success(function () {
-                    console.log("recorderWrapper | Uploaded audio");
-                    $scope.audioUploaded = true;
-                }).error(function () {
-                    console.log("recorderWrapper | Audio upload failed");
-                });
-        }
-    });
+    // //captures player stop time. This seems like the right way to do this. Maybe not the right place.
+    // var playerTimeListener = $scope.$on('playerTime', function(event, data){
+    //     var time = Math.floor( data * 1000 ); //convert to milliseconds and remove decimals
+    //     $scope.sessionData.stopTime = time;
+    //     playerTimeListener();
+    // });
+    //
+    // $scope.$on('audioDoneEncoding', function(event, data){
+    //     if ($scope.sessionData.sid != 'demo') {
+    //         var fd = new FormData();
+    //         fd.append('file', data, 'audio.wav');
+    //         var postUrl = '/api/avData?sid=' + $scope.sessionData.sid + '&pid=' + $scope.sessionData.pid;
+    //         $http.post(postUrl, fd,
+    //             {
+    //                 transformRequest: function (data) {
+    //                     return data;
+    //                 },
+    //                 headers: {
+    //                     'Content-Type': undefined,
+    //                     'x-access-token': $scope.sessionData.token
+    //                 }
+    //             }).success(function () {
+    //                 console.log("recorderWrapper | Uploaded audio");
+    //                 $scope.audioUploaded = true;
+    //             }).error(function () {
+    //                 console.log("recorderWrapper | Audio upload failed");
+    //             });
+    //     }
+    // });
 
     //PHASE CONTROL
     //TODO put phase control in a service?
@@ -72,19 +75,21 @@ angular.module('app').controller('ssMainCtrl', function($rootScope, $scope, $win
             //    pid: $scope.sessionData.pid,
             //    stopTime: $scope.sessionData.stopTime
             //});
-            $window.location = $scope.sessionData.redirect + "?sid=" + $scope.sessionData.sid + "&pid=" + $scope.sessionData.pid + "&stopTime=" + $scope.sessionData.stopTime;
+
         }
+        $window.location = $scope.sessionData.redirect + "?sid=" + $scope.sessionData.sid + "&pid=" + $scope.sessionData.pid + "&stopTime=" + $scope.sessionData.stopTime;
     });
 
     $scope.$on('debriefPhase', function(){
-        if ( $scope.audioUploaded ){
-          /*  window.location.path($scope.sessionData.redirect).search({
-                sid: $scope.sessionData.sid,
-                pid: $scope.sessionData.pid,
-                stopTime: $scope.sessionData.stopTime
-        });*/
-            $window.location = $scope.sessionData.redirect + "?sid=" + $scope.sessionData.sid + "&pid=" + $scope.sessionData.pid + "&stopTime=" + $scope.sessionData.stopTime;
-        }
+        // if ( $scope.audioUploaded ){
+        //   /*  window.location.path($scope.sessionData.redirect).search({
+        //         sid: $scope.sessionData.sid,
+        //         pid: $scope.sessionData.pid,
+        //         stopTime: $scope.sessionData.stopTime
+        // });*/
+        //     $window.location = $scope.sessionData.redirect + "?sid=" + $scope.sessionData.sid + "&pid=" + $scope.sessionData.pid + "&stopTime=" + $scope.sessionData.stopTime;
+        // }
+        $window.location = $scope.sessionData.redirect + "?sid=" + $scope.sessionData.sid + "&pid=" + $scope.sessionData.pid + "&stopTime=" + $scope.sessionData.stopTime;
     });
 
     //to detect mediaStreamReady and change to welcome phase
@@ -98,7 +103,9 @@ angular.module('app').controller('ssMainCtrl', function($rootScope, $scope, $win
                 ctrl.instructions = $scope.sessionData.instructions;
                 ctrl.phase = 'welcome';
             }, function (res) {
-                ctrl.phase = 'invalid-url';
+                //ctrl.phase = 'invalid-url';
+                //hacking to short circuit url validation
+                ctrl.phase = 'welcome';
             });
 
         }
@@ -127,14 +134,16 @@ angular.module('app').controller('ssMainCtrl', function($rootScope, $scope, $win
                     break;
                 case "briefing":
                     $scope.$broadcast('stimulusPhase');
-                    audioRecorderService.API.toggleRecording();
+                    //audioRecorderService.API.toggleRecording();
+                    videoRecorderSvc.record();
                     ctrl.phase = "stimulus";
                     break;
                 case "stimulus":
                     $scope.$broadcast('stopPlayer');
                     $scope.$broadcast('debriefPhase');
                     //TODO maybe figure out separating the audio component one day
-                    audioRecorderService.API.toggleRecording();
+                    //audioRecorderService.API.toggleRecording();
+                    videoRecorderSvc.stop();
                     ctrl.phase = "debrief";
                     break;
                 ////deprecated

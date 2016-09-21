@@ -1,10 +1,10 @@
 angular.module('app').directive('webcamCalibration', [function(){
 
     function link(scope, element, attrs) {
-        scope.validation.webcam = false;
+        scope.webcam = false;
 
         scope.onCalibrated = function() {
-            scope.validation.webcam = true;
+            scope.webcam = true;
             scope.$emit('webcamCalibrated');
         }
     }

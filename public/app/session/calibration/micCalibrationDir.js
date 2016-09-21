@@ -1,9 +1,9 @@
 angular.module('app').directive('micCalibration', function(){
     function link(scope, element, attrs) {
-        scope.validation.microphone = false;
+        scope.microphone = false;
 
         var deregister = scope.$on('micTestPass', function(event) {
-            scope.validation.microphone = true;
+            scope.microphone = true;
             scope.$apply();
             event.stopPropagation();
             deregister();

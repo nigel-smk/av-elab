@@ -2,32 +2,23 @@ angular.module('app').controller('MainCtrl', function($rootScope, $scope, $windo
     'use strict';
 
     //TODO use events and listeners to drive the movement of the app. No giant if-then block.
-    //TODO use the video streaming
 
     //VARIABLES
     var ctrl = this;
+    ctrl.calibrationComplete = false;
+
     $scope.user = {};
-    $scope.validation = {};
     $scope.sessionData = {};
-    $scope.audioUploaded = false;
     ctrl.phase = "browser-detect";
 
-    //CALIBRATION VALIDATION
-    $scope.$watch('validation.speakerTestInput', function(){
-        if ($scope.validation.speakerTestInput) {
-            $scope.validation.speakerTestInput = $scope.validation.speakerTestInput.toLowerCase().trim();
-        }
+    $scope.$on('calibrationComplete', function(event) {
+        ctrl.calibrationComplete = true;
     });
-
-    //play validation sound (welcome)
-    $scope.playTestSound = function(){
-        document.getElementById('audioTest').play();
-    };
 
     //PHASE CONTROL
     //TODO put phase control in a service?
 
-    //to detect mediaStreamReady and change to welcome phase
+    //detect mediaStreamReady and change to welcome phase
     $rootScope.$on(UM_Event.GOTSTREAM, function(event, stream, err){
         if (err){
             console.error(err);
@@ -58,9 +49,7 @@ angular.module('app').controller('MainCtrl', function($rootScope, $scope, $windo
         if (e.keyCode == 32) {
             switch(ctrl.phase) {
                 case "welcome":
-                    if ($scope.validation.speakerTestInput == 'welcome'
-                    && $scope.validation.microphone
-                    && $scope.validation.webcam) {
+                    if (ctrl.calibrationComplete) {
                         ctrl.phase = "briefing";
                     }
                     break;

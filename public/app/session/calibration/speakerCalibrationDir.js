@@ -2,9 +2,13 @@ angular.module('app').directive('speakerCalibration', [function(){
 
     function link(scope, element, attr) {
 
-        scope.validation.speakerTestInput = "";
+        scope.speakerTestInput = "";
 
-        scope.$watch('validation.speakerTestInput', function(newValue, oldValue) {
+        scope.playTestSound = function(){
+            document.getElementById('audioTest').play();
+        };
+
+        scope.$watch('speakerTestInput', function(newValue, oldValue) {
            if (newValue === 'welcome') {
                scope.$emit('speakersCalibrated');
            } 

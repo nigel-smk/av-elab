@@ -1,8 +1,8 @@
 <div class="col-md-4 parent">
-    <div ng-class="{'calibration-success':validation.speakerTestInput=='welcome'}" class="panel panel-default calibrator speaker-calibrator calibration-height text-center">
-        <div ng-show="validation.speakerTestInput == 'welcome'" class="panel-heading">Headphone calibration complete</div>
+    <div ng-class="{'calibration-success':speakerTestInput=='welcome'}" class="panel panel-default calibrator speaker-calibrator calibration-height text-center">
+        <div ng-show="speakerTestInput == 'welcome'" class="panel-heading">Headphone calibration complete</div>
         <div class="panel-body v-aligned">
-            <div ng-hide="validation.speakerTestInput == 'welcome'" class="v-aligned-content">
+            <div ng-hide="speakerTestInput == 'welcome'" class="v-aligned-content">
                 <p>Enter the word from</p>
                 <button ng-click="playTestSound()">this audio clip</button><br/>
                 <p>in the space below</p><br/>
@@ -10,7 +10,7 @@
                     <source src="/audio/welcome.mp3" type="audio/mpeg"/>
                 </audio>
                 <label>Input test word:
-                    <input type="text" name="speakerTestInput" ng-model="validation.speakerTestInput" required="required"/>
+                    <input type="text" name="speakerTestInput" ng-model="speakerTestInput" required="required"/>
                 </label>
             </div>
         </div>

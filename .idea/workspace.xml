@@ -2,47 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="75922d38-c3aa-45dc-bb3e-4832b78ffca2" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/app/session/MainCtrl.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/app/session/calibration/calibrationDir.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/app/session/calibration/calibrationDir.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/app/session/calibration/micCalibrationDir.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/app/session/calibration/micCalibrationDir.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/app/session/calibration/speakerCalibrationDir.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/app/session/calibration/speakerCalibrationDir.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/app/session/calibration/webcamCalibrationDir.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/app/session/calibration/webcamCalibrationDir.js" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/blocks/welcome/main.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/blocks/welcome/microphone.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/blocks/welcome/participant.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/blocks/welcome/speakers.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/blocks/welcome/webcam.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/app/audioRecorderSvc.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/app/recorder.module.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/app/session/ssMainCtrl.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/app/session/welcome/audioStreamCtrl.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/app/session/welcome/liveStreamCtrl.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/app/session/welcome/snapshotCtrl.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/canvas-to-blob.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/recorderWorker.js" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/app/admin/adMainCtrl.js" afterPath="$PROJECT_DIR$/public/app/admin/adminCtrl.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/app/session/permissions/permissionsDir.html" afterPath="$PROJECT_DIR$/public/app/session/cameraAccess/permissionsDir.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/app/session/permissions/permissionsDir.js" afterPath="$PROJECT_DIR$/public/app/session/cameraAccess/permissionsDir.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/app/session/sessionAuthSvc.js" afterPath="$PROJECT_DIR$/public/app/services/sessionAuthSvc.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/app/session/stimulusCtrl.js" afterPath="$PROJECT_DIR$/public/app/session/stimulus/stimulusCtrl.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/app/session/welcome/liveStreamDir.js" afterPath="$PROJECT_DIR$/public/app/session/calibration/webcamMonitorDir.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/app/session/welcome/micLevelsDir.js" afterPath="$PROJECT_DIR$/public/app/session/calibration/micMonitorDir.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/app/session/youTubeEmbed/youTubeCst.js" afterPath="$PROJECT_DIR$/public/app/session/stimulus/youTubeEmbed/youTubeCst.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/app/session/youTubeEmbed/youTubeCtrl.js" afterPath="$PROJECT_DIR$/public/app/session/stimulus/youTubeEmbed/youTubeCtrl.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/app/session/youTubeEmbed/youTubeDir.js" afterPath="$PROJECT_DIR$/public/app/session/stimulus/youTubeEmbed/youTubeDir.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/app/session/youTubeEmbed/youTubeSvc.js" afterPath="$PROJECT_DIR$/public/app/session/stimulus/youTubeEmbed/youTubeSvc.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/app/userMedia.module.js" afterPath="$PROJECT_DIR$/public/app/services/userMedia.module.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/app/videoRecorderSvc.js" afterPath="$PROJECT_DIR$/public/app/services/videoRecorderSvc.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/.Rhistory" afterPath="$PROJECT_DIR$/public/app/session/calibration/webcamMonitorDir.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/video/welcome.mp3" afterPath="$PROJECT_DIR$/public/audio/welcome.mp3" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/includes/scripts.jade" afterPath="$PROJECT_DIR$/app/views/includes/scripts.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/index.jade" afterPath="$PROJECT_DIR$/app/views/index.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/app/app.js" afterPath="$PROJECT_DIR$/public/app/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/app/session/MainCtrl.js" afterPath="$PROJECT_DIR$/public/app/session/MainCtrl.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/app/session/calibration/micCalibrationDir.html" afterPath="$PROJECT_DIR$/public/app/session/calibration/micCalibrationDir.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/app/session/calibration/micCalibrationDir.js" afterPath="$PROJECT_DIR$/public/app/session/calibration/micCalibrationDir.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/app/session/calibration/speakerCalibrationDir.html" afterPath="$PROJECT_DIR$/public/app/session/calibration/speakerCalibrationDir.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/app/session/calibration/speakerCalibrationDir.js" afterPath="$PROJECT_DIR$/public/app/session/calibration/speakerCalibrationDir.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/app/session/calibration/webcamCalibrationDir.html" afterPath="$PROJECT_DIR$/public/app/session/calibration/webcamCalibrationDir.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/app/session/calibration/webcamCalibrationDir.js" afterPath="$PROJECT_DIR$/public/app/session/calibration/webcamCalibrationDir.js" />
     </list>
     <ignored path="petersonLab.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -64,21 +30,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="calibrationDir.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/app/session/calibration/calibrationDir.js">
+      <file leaf-file-name="MainCtrl.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/public/app/session/MainCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="22" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
+            <state relative-caret-position="512">
+              <caret line="62" column="28" selection-start-line="62" selection-start-column="28" selection-end-line="62" selection-end-column="28" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="speakerCalibrationDir.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/app/session/calibration/speakerCalibrationDir.html">
+      <file leaf-file-name="permissionsDir.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/app/session/cameraAccess/permissionsDir.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="39" selection-start-line="9" selection-start-column="39" selection-end-line="9" selection-end-column="39" />
+            <state relative-caret-position="150">
+              <caret line="10" column="61" selection-start-line="10" selection-start-column="61" selection-end-line="10" selection-end-column="61" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="calibrationDir.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/app/session/calibration/calibrationDir.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="10" column="48" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="48" />
               <folding />
             </state>
           </provider>
@@ -87,8 +63,8 @@
       <file leaf-file-name="micCalibrationDir.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/app/session/calibration/micCalibrationDir.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="27" selection-start-line="6" selection-start-column="27" selection-end-line="6" selection-end-column="27" />
+            <state relative-caret-position="75">
+              <caret line="5" column="18" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -97,28 +73,8 @@
       <file leaf-file-name="speakerCalibrationDir.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/app/session/calibration/speakerCalibrationDir.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="49" selection-start-line="8" selection-start-column="49" selection-end-line="8" selection-end-column="49" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.jade" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/index.jade">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="13" column="45" selection-start-line="13" selection-start-column="45" selection-end-line="13" selection-end-column="45" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="scripts.jade" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/views/includes/scripts.jade">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="41" column="81" selection-start-line="41" selection-start-column="81" selection-end-line="41" selection-end-column="81" />
+            <state relative-caret-position="150">
+              <caret line="10" column="22" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -127,8 +83,8 @@
       <file leaf-file-name="webcamCalibrationDir.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/app/session/calibration/webcamCalibrationDir.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="31" selection-start-line="3" selection-start-column="31" selection-end-line="3" selection-end-column="31" />
+            <state relative-caret-position="90">
+              <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -137,8 +93,28 @@
       <file leaf-file-name="micCalibrationDir.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/app/session/calibration/micCalibrationDir.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
+            <state relative-caret-position="30">
+              <caret line="2" column="163" selection-start-line="2" selection-start-column="163" selection-end-line="2" selection-end-column="163" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="speakerCalibrationDir.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/app/session/calibration/speakerCalibrationDir.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="1" column="42" selection-start-line="1" selection-start-column="42" selection-end-line="1" selection-end-column="42" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="webcamCalibrationDir.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/app/session/calibration/webcamCalibrationDir.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="8" column="67" selection-start-line="8" selection-start-column="67" selection-end-line="8" selection-end-column="67" />
               <folding />
             </state>
           </provider>
@@ -195,27 +171,27 @@
         <option value="$PROJECT_DIR$/public/app/session/ssMainCtrl.js" />
         <option value="$PROJECT_DIR$/public/app/session/sessionAuthSvc.js" />
         <option value="$PROJECT_DIR$/public/app/app.js" />
-        <option value="$PROJECT_DIR$/public/app/session/MainCtrl.js" />
         <option value="$PROJECT_DIR$/public/app/session/calibration/liveStreamCtrl.js" />
         <option value="$PROJECT_DIR$/public/app/session/calibration/micLevelsDir.js" />
         <option value="$PROJECT_DIR$/public/app/session/calibration/calibrationCtrl.js" />
         <option value="$PROJECT_DIR$/app/views/blocks/welcome/webcam.jade" />
         <option value="$PROJECT_DIR$/public/app/session/calibration/webcamMonitorDir.html" />
         <option value="$PROJECT_DIR$/public/app/session/calibration/webcamMonitorDir.js" />
-        <option value="$PROJECT_DIR$/public/app/session/calibration/webcamCalibrationDir.html" />
         <option value="$PROJECT_DIR$/app/views/blocks/welcome/microphone.jade" />
         <option value="$PROJECT_DIR$/public/app/session/calibration/micMonitorDir.js" />
         <option value="$PROJECT_DIR$/public/app/session/calibration/micMonitorDir.html" />
-        <option value="$PROJECT_DIR$/public/app/session/calibration/micCalibrationDir.html" />
         <option value="$PROJECT_DIR$/public/app/session/calibration/speakerTestDir.js" />
-        <option value="$PROJECT_DIR$/public/app/session/calibration/speakerCalibrationDir.js" />
-        <option value="$PROJECT_DIR$/public/app/session/calibration/webcamCalibrationDir.js" />
         <option value="$PROJECT_DIR$/public/app/session/calibration/calibrationDir.html" />
-        <option value="$PROJECT_DIR$/public/app/session/calibration/micCalibrationDir.js" />
         <option value="$PROJECT_DIR$/public/app/session/calibration/calibrationDir.js" />
-        <option value="$PROJECT_DIR$/public/app/session/calibration/speakerCalibrationDir.html" />
         <option value="$PROJECT_DIR$/app/views/index.jade" />
         <option value="$PROJECT_DIR$/app/views/includes/scripts.jade" />
+        <option value="$PROJECT_DIR$/public/app/session/calibration/speakerCalibrationDir.js" />
+        <option value="$PROJECT_DIR$/public/app/session/calibration/webcamCalibrationDir.js" />
+        <option value="$PROJECT_DIR$/public/app/session/calibration/webcamCalibrationDir.html" />
+        <option value="$PROJECT_DIR$/public/app/session/calibration/speakerCalibrationDir.html" />
+        <option value="$PROJECT_DIR$/public/app/session/calibration/micCalibrationDir.html" />
+        <option value="$PROJECT_DIR$/public/app/session/calibration/micCalibrationDir.js" />
+        <option value="$PROJECT_DIR$/public/app/session/MainCtrl.js" />
       </list>
     </option>
   </component>
@@ -326,58 +302,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="session" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="petersonLab" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sleepy-mountain-8012" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="session" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cameraAccess" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="petersonLab" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sleepy-mountain-8012" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="session" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="calibration" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1124,12 +1048,12 @@
       <workItem from="1472777130007" duration="1535000" />
       <workItem from="1473121199457" duration="228000" />
       <workItem from="1473734868389" duration="12307000" />
-      <workItem from="1474334845481" duration="12424000" />
+      <workItem from="1474334845481" duration="13618000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27760000" />
+    <option name="totallyTimeSpent" value="28954000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -1423,26 +1347,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/app/session/cameraAccess/permissionsDir.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="61" selection-start-line="10" selection-start-column="61" selection-end-line="10" selection-end-column="61" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/app/session/cameraAccess/permissionsDir.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/app/session/MainCtrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="34" selection-start-line="12" selection-start-column="34" selection-end-line="12" selection-end-column="34" />
           <folding />
         </state>
       </provider>
@@ -1508,7 +1416,7 @@
         <state relative-caret-position="239">
           <caret line="81" column="3" selection-start-line="81" selection-start-column="3" selection-end-line="81" selection-end-column="3" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1569,66 +1477,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/app/session/calibration/webcamCalibrationDir.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="18" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/app/session/calibration/calibrationDir.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
           <caret line="13" column="6" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/app/session/calibration/speakerCalibrationDir.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="49" selection-start-line="8" selection-start-column="49" selection-end-line="8" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/app/session/calibration/webcamCalibrationDir.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="31" selection-start-line="3" selection-start-column="31" selection-end-line="3" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/app/session/calibration/micCalibrationDir.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/app/session/calibration/micCalibrationDir.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="27" selection-start-line="6" selection-start-column="27" selection-end-line="6" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/app/session/calibration/calibrationDir.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="22" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/app/session/calibration/speakerCalibrationDir.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="39" selection-start-line="9" selection-start-column="39" selection-end-line="9" selection-end-column="39" />
           <folding />
         </state>
       </provider>
@@ -1645,6 +1497,78 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
           <caret line="41" column="81" selection-start-line="41" selection-start-column="81" selection-end-line="41" selection-end-column="81" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/app/session/calibration/calibrationDir.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="48" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/app/session/calibration/speakerCalibrationDir.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="22" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/app/session/calibration/webcamCalibrationDir.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/app/session/calibration/webcamCalibrationDir.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="67" selection-start-line="8" selection-start-column="67" selection-end-line="8" selection-end-column="67" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/app/session/calibration/speakerCalibrationDir.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="42" selection-start-line="1" selection-start-column="42" selection-end-line="1" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/app/session/calibration/micCalibrationDir.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="163" selection-start-line="2" selection-start-column="163" selection-end-line="2" selection-end-column="163" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/app/session/calibration/micCalibrationDir.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="18" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/app/session/cameraAccess/permissionsDir.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="61" selection-start-line="10" selection-start-column="61" selection-end-line="10" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/app/session/MainCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="512">
+          <caret line="62" column="28" selection-start-line="62" selection-start-column="28" selection-end-line="62" selection-end-column="28" />
           <folding />
         </state>
       </provider>

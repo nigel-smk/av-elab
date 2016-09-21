@@ -1,5 +1,5 @@
 angular.module('app')
-    .directive('liveStream', ['userMediaService', function(userMediaService) {
+    .directive('webcamMonitor', ['userMediaService', function(userMediaService) {
         function link (scope, element, attrs){
             userMediaService
                 .then(function(stream){
@@ -20,7 +20,7 @@ angular.module('app')
 
         return {
             restrict: 'E',
-            template: '<video id="webcam-live" autoplay muted />',
+            templateUrl: 'app/session/calibration/webcamMonitorDir.html',
             link: link
         }
     }]);

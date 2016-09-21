@@ -1,23 +1,44 @@
 angular.module('app')
-    .directive('micLevels', ['$rootScope', '$window', 'audioRecorderService', function($rootScope, $window, audioRecorderService) {
+    .directive('micMonitor', ['$window', 'userMediaService', function($window, userMediaService) {
         function link (scope, element, attrs){
 
             var rafID = null;
             var analyserContext = null;
-            //TODO try initializing the analyser node once here
             var analyserNode = null;
-            function nodeRefresh(){
-                analyserNode = audioRecorderService.API.getAnalyserNode();
+
+            //retrieve stream from getUserMedia
+            userMediaService
+                .then(function(stream){
+                    //TODO rewrite as two functions: createAnalyser, createCanvas
+                    
+                    //create analyserNode
+                    gotStream(stream);
+                    //create canvas
+                    var canvas = document.getElementById("analyser");
+                    canvasWidth = canvas.width;
+                    canvasHeight = canvas.height;
+                    analyserContext = canvas.getContext('2d');
+                    //start draw cycle
+                    rafID = $window.requestAnimationFrame( updateAnalysers );
+                });
+
+            function gotStream(stream) {
+                var audioContext = new $window.AudioContext();
+                inputPoint = audioContext.createGain();
+
+                // Create an AudioNode from the stream.
+                realAudioInput = audioContext.createMediaStreamSource(stream);
+                audioInput = realAudioInput;
+                audioInput.connect(inputPoint);
+
+                //    audioInput = convertToMono( input );
+
+                analyserNode = audioContext.createAnalyser();
+                analyserNode.fftSize = 2048;
+                inputPoint.connect(analyserNode);
             }
 
-            var canvas = document.getElementById("analyser");
-            canvasWidth = canvas.width;
-            canvasHeight = canvas.height;
-            analyserContext = canvas.getContext('2d');
-            rafID = $window.requestAnimationFrame( updateAnalysers );
-
             function updateAnalysers(){
-                nodeRefresh();
                 var SPACING = 3;
                 var freqByteData = new Uint8Array(analyserNode.frequencyBinCount);
 
@@ -38,7 +59,7 @@ angular.module('app')
                 analyserContext.fillRect(0, canvasHeight, canvasWidth, -freqAvg * 2);
 
                 if (freqAvg > 50) {
-                    $rootScope.$broadcast('micTestPass');
+                    scope.$emit('micTestPass');
                 }
 
                 $window.requestAnimationFrame( updateAnalysers );
@@ -49,7 +70,6 @@ angular.module('app')
                 rafID = null;
             }
 
-            //scope.on('$destroy', onDestroy);
         }
 
         return {

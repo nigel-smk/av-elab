@@ -12,12 +12,4 @@ angular.module('app').factory('sessionAuth', ['$location', '$http', function($lo
         }
     });
 
-    //.then(function(res) {
-    //    sessionData = res.data;
-    //}, function(res) {
-    //    //TODO authentication failed
-    //});
-
-    //return sessionData;
-
 }]);

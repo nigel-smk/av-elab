@@ -13,11 +13,8 @@ block main-content
                     permissions
                 div(ng-switch-when="welcome")
                     calibration()
-                div(ng-switch-when="briefing" class="row-fluid")
-                    div(class="alert alert-info col-md-6 col-md-offset-3 text-center")
-                        h3 {{session.instructions}}
-                    div(class="col-md-6 col-md-offset-3 text-center")
-                        h2 Press space bar to start the video...
+                div(ng-switch-when="briefing")
+                    briefing(instructions="session.instructions")
                 div(ng-switch-when="stimulus")
                     include blocks/stimulus.jade
                 div( class="parent" ng-switch-when="debrief")

@@ -12,17 +12,10 @@ block main-content
                 div(ng-switch-when="permissions")
                     permissions
                 div(ng-switch-when="welcome")
-                    calibration()
+                    calibration
                 div(ng-switch-when="briefing")
                     briefing(instructions="session.instructions")
                 div(ng-switch-when="stimulus")
                     include blocks/stimulus.jade
-                div( class="parent" ng-switch-when="debrief")
+                //div( class="parent" ng-switch-when="debrief")
                     include blocks/debrief.jade
-                div(class="parent" ng-switch-when="thankyou")
-                    div(class="text-center")
-                        h1 Thank you for your participation!
-                        h6 (Press any key to restart demo)
-                div(class="parent" ng-switch-when="authFail")
-                    p You have entered an invalid participant number.
-                    button(ng-click="session.phase='welcome'") Go Back

@@ -6,7 +6,8 @@ block main-content
         div(ng-controller="MainCtrl as session" ng-cloak)
             div(ng-switch on="session.phase" class="center-block")
                 div(ng-switch-when="browser-detect")
-                    include blocks/browser-detection
+                    //include blocks/browser-detection
+                    browser-detection
                 div(ng-switch-when="invalid-url")
                     h3(class="text-center") Sorry, the link that you used is no longer valid
                 div(ng-switch-when="permissions")

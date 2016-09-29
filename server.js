@@ -76,21 +76,11 @@ var study = require('./app/models/study');
     });
 })('./app/controllers');
 
-//angular partials route
-app.get('/partials/:partialPath', function(req, res){
-    res.render('partials/' + req.params.partialPath);
-});
-
 //admin page route
 app.get('/admin', function(req, res){
     res.render('admin', {
     });
 });
-
-app.get('/run/:sid', function(req, res){
-    res.render('index', {
-    })
-})
 
 //else, serve index.html
 app.get('/', function(req, res){

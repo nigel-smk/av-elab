@@ -1,32 +1,30 @@
-angular.module('app').directive('calibration', [function() {
+angular.module('app').directive('calibration', ['$window', function($window) {
     function link(scope, element, attrs) {
-
-        //scope.validation.calibrationComplete = false;
 
         scope.expectedEvents = new Set(['micCalibrated', 'webcamCalibrated', 'speakersCalibrated']);
 
-        function registerCalibrationEvent(name) {
-            scope.expectedEvents.delete(name);
-            if (scope.expectedEvents.size === 0) {
-                scope.$emit('calibrationComplete');
-                //scope.validation.calibrationComplete = true;
-            }
-        }
-
         scope.$on('webcamCalibrated', function(event){
-            registerCalibrationEvent(event.name);
+            scope.expectedEvents.delete(event.name);
             event.stopPropagation();
         });
         
         scope.$on('micCalibrated', function(event){
-            registerCalibrationEvent(event.name);
+            scope.expectedEvents.delete(event.name);
             event.stopPropagation();
         });
 
         scope.$on('speakersCalibrated', function(event) {
-            registerCalibrationEvent(event.name);
+            scope.expectedEvents.delete(event.name);
             event.stopPropagation();
         })
+
+        //detect space bar for continue
+        angular.element($window).on('keydown', function(e) {
+            if (scope.expectedEvents.size == 0) {
+                scope.$emit('calibrationComplete');
+                angular.element($window).off('keydown');
+            }
+        });
     }
     
     return {

@@ -8,7 +8,9 @@ angular.module('app').directive('youtube', function($window, YT_event, youTubeAp
             videoid: "@"
         },
 
-        template: "<div><div id='overlay' style='position: relative; z-index: 0'><div id='YTplayer' style='position: relative; z-index: -1'/></div></div>",
+        templateUrl: "/app/session/youTube/youTubeDir.html",
+
+        //template: "<div><div id='overlay' style='position: relative; z-index: 0'><div id='YTplayer' style='position: relative; z-index: -1'/></div></div>",
 
         link: function(scope, element, attrs, $rootScope) {
             var tag = document.createElement('script');
@@ -92,7 +94,7 @@ angular.module('app').directive('youtube', function($window, YT_event, youTubeAp
             });
 
             scope.$on(YT_event.STOP, function () {
-                player.seekTo(0);
+                //player.seekTo(0);
                 player.stopVideo();
             });
 
@@ -106,7 +108,9 @@ angular.module('app').directive('youtube', function($window, YT_event, youTubeAp
             });
 
             scope.$on('stopPlayer', function () {
-                scope.$emit('playerTime', player.getCurrentTime());
+                scope.$emit('playerStopped', player.getCurrentTime());
+                console.log(player.getCurrentTime());
+                player.stopVideo();
             });
 
             scope.$on(YT_event.STATUS_CHANGE, function (event, message) {

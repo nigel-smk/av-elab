@@ -11,7 +11,7 @@ angular.module('userMedia', [])
         navigator.mozGetUserMedia ||
         navigator.msGetUserMedia);
         var mediaConstraint = { video: true, audio: true };
-        console.log('userMediaSvc | started');
+        //console.log('userMediaSvc | started');
         navigator.getMedia(mediaConstraint, onSuccess, onFailure);
 
         function onSuccess(stream){

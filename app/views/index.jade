@@ -6,7 +6,6 @@ block main-content
         div(ng-controller="MainCtrl as session" ng-cloak)
             div(ng-switch on="session.phase" class="center-block")
                 div(ng-switch-when="browser-detect")
-                    //include blocks/browser-detection
                     browser-detection
                 div(ng-switch-when="invalid-url")
                     h3(class="text-center") Sorry, the link that you used is no longer valid
@@ -16,7 +15,5 @@ block main-content
                     calibration
                 div(ng-switch-when="briefing")
                     briefing(instructions="session.instructions")
-                div(ng-switch-when="stimulus")
-                    include blocks/stimulus.jade
-                //div( class="parent" ng-switch-when="debrief")
-                    include blocks/debrief.jade
+                div(ng-switch-when="stimulus" ng-controller="youTubeCtrl as ytCtrl")
+                    youtube(width="{{ytCtrl.width}}" height="{{ytCtrl.height}}" videoid="{{ytCtrl.videoid}}")

@@ -6,7 +6,7 @@ angular.module('app').directive('browserDetection', ['deviceDetector', function(
         var browser = data.browser;
 
         if (browser == 'chrome' && version >= 21){
-            scope.$emit("FFORCHROME");
+            scope.$emit("browserDetectionComplete");
         }
     }
     

@@ -1,4 +1,4 @@
-angular.module('app').controller('youTubeCtrl', function($scope, YT_event) {
+angular.module('app').controller('youTubeCtrl', function($scope, YT_event, $window) {
     //initial settings
     var ctrl = this;
 
@@ -17,6 +17,17 @@ angular.module('app').controller('youTubeCtrl', function($scope, YT_event) {
 
     $scope.$on(YT_event.STATUS_CHANGE, function(event, data) {
         ctrl.playerStatus = data;
+    });
+    
+    $scope.$on('playerTime', function(event, data) {
+        $scope.$emit('stimulusComplete', data);
+    });
+    
+    //detect spacebar to continue
+    angular.element($window).one('keydown', function(e) {
+        if (e.keyCode == 32) {
+            ctrl.sendControlEvent('stopPlayer');
+        }
     });
 
 });

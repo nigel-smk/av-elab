@@ -1,5 +1,5 @@
 angular.module('app')
-    .directive('permissions', ['$rootScope', '$window', 'userMediaService', 'UM_Event', function($rootScope, $window, userMediaService, UM_Event) {
+    .directive('permissions', ['$window', 'userMediaService', 'UM_Event', function($window, userMediaService, UM_Event) {
         function link (scope, element, attrs){
             scope.permissions = {};
             userMediaService
@@ -15,7 +15,7 @@ angular.module('app')
             );
 
             scope.continue = function(){
-                $rootScope.$emit(UM_Event.GOTSTREAM);
+                scope.$emit('avAccessComplete');
             }
 
             scope.reload = function(){

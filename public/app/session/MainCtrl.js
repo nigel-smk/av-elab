@@ -30,6 +30,7 @@ angular.module('app').controller('MainCtrl', function($scope, $window, $location
 
     $scope.$on('briefingComplete', function(event) {
         videoRecorderSvc.record();
+        //videoRecorderSvc.record($scope.sessionData);
         ctrl.phase = "stimulus";
     });
     

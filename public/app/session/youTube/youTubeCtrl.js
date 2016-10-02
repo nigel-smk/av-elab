@@ -19,7 +19,7 @@ angular.module('app').controller('youTubeCtrl', function($scope, YT_event, $wind
         ctrl.playerStatus = data;
     });
     
-    $scope.$on('playerTime', function(event, data) {
+    $scope.$on('playerStopped', function(event, data) {
         $scope.$emit('stimulusComplete', data);
     });
     

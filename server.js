@@ -17,10 +17,8 @@ var express = require('express'),
     drive = require('./app/services/googleDrive'),
     http = require('http');
 var app = express();
-var binaryServer = require("./app/binary-server/binary-server");
 
-//set your environment variable? what does this effect?
-var env = process.env.NODE_ENV = process.env.NODE_ENV || 'developmen';
+var env = process.env.NODE_ENV = process.env.NODE_ENV;
 console.log(env);
 
 //express configuration
@@ -40,28 +38,23 @@ app.use(stylus.middleware(
         }
 	}
 ));
-//static route handling
-app.use(express.static(__dirname + "/public"));
 
 //mongo setup
-if (env === 'development') {
-    mongoose.connect('mongodb://localhost/petersonLab');
-} else {
-    mongoose.connect(require('./credentials/mLab.json').URL);
-}
+mongoose.connect(require('./credentials/mLab.json').URL);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error...'));
 db.once('open', function callback(){
     console.log('petersonLab db opened');
 });
-
-//TODO initialize the models in a cleaner fashion
+//initialize the models
 var appData = require('./app/models/appData');
 var session = require('./app/models/session');
 var share = require('./app/models/share');
 var study = require('./app/models/study');
 
 
+//static route handling
+app.use(express.static(__dirname + "/public"));
 //dynamically add routes from controllers folder
 (function requireRoutes(routePath){
     fs.readdirSync(routePath).forEach(function (file) {
@@ -75,13 +68,11 @@ var study = require('./app/models/study');
         }
     });
 })('./app/controllers');
-
 //admin page route
 app.get('/admin', function(req, res){
     res.render('admin', {
     });
 });
-
 //else, serve index.html
 app.get('/', function(req, res){
 	res.render('index', {
@@ -89,21 +80,17 @@ app.get('/', function(req, res){
 });
 
 //initialize gDrive folder structure
-drive.init(function() {
-    console.log("Initializing folder structure...");
-    drive.queueRequest(function(callback) {
-        drive.mkdir(["eLab", "avData"], null, function(err){
-            if(err) {
-                console.error(err);
-                return;
-            }
-            callback();
-        })
-    });
-})
+console.log("Initializing gDrive folder structure...");
+drive.init();
+drive.mkdir(["eLab", "avData"], null, function(err){
+    if(err) {
+        console.error(err);
+        return;
+    }
+});
 
+//start server
 const port = process.env.PORT || 3030;
-//app.listen(port);
 var server = http.createServer(app).listen(port);
 require('./app/binary-server/binary-server.js')(server, "/api/upload");
 console.log("Listening on port " + port + "...");

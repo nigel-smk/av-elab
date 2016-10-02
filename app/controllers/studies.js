@@ -41,16 +41,13 @@ module.exports.controller = function(app){
             path: ["eLab", "avData"],
             title: req.body.sid
         };
-        drive.queueRequest(function(callback){
-            drive.deleteFile(fileInfo, function(err) {
-                if (err){
-                    console.error("Gdrive | ", err);
-                    return;
-                } else {
-                    callback();
-                }
-            });
-
+        drive.deleteFile(fileInfo, function(err) {
+            if (err){
+                console.error("Gdrive | ", err);
+                return;
+            } else {
+                callback();
+            }
         });
     });
 

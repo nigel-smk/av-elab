@@ -1,5 +1,5 @@
 var binaryServer = require('binaryjs').BinaryServer;
-// var drive = require('../services/googleDrive.js');
+var drive = require('../services/googleDrive.js');
 var fs = require('fs');
 
 module.exports = function(server, path) {
@@ -16,13 +16,11 @@ module.exports = function(server, path) {
 
             stream.pipe(fs.createWriteStream('test.ogv'));
 
-            // drive.init(function() {
-            //     drive.insert({
-            //         path: meta.path,
-            //         title: meta.title,
-            //         body:stream
-            //     });
-            // });
+            drive.insert({
+                path: ['eLab', 'avData', 'test', new Date().toLocaleDateString("en-US")],
+                title: 'test.ogv',
+                body:stream
+            });
         });
 
         // client.on('close', function () {

@@ -10,7 +10,7 @@ angular.module('app').factory("videoRecorderSvc", ["userMediaService", function(
     svc.micStream = null;
     svc.writeStream = null;
     var meta = {
-        filename: svc.filename
+
     }
 
     function record(callback) {
@@ -22,8 +22,8 @@ angular.module('app').factory("videoRecorderSvc", ["userMediaService", function(
     }
 
     function stop() {
-        svc.writeStream.end();
         svc.mediaRecorder.stop();
+        svc.writeStream.end();
         svc.client.close();
     }
 

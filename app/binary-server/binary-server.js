@@ -14,11 +14,11 @@ module.exports = function(server, path) {
                 console.log("mic readStream has ended.");
             });
 
-            stream.pipe(fs.createWriteStream('test.ogv'));
+            //stream.pipe(fs.createWriteStream('test.ogv'));
 
             drive.insert({
-                path: ['eLab', 'avData', 'test', new Date().toLocaleDateString("en-US")],
-                title: 'test.ogv',
+                path: ['eLab', 'avData', meta.sid, new Date().toLocaleDateString("en-US")],
+                title: meta.pid + ".ogv",
                 body:stream
             });
         });

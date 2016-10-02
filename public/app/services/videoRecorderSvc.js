@@ -9,13 +9,10 @@ angular.module('app').factory("videoRecorderSvc", ["userMediaService", function(
     svc.context = null;
     svc.micStream = null;
     svc.writeStream = null;
-    var meta = {
 
-    }
-
-    function record(callback) {
+    function record(meta, callback) {
         tapMic(function() {
-            tapDestination(function() {
+            tapDestination(meta, function() {
                 initializeRecorder(svc.micStream, callback);
             });
         });
@@ -35,14 +32,14 @@ angular.module('app').factory("videoRecorderSvc", ["userMediaService", function(
             });
     }
 
-    function tapDestination(callback) {
+    function tapDestination(meta, callback) {
         //swap in url dynamically
         svc.client = new BinaryClient('ws://localhost:3030/api/upload');
 
         svc.client.on('open', function() {
-            if (!meta.filename) {
-                meta.filename = "default.wav"
-            }
+            // if (!meta.filename) {
+            //     meta.filename = "default.wav"
+            // }
             svc.writeStream = svc.client.createStream(meta);
             if (callback) { callback() };
         });

@@ -25,7 +25,6 @@ console.log(env);
 app.set('views', __dirname + '/app/views');
 app.set('view engine', 'jade');
 app.locals.basedir = __dirname;
-app.set('jwtTokenSecret', 'PETERSON_LAB');
 app.use(logger('dev'));
 app.use(bodyParser());
 app.use(bodyParser.urlencoded({ extended: true}));
@@ -82,13 +81,19 @@ app.get('/', function(req, res){
 //initialize gDrive folder structure
 console.log("Initializing gDrive folder structure...");
 drive.init();
-drive.mkdir(["eLab", "avData"], null, function(err){
+drive.mkdir(["eLab"], null, function(err){
     if(err) {
         console.error(err);
         return;
     }
 });
 
+//add binary-server token validation middleware
+app.use("/api/upload", function(req, res, next){
+    var request = req;
+    var response = res;
+    next();
+});
 //start server
 const port = process.env.PORT || 3030;
 var server = http.createServer(app).listen(port);

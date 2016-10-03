@@ -9,7 +9,8 @@ var mongoose = require('mongoose'),
     moment = require('moment'),
     flakeIdGen = require('flake-idgen'),
     intformat = require('biguint-format'),
-    generator = new flakeIdGen;
+    generator = new flakeIdGen,
+    SECRET = require('../../../credentials/jwtSecret.json').secret;
 
 module.exports.controller = function(app) {
 
@@ -19,9 +20,9 @@ module.exports.controller = function(app) {
         if (req.body.username == 'admin' && req.body.password == 'petersonelab1!') {
             var expires = moment().add('hours', 16).valueOf();
             var token = jwt.encode({
-                iss: req.body.username,
+                admin: true,
                 exp: expires
-            }, app.get('jwtTokenSecret'));
+            }, SECRET);
 
             res.json({
                 token: token,
@@ -81,16 +82,6 @@ module.exports.controller = function(app) {
                 //todo better status
                 res.end(418);
                 return;
-            } else if ( pid == 'demo' ) {
-                res.json({
-                    token: 'demo',
-                    pid: pid,
-                    sid: sid,
-                    youTubeId: studyResult.youTubeId,
-                    instructions: studyResult.instructions,
-                    redirect: studyResult.redirect
-                });
-                return;
             }
             //check if session exists and it has not been started
             Session.findOne({sid: sid, pid: pid}).exec(function(err, sessionResult){
@@ -102,9 +93,10 @@ module.exports.controller = function(app) {
                     console.log('auth | authentication for ', sid, ', ', pid, 'successful.');
                     var expires = moment().add('hours', 1).valueOf();
                     var token = jwt.encode({
-                        iss: sid + pid,
+                        sid: sid,
+                        pid: pid,
                         exp: expires
-                    }, app.get('jwtTokenSecret'));
+                    }, SECRET);
                     res.json({
                         token: token,
                         exp: expires,

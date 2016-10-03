@@ -10,8 +10,9 @@ angular.module('userMedia', [])
         navigator.webkitGetUserMedia ||
         navigator.mozGetUserMedia ||
         navigator.msGetUserMedia);
-        var mediaConstraint = { video: true, audio: true };
-        //console.log('userMediaSvc | started');
+        //TODO take mediaConstraint as a variable
+        //var mediaConstraint = { video: true, audio: true };
+        var mediaConstraint = { video: { frameRate: { max: 2 }, width: { max: 240 }, height: { max: 180 } }, audio: true };
         navigator.getMedia(mediaConstraint, onSuccess, onFailure);
 
         function onSuccess(stream){

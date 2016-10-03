@@ -1,7 +1,8 @@
 var jwt = require('jwt-simple'),
-    url = require('url');
+    url = require('url').
+    SECRET = require('../../credentials/jwtSecret.json').secret;
 
-module.exports.set = function(app) {
+module.exports.set = function() {
     return function(req, res, next) {
         var token = (req.body && req.body.access_token)
             || (req.query && req.query.access_token)
@@ -9,10 +10,14 @@ module.exports.set = function(app) {
 
         if (token) {
             try {
-                var decoded = jwt.decode(token, app.get('jwtTokenSecret'));
+                var decoded = jwt.decode(token, SECRET);
                 // handle token here
                 if (decoded.exp <= Date.now()) {
                     res.end('Access token has expired', 400);
+                }
+                //check if user is admin
+                if (decoded.admin) {
+                    req.isAdmin = true;
                 }
                 next();
             } catch (err) {

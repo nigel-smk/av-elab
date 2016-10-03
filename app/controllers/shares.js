@@ -8,7 +8,11 @@ module.exports.controller = function(app){
     var auth = jwtauth.set(app);
 
     app.post('/api/share', [auth], function(req, res){
-        //give permissions to email
+        //check that token is admin token
+        if (!req.isAdmin) {
+            res.end('Invalid token', 401);
+            return;
+        }
         var fileInfo = {
             path: ['eLab']
         }
@@ -29,6 +33,10 @@ module.exports.controller = function(app){
     })
 
     app.get('/api/getShared', [auth], function(req, res){
+        if (!req.isAdmin) {
+            res.end('Invalid token', 401);
+            return;
+        }
         Share.find({}, {"__v": 0}).exec(function(err, result){
             if (err){
                 console.error(err);
@@ -40,6 +48,10 @@ module.exports.controller = function(app){
     });
 
     app.post('/api/unshare', [auth], function(req, res){
+        if (!req.isAdmin) {
+            res.end('Invalid token', 401);
+            return;
+        }
         var fileInfo = {
             path: ['eLab']
         }

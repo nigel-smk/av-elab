@@ -1,11 +1,10 @@
-var jwtauth = require('../services/jwtauth'),
+var auth = require('../services/jwtauth'),
     gdrive = require('../services/googleDrive'),
     mongoose = require('mongoose'),
     Share = mongoose.model('Share');
     //Share = require('../models/share'),
 
 module.exports.controller = function(app){
-    var auth = jwtauth.set(app);
 
     app.post('/api/share', [auth], function(req, res){
         //check that token is admin token

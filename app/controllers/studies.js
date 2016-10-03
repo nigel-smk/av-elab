@@ -1,4 +1,4 @@
-var jwtauth = require('../services/jwtauth'),
+var auth = require('../services/jwtauth'),
     drive = require('../services/googleDrive'),
     mongoose = require('mongoose'),
     Study = mongoose.model('Study'),
@@ -8,7 +8,6 @@ var jwtauth = require('../services/jwtauth'),
     generator = new flakeIdGen;
 
 module.exports.controller = function(app){
-    var auth = jwtauth.set(app);
 
     app.get('/api/getStudies', [auth], function(req, res){
         Study.find({}, {"__v": 0}).exec(function(err, result){

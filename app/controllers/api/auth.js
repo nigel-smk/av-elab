@@ -57,8 +57,7 @@ module.exports.controller = function(app) {
             var pid = intformat(generator.next(), 'dec');
             var session = new Session({
                 sid: sid,
-                pid: pid,
-                started: false
+                pid: pid
             });
             session.save(function (err) {
                 if (err) {

@@ -1,9 +1,7 @@
 var Session = require('../../models/session');
-var jwtauth = require('../../services/jwtauth');
+var auth = require('../../services/jwtauth');
 
 module.exports.controller = function(app) {
-
-    var auth = jwtauth.set(app);
 
     app.post('/api/sessionData', [auth], function (req, res) {
         console.log('got session data post');

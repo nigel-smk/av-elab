@@ -9,7 +9,8 @@ var mongoose = require('mongoose'),
     moment = require('moment'),
     flakeIdGen = require('flake-idgen'),
     intformat = require('biguint-format'),
-    generator = new flakeIdGen;
+    generator = new flakeIdGen,
+    SECRET = require('../../../credentials/jwtSecret.json').secret;
 
 module.exports.controller = function(app) {
 
@@ -19,9 +20,9 @@ module.exports.controller = function(app) {
         if (req.body.username == 'admin' && req.body.password == 'petersonelab1!') {
             var expires = moment().add('hours', 16).valueOf();
             var token = jwt.encode({
-                iss: req.body.username,
+                admin: true,
                 exp: expires
-            }, app.get('jwtTokenSecret'));
+            }, SECRET);
 
             res.json({
                 token: token,
@@ -75,56 +76,53 @@ module.exports.controller = function(app) {
     app.post('/api/auth/session', function (req, res) {
         var sid = req.body.sid;
         var pid = req.body.pid;
-        Study.findOne({sid: sid}).exec(function (err, studyResult) {
+        Study.findOne({sid: sid, pid: pid}).exec(function (err, studyResult) {
             if (err) {
                 console.error(err);
                 //todo better status
                 res.end(418);
                 return;
-            } else if ( pid == 'demo' ) {
-                res.json({
-                    token: 'demo',
-                    pid: pid,
-                    sid: sid,
-                    youTubeId: studyResult.youTubeId,
-                    instructions: studyResult.instructions,
-                    redirect: studyResult.redirect
-                });
-                return;
             }
-            //check if session exists and it has not been started
-            Session.findOne({sid: sid, pid: pid}).exec(function(err, sessionResult){
-                if (err) {
-                    console.error(err);
-                    res.end(400);
-                } else if(sessionResult) { //there is a session registered with the given pid/sid
-                    //authenticate user
-                    console.log('auth | authentication for ', sid, ', ', pid, 'successful.');
-                    var expires = moment().add('hours', 1).valueOf();
-                    var token = jwt.encode({
-                        iss: sid + pid,
-                        exp: expires
-                    }, app.get('jwtTokenSecret'));
-                    res.json({
-                        token: token,
-                        exp: expires,
-                        pid: pid,
-                        sid: sid,
-                        youTubeId: studyResult.youTubeId,
-                        instructions: studyResult.instructions,
-                        redirect: studyResult.redirect
-                    });
-                    //mark the session as started
-                    Session.findOneAndUpdate({ sid: sid, pid: pid }, { started: true }, null, function (result) {
-                        if (err) {
-                            //TODO what to do on error?
-                            console.error();
-                        }
-                    });
-                } else { //no session matches the requests parameters
-                    res.sendStatus(400);
-                }
+
+            //authenticate user
+            console.log('auth | authentication for ', sid, ', ', pid, 'successful.');
+            var expires = moment().add('hours', 1).valueOf();
+            var token = jwt.encode({
+                sid: sid,
+                pid: pid,
+                exp: expires
+            }, SECRET);
+            res.json({
+                token: token,
+                exp: expires,
+                pid: pid,
+                sid: sid,
+                youTubeId: studyResult.youTubeId,
+                instructions: studyResult.instructions,
+                redirect: studyResult.redirect
             });
+            //log the session start
+            Session.findOneAndUpdate(
+                {
+                    sid: sid,
+                    pid: pid
+                },
+                {
+                    $push: {
+                        activity: {
+                            type: "progress",
+                            description: "User authenticated"
+                        }
+                    }
+                },
+                null, 
+                function (result) {
+                    if (err) {
+                        //TODO what to do on error?
+                        console.error();
+                    }
+                }
+            );
         });
     });
 

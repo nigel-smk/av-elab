@@ -1,30 +1,37 @@
+Build admin page with directives and services
+
+Demo mode when no sid or pid are passed in
+
+Redirect at end of session
+
+start use "sessions" on server side
+
+track user progress through app and store to db
+
+fix auth
+add auth to upload endpoint
+
+initialize gdrive folder structure within the module
+
+Take metadata from stream to create files.
+Safeguard against gdrive quotas by uploading only X files at a time. Store others on disk until space is open for upload.
+
+
+
+
+
+
+
+OLD
+
 Admin
     Study does not store false active
     activate active
     obfuscate password
 
-Welcome
-    Participant number highlight for completion
-        grey out calibration?
-
-stimulus
-    centre video better?
-    audio takes a long time to confirm upload. Send 200 when upload is complete and then upload to gdrive
-
-feedback
-    larger text input
-    optional feedback text?
-
 general
     browser testing
-
-security
-     AWS files are open access. Could result in unwarranted access => charges?
 
  unexpected behaviour handling
     study not valid
     register user as having started to prevent restarting
-
-EXTRAS
-thankyou
-    redirect option?

@@ -8,8 +8,6 @@ angular.module('app', [
     'ngRoute',
     'ngSanitize',
     'webcam',
-    'recorder',
-    'audioRecorder',
     'com.2fdevs.videogular',
     'com.2fdevs.videogular.plugins.controls',
     'ng.deviceDetector',

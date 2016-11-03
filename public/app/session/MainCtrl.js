@@ -25,7 +25,7 @@ angular.module('app').controller('MainCtrl', function($scope, $window, $location
         logActivity('avAccess');
         ctrl.phase = 'welcome';
     });
-    
+
     $scope.$on('calibrationComplete', function(event) {
         logActivity('calibration');
         ctrl.phase = "briefing";
@@ -40,7 +40,7 @@ angular.module('app').controller('MainCtrl', function($scope, $window, $location
         });
         ctrl.phase = "stimulus";
     });
-    
+
     $scope.$on('stimulusComplete', function(event, data) {
         logActivity('stimulus');
         videoRecorderSvc.stop();
@@ -57,5 +57,5 @@ angular.module('app').controller('MainCtrl', function($scope, $window, $location
             //log failures to console?
         );
     }
-    
+
 });

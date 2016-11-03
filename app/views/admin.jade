@@ -86,11 +86,9 @@ block main-content
                     tr
                         th Study
                         th Participant
-                        th Activity Type
-                        th Activity Description
+                        th Description
                 tbody
                     tr(ng-repeat="activity in activities")
                         td {{ activity.sid }}
                         td {{ activity.pid }}
-                        td {{ activity.type }}
                         td {{ activity.description }}

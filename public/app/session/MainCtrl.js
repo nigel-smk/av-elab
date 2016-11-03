@@ -1,15 +1,16 @@
-angular.module('app').controller('MainCtrl', function($scope, $window, $location, videoRecorderSvc, sessionAuth, sessionDataSvc){
+angular.module('app').controller('MainCtrl', function($scope, $window, $location, videoRecorderSvc, sessionAuth, activityDataSvc){
     'use strict';
 
     var ctrl = this;
 
     $scope.user = {};
-    $scope.sessionData = {};
-    ctrl.phase = "browser-detect";
+    $scope.sessionData = null;
+    ctrl.phase = "authenticating";
 
     sessionAuth.then(function (res) {
         $scope.sessionData = res.data;
         ctrl.instructions = $scope.sessionData.instructions;
+        ctrl.phase = 'browser-detect'
         logActivity('login');
     }, function (res) {
         ctrl.phase = 'invalid-url';
@@ -48,14 +49,11 @@ angular.module('app').controller('MainCtrl', function($scope, $window, $location
     });
 
     function logActivity(description) {
-        sessionDataSvc.pushActivity({
+        activityDataSvc.create({
             pid: $scope.sessionData.pid,
             sid: $scope.sessionData.sid,
-            activity: {
-                type: 'phaseComplete',
-                description: description
-            }
-        }).then(
+            description: description
+        }, $scope.sessionData.token).then(
             //log failures to console?
         );
     }

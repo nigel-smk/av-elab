@@ -2,6 +2,7 @@
 var mongoose = require('mongoose'),
     Study = mongoose.model('Study'),
     Session = mongoose.model('Session'),
+    Activity = mongoose.model('Activity'),
     //Study = require('../../models/study'),
     //Session = require('../../models/session'),
     AppData = require('../../models/appData'),
@@ -57,7 +58,8 @@ module.exports.controller = function(app) {
             var pid = intformat(generator.next(), 'dec');
             var session = new Session({
                 sid: sid,
-                pid: pid
+                pid: pid,
+                activity: []
             });
             session.save(function (err) {
                 if (err) {
@@ -73,13 +75,15 @@ module.exports.controller = function(app) {
 
     //authenticates the participantId/sid and generates a JWTtoken
     app.post('/api/auth/session', function (req, res) {
+        //TODO check that the session exists and THEN query the session details
+        //TODO better yet, make the session details call separately
         var sid = req.body.sid;
         var pid = req.body.pid;
-        Study.findOne({sid: sid, pid: pid}).exec(function (err, studyResult) {
-            if (err) {
+        Study.findOne({sid: sid}).exec(function (err, studyResult) {
+            if (err || !studyResult) {
                 console.error(err);
                 //todo better status
-                res.end(418);
+                res.status(401).end("Invalid credentials.");
                 return;
             }
 
@@ -100,28 +104,6 @@ module.exports.controller = function(app) {
                 instructions: studyResult.instructions,
                 redirect: studyResult.redirect
             });
-            //log the session start
-            Session.findOneAndUpdate(
-                {
-                    sid: sid,
-                    pid: pid
-                },
-                {
-                    $push: {
-                        activity: {
-                            type: "progress",
-                            description: "User authenticated"
-                        }
-                    }
-                },
-                null, 
-                function (result) {
-                    if (err) {
-                        //TODO what to do on error?
-                        console.error();
-                    }
-                }
-            );
         });
     });
 

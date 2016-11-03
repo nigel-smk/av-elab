@@ -79,3 +79,16 @@ block main-content
                                 option owner
                         td
                             button(ng-click='shareAvData()') Add
+
+            h2 Activity Log
+            table(class='table table-bordered')
+                thead
+                    tr
+                        th Study
+                        th Participant
+                        th Description
+                tbody
+                    tr(ng-repeat="activity in activities")
+                        td {{ activity.sid }}
+                        td {{ activity.pid }}
+                        td {{ activity.description }}

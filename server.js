@@ -50,7 +50,7 @@ var appData = require('./app/models/appData');
 var session = require('./app/models/session');
 var share = require('./app/models/share');
 var study = require('./app/models/study');
-
+var activity = require('./app/models/activity');
 
 //static route handling
 app.use(express.static(__dirname + "/public"));

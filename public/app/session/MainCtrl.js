@@ -45,7 +45,7 @@ angular.module('app').controller('MainCtrl', function($scope, $window, $location
         logActivity('stimulus');
         videoRecorderSvc.stop();
         $scope.sessionData.stopTime = data;
-        $window.location = $scope.sessionData.redirect + "?sid=" + $scope.sessionData.sid + "&pid=" + $scope.sessionData.pid + "&stopTime=" + $scope.sessionData.stopTime;
+        $window.location = $scope.sessionData.redirect + "&sid=" + $scope.sessionData.sid + "&pid=" + $scope.sessionData.pid + "&stopTime=" + $scope.sessionData.stopTime;
     });
 
     function logActivity(description) {

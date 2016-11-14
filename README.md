@@ -16,7 +16,7 @@ A qualtrics-integrated webapp for exposing online study participants to A/V stim
 
 
 ## Technologies
-- Node 6.9
+- Node 5.12
 - Angular 1.6
 - Mongo DB 3.2
 - Google Drive

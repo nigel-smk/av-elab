@@ -37,20 +37,18 @@ module.exports.controller = function(app){
             }
         });
         var fileInfo = {
-            path: ["eLab", "avData"],
+            path: ["eLab"],
             title: req.body.sid
         };
-        drive.queueRequest(function(callback){
-            drive.deleteFile(fileInfo, function(err) {
-                if (err){
-                    console.error("Gdrive | ", err);
-                    return;
-                } else {
-                    callback();
-                }
-            });
-
+        drive.deleteFile(fileInfo, function(err) {
+            if (err){
+                console.error("Gdrive | ", err);
+                return;
+            } else {
+                //TODO log delete success
+            }
         });
+
     });
 
     app.post('/api/newStudy', [auth], function(req, res){

@@ -142,7 +142,7 @@ function insert(fileInfo, callback) {
                 },
                 media: {
                     mimeType: mimeType,
-                    body: fileInfo.body // read streams are awesome!
+                    body: fileInfo.body
                 }
             }, function (err, file) {
                 if (err) {

@@ -11,14 +11,14 @@ var mongoose = require('mongoose'),
     flakeIdGen = require('flake-idgen'),
     intformat = require('biguint-format'),
     generator = new flakeIdGen,
-    SECRET = require('../../../credentials/jwtSecret.json').secret;
+    SECRET = require('../../../credentials/jwtSecret.json').secret,
+    ADMINCREDS = require('../../../credentials/admin.json');
 
 module.exports.controller = function(app) {
 
     //TODO change to /api/auth/admin
     app.post('/api/auth', function (req, res) {
-        console.log(req.body);
-        if (req.body.username == 'admin' && req.body.password == 'petersonelab1!') {
+        if (req.body.username == ADMINCREDS.username && req.body.password == ADMINCREDS.password) {
             var expires = moment().add('hours', 16).valueOf();
             var token = jwt.encode({
                 admin: true,

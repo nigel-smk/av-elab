@@ -1,10 +1,12 @@
 # Video eLab  
 A qualtrics-integrated webapp for exposing online study participants to A/V stimuli
 
+
 ## Features
 - seamlessly move from your qualtrics pre-survey, through your A/V stimuli, and on to your post-survey
 - ensure that your participants can see and hear your stimulus with calibration tasks
 - confirm that your participants paid attention by reviewing A/V recordings of their sessions in Google Drive
+
 
 ## Demo
 [Admin Page](https://sleepy-mountain-8012.herokuapp.com/admin)
@@ -12,11 +14,14 @@ A qualtrics-integrated webapp for exposing online study participants to A/V stim
   
 [Session Demo](https://sleepy-mountain-8012.herokuapp.com/run/test)
 
+
 ## Technologies
 - Node 6.9
 - Angular 1.6
 - Mongo DB 3.2
 - Google Drive
+- it should be noted that this app employs an experimental web technology called [WebRTC](https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API). As such, this app will only work on the latest [Chrome browser](https://www.google.ca/chrome/browser/desktop/index.html). 
+
 
 ## Getting started on your local machine
 
@@ -56,6 +61,7 @@ A qualtrics-integrated webapp for exposing online study participants to A/V stim
 13. From the root folder, enter `npm install` into the terminal to install the dependencies for the server project
 14. From the root folder, enter `node server.js` to start the web server
 
+
 ## Usage
 
 Note: your `<base_url>` is the url for your webserver (e.g. localhost:3030, or your heroku deployment's url).
@@ -84,64 +90,30 @@ Note: your `<base_url>` is the url for your webserver (e.g. localhost:3030, or y
   
 ### 3. Setup your Qualtrics pre-survey
 
-  - Login to your Qualtrics account and create or edit your pre-survey  
+  - Login to your Qualtrics account and create or edit your pre-survey
   
   - In your **Survey Flow**, as your first element [add a new **Embedded Data** element](https://www.qualtrics.com/support/survey-platform/survey-module/survey-flow/standard-elements/embedded-data/)
   - Add 2 fields to the **Embedded Data** element: `sid`, and `pid`
   - Enter your study's id into the `sid` field, and leave the `pid` field blank
-  - the `pid` field will be populated by the **Web Service** element (below)
+    - the `pid` field will be populated by the **Web Service** element (below)
   
   - At the end of your **Survey Flow**, before your **End of Survey** element [add a new **Web Service** element](https://www.qualtrics.com/support/survey-platform/survey-module/survey-flow/advanced-elements/web-service/)
   - In the URL field, enter `<base_url>/api/auth/generateKey`
-  - Add a parameter called `studyKey` with the Study Key that was generated for your study as the value
+  - Add a parameter called `studyKey` with the **Study Key** that was generated for your study as the value
   - Then click **Test URL**
   - If it is successful, you will be presented with the option to add `pid` as embedded data
   - If it is not successful, make sure that your eLab server is running and the url is correct
-  - Click **Add Embedded Data**  
+  - Click **Add Embedded Data**
   
   - On your **End of Survey** element, click **Customize**
   - In the popup that appears, check off the **Redirect to a URL** option
-  - In the redirect field, enter a URL of this form: `<base_url>?sid=${e://Field/sid}&pid=${e://Field/pid}`  
+  - In the redirect field, enter a URL of this form: `<base_url>?sid=${e://Field/sid}&pid=${e://Field/pid}`
     - this syntax swaps the values from your **Embedded Data** element into the url's query parameters
 
 ### 4. Do a test run of your study
 
-
-
-### TO DO
-
-#### UI design
-- center all text and video
-- layout elements nicely
-- show users a "Please use a larger screen" page when screen is too small. (Can that be done with css only?)
-- determine physical dimensions for the app that will allow it to be the same size on most desktop or laptop screens.
-
-
-#### Admin Page
-- The "active" checkbox on the study management pane needs to be able to prevent the running of studies that are inactive
-- The admin password box should be obfuscated
-- controls need to be put on the inputs to prevent things like duplicate studies and duplicate shares
-- when an item in a row's table is clicked it should set that field into edit mode. Change the new/delete button to a save button.
-
-#### Study Run Page
-#### Calibration phase
-- The participant number input could probably use some highlighting to indicate that it must be done.
-  - maybe grey out the calibration phase until the participant has entered and submitted a valid participant number for the study
-
-####  Survey phase
-- need larger text input field.
-- a limiter for the length of the text that can be entered. Does not need a char counter but it might be nice.
-- might need to add a feature to the Study Management pane so that an experminter can choose what the final survey question will be and maybe add a second question.
-
-#### Compatibility
-- Browser priority: Chrome, Firefox, IE, Edge?
-- Chrome works, Firefox needs a little work. IE is probably not worth it because it will require flash for the A/V
-- Need to check the user's browser type and inform them that the app will not work with their browser.
-
-#### Security
-- AWS files are open access. Could result in unwarranted access => charges
-
-#### Unexpected User Behaviour Handling
-- prevent user from restarting app once they have begun
-thankyou
-    redirect option
+  - Walk through your survey process from pre-survey to post-survey to ensure that the flow is as expected
+  
+  - If you want to test run the app only, first generate a `pid` by entering `<base_url>/api/auth/generateKey?studyKey=<your_generated_study_key>` into your browser
+  - Copy the `pid` from the response that you recieve in your browser
+  - To start the webapp, in a Chrome browser enter `<base_url>?sid=<your_study_id>&pid=<your_copied_pid>`

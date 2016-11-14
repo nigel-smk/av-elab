@@ -60,11 +60,16 @@
 
 Note: your `<base_url>` is the url for your webserver (e.g. localhost:3030, or your heroku deployment's url).
 
-#### 1. Login
-Navigate to the admin page at `<base_url>/admin` and login with the credentials you provided in `admin.json`
+#### 1. Setup your Qualtrics post-survey
+
+  - Login to your Qualtrics account and create or edit your post-survey
+  - In your "Survey Flow", [add a new "Embedded Data" element](https://www.qualtrics.com/support/survey-platform/survey-module/survey-flow/standard-elements/embedded-data/)
+  - Add 3 empty fields to the "Embedded Data" element: sid, pid, and stopTime
+  - These fields will be filled by the webapp via the url query parameters when it redirects to your post-survey
 
 #### 2. Create a new study
 
+  - Navigate to the admin page at `<base_url>/admin` and login with the credentials you provided in `admin.json`
   - In the 'Manage Studies' section, enter a 'Study ID' of your choice to identify your study.
   - In your browser, navigate to the youtube video that you want to use. 
   The url should be of the format `https://www.youtube.com/watch?v=<youtube_id>`. 
@@ -75,10 +80,24 @@ Navigate to the admin page at `<base_url>/admin` and login with the credentials 
   The url will have a query string appended to it of the format 
   `?sid=<the_study_id>&pid=<a_unique_participant_id>&stopTime=<when_the_video_was_stopped>`
   - Click the 'Add' button
+  - Copy your generated "Study Key" to your clipboard for the pre-survey setup
   
 #### 3. Setup your Qualtrics pre-survey
 
-  - 
+  - Login to your Qualtrics account and create or edit your pre-survey
+  - At the end of your "Survey Flow", [add a new "Web Service" element](https://www.qualtrics.com/support/survey-platform/survey-module/survey-flow/advanced-elements/web-service/)
+  - In the URL field, enter `<base_url>/api/auth/generateKey`
+  - Add two parameters to send to the webservice:
+      - sid = <your_study_id>
+      - studyKey = <your_study_key>
+  - Then click "Test URL"
+  - If it is successful, you will be presented with the option to add "pid" as embedded data
+  - If it is not successful, make sure that your server is running and the url is correct
+  - Click "Add Embedded Data" and then save your survey flow
+
+#### 4. Do a test run of your study
+
+
 
 ### TO DO
 

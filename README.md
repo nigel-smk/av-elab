@@ -92,6 +92,11 @@ Note: your `<base_url>` is the url for your webserver (e.g. localhost:3030, or y
   `?sid=<the_study_id>&pid=<a_unique_participant_id>&stopTime=<when_the_video_was_stopped>`
   - Click the **Add** button
   - Copy your generated **Study Key** to your clipboard for the pre-survey setup
+  - In the **Share AV Data** section enter a **Name** and **Gmail**, and select a **Permission**
+    - The permission should always be `reader`
+    - This shares the app's session recordings with the given gmail user
+    - They can access these recordings by logging into their personal Google Drive and clicking **Shared with me**
+      - It will show as a folder called **eLab**
   
 ### 3. Setup your Qualtrics pre-survey
 

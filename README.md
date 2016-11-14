@@ -63,8 +63,8 @@ Note: your `<base_url>` is the url for your webserver (e.g. localhost:3030, or y
 #### 1. Setup your Qualtrics post-survey
 
   - Login to your Qualtrics account and create or edit your post-survey
-  - In your "Survey Flow", [add a new "Embedded Data" element](https://www.qualtrics.com/support/survey-platform/survey-module/survey-flow/standard-elements/embedded-data/)
-  - Add 3 empty fields to the "Embedded Data" element: sid, pid, and stopTime
+  - In your "Survey Flow", as your first element, [add a new "Embedded Data" element](https://www.qualtrics.com/support/survey-platform/survey-module/survey-flow/standard-elements/embedded-data/)
+  - Add 3 empty fields to the "Embedded Data" element: "sid", "pid", and "stopTime"
   - These fields will be filled by the webapp via the url query parameters when it redirects to your post-survey
 
 #### 2. Create a new study
@@ -84,16 +84,25 @@ Note: your `<base_url>` is the url for your webserver (e.g. localhost:3030, or y
   
 #### 3. Setup your Qualtrics pre-survey
 
-  - Login to your Qualtrics account and create or edit your pre-survey
-  - At the end of your "Survey Flow", [add a new "Web Service" element](https://www.qualtrics.com/support/survey-platform/survey-module/survey-flow/advanced-elements/web-service/)
+  - Login to your Qualtrics account and create or edit your pre-survey  
+  
+  - In your "Survey Flow", as your first element, [add a new "Embedded Data" element](https://www.qualtrics.com/support/survey-platform/survey-module/survey-flow/standard-elements/embedded-data/)
+  - Add 2 fields to the "Embedded Data" element: "sid", and "pid"
+  - Enter your study's id into the "sid" field, and leave the pid field blank
+  - the "pid" field will be populated by the "Web Service" element (below)
+  
+  - At the end of your "Survey Flow", before your "End of Survey" element [add a new "Web Service" element](https://www.qualtrics.com/support/survey-platform/survey-module/survey-flow/advanced-elements/web-service/)
   - In the URL field, enter `<base_url>/api/auth/generateKey`
-  - Add two parameters to send to the webservice:
-      - sid = <your_study_id>
-      - studyKey = <your_study_key>
+  - Add a parameter called "studyKey" with the Study Key that was generated for your study as the value
   - Then click "Test URL"
   - If it is successful, you will be presented with the option to add "pid" as embedded data
-  - If it is not successful, make sure that your server is running and the url is correct
-  - Click "Add Embedded Data" and then save your survey flow
+  - If it is not successful, make sure that your eLab server is running and the url is correct
+  - Click "Add Embedded Data"  
+  
+  - On your "End of Survey" element, click "Customize"
+  - In the popup that appears, check off the "Redirect to a URL" option
+  - In the redirect field, enter a URL of this form: `<base_url>?sid=${e://Field/sid}&pid=${e://Field/pid}`  
+    - this syntax swaps the values from your "Embedded Data" element into the url's query parameters
 
 #### 4. Do a test run of your study
 

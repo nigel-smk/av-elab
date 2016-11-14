@@ -62,6 +62,11 @@ A qualtrics-integrated webapp for exposing online study participants to A/V stim
 14. From the root folder, enter `node server.js` to start the web server
 
 
+## Deploying the eLab to Heroku
+
+**Coming soon**
+
+
 ## Usage
 
 Note: your `<base_url>` is the url for your webserver (e.g. localhost:3030, or your heroku deployment's url).
@@ -71,7 +76,7 @@ Note: your `<base_url>` is the url for your webserver (e.g. localhost:3030, or y
   - Login to your Qualtrics account and create or edit your post-survey
   - In your **Survey Flow**, as your first element, [add a new **Embedded Data** element](https://www.qualtrics.com/support/survey-platform/survey-module/survey-flow/standard-elements/embedded-data/)
   - Add 3 empty fields to the **Embedded Data** element: `sid`, `pid`, and `stopTime`
-  - These fields will be filled by the webapp via the url query parameters when it redirects to your post-survey
+    - These fields will be filled by the webapp via the url query parameters when it redirects to your post-survey
 
 ### 2. Create a new study
 
@@ -81,9 +86,9 @@ Note: your `<base_url>` is the url for your webserver (e.g. localhost:3030, or y
   The url should be of the format `https://www.youtube.com/watch?v=<youtube_id>`. 
   Copy and paste the `<youtube_id>` into your new study's YouTube ID field.
   - Click the **Edit Instructions** button and enter your pre-video briefing text into the popup
-  - Enter the url that you want to redirect your participants to in the **Post-Survey URL** field. 
-  When the participant stops the video or the video ends, they will be redirected to this url.
-  The url will have a query string appended to it of the format 
+  - Enter the url that you want to redirect your participants to in the **Post-Survey URL** field
+    - When the participant stops the video or the video ends, they will be redirected to this url
+    - This url will have a query string appended to it of the format: 
   `?sid=<the_study_id>&pid=<a_unique_participant_id>&stopTime=<when_the_video_was_stopped>`
   - Click the **Add** button
   - Copy your generated **Study Key** to your clipboard for the pre-survey setup

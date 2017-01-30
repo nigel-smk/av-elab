@@ -9,10 +9,10 @@ A qualtrics-integrated webapp for exposing online study participants to A/V stim
 
 
 ## Demo
-[Admin Page](https://sleepy-mountain-8012.herokuapp.com/admin)
+~~[Admin Page](https://sleepy-mountain-8012.herokuapp.com/admin)~~ currently down for maintenance
   - login with demo/password
   
-[Session Demo](https://sleepy-mountain-8012.herokuapp.com/run/test)
+~~[Session Demo](https://sleepy-mountain-8012.herokuapp.com/run/test)~~ currently down for maintenance
 
 
 ## Technologies

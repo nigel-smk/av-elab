@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelper } from 'angular2-jwt';
 
-import { UserService } from '../services/user.service';
+// replace userservice with admin validation and active user validation
 
 @Injectable()
 export class AuthService {
@@ -13,8 +13,7 @@ export class AuthService {
 
   currentUser = { _id: '', username: '', role: '' };
 
-  constructor(private userService: UserService,
-              private router: Router) {
+  constructor(private router: Router) {
     const token = localStorage.getItem('token');
     if (token) {
       const decodedUser = this.decodeUserFromToken(token);
@@ -23,14 +22,15 @@ export class AuthService {
   }
 
   login(emailAndPassword) {
-    return this.userService.login(emailAndPassword).map(res => res.json()).map(
-      res => {
-        localStorage.setItem('token', res.token);
-        const decodedUser = this.decodeUserFromToken(res.token);
-        this.setCurrentUser(decodedUser);
-        return this.loggedIn;
-      }
-    );
+    return null;
+    // return this.userService.login(emailAndPassword).map(res => res.json()).map(
+    //   res => {
+    //     localStorage.setItem('token', res.token);
+    //     const decodedUser = this.decodeUserFromToken(res.token);
+    //     this.setCurrentUser(decodedUser);
+    //     return this.loggedIn;
+    //   }
+    // );
   }
 
   logout() {

@@ -1,9 +1,9 @@
 {
-  "name": "angular2-full-stack",
-  "version": "4.0.0",
+  "name": "av-elab",
+  "version": "0.0.1",
   "license": "MIT",
-  "author": "Davide Violante",
-  "description": "Angular Full Stack project built using Angular 2+, Express, Mongoose and Node.",
+  "author": "Nigel Maynard",
+  "description": "Online platform for running audio/visual psych experiments.",
   "angular-cli": {},
   "scripts": {
     "ng": "ng",

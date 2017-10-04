@@ -7,10 +7,13 @@ import {InvalidBrowserComponent} from './invalid-browser/invalid-browser.compone
 import {BriefingComponent} from './briefing/briefing.component';
 import {StimulusComponent} from './stimulus/stimulus.component';
 import {AdminLoginComponent} from './admin-login/admin-login.component';
+import {InvalidBrowserGuardService} from './services/invalid-browser-guard.service';
+import {EntryGuardService} from './services/entry-guard.service';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'invalid-browser', pathMatch: 'full' },
-  { path: 'invalid-browser', component: InvalidBrowserComponent},
+  // the empty path will always be redirected via the EntryGuardService
+  { path: '', component: InvalidBrowserComponent, canActivate: [EntryGuardService] },
+  { path: 'invalid-browser', component: InvalidBrowserComponent, canActivate: [InvalidBrowserGuardService]},
   { path: 'av-access', component: AvAccessComponent },
   { path: 'calibration', component: CalibrationComponent },
   { path: 'briefing', component: BriefingComponent },
@@ -21,7 +24,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes) ],
+  imports: [ RouterModule.forRoot(routes, { enableTracing: true }) ],
   exports: [ RouterModule ]
 })
 

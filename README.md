@@ -1,82 +1,133 @@
-# Angular Full Stack [![Dependencies](https://david-dm.org/DavideViolante/Angular-Full-Stack.svg)](https://david-dm.org/DavideViolante/Angular2-Full-Stack) [![Donate](https://img.shields.io/badge/paypal-donate-179BD7.svg)](https://www.paypal.me/dviolante) [![MIT license](http://img.shields.io/badge/license-MIT-lightgrey.svg)](http://opensource.org/licenses/MIT)
+# Video eLab  
+A qualtrics-integrated webapp for exposing online study participants to A/V stimuli
 
 
-The frontend is generated with [Angular CLI](https://github.com/angular/angular-cli). The backend is made from scratch. Whole stack in [TypeScript](https://www.typescriptlang.org).
+## Features
+- seamlessly move from your qualtrics pre-survey, through your A/V stimuli, and on to your post-survey
+- ensure that your participants can see and hear your stimulus with calibration tasks
+- confirm that your participants paid attention by reviewing A/V recordings of their sessions in Google Drive
 
-This project uses the [MEAN stack](https://en.wikipedia.org/wiki/MEAN_(software_bundle)):
-* [**M**ongoose.js](http://www.mongoosejs.com) ([MongoDB](https://www.mongodb.com)): database
-* [**E**xpress.js](http://expressjs.com): backend framework
-* [**A**ngular 2+](https://angular.io): frontend framework
-* [**N**ode.js](https://nodejs.org): runtime environment
 
-Other tools and technologies used:
-* [Angular CLI](https://cli.angular.io): frontend scaffolding
-* [Bootstrap](http://www.getbootstrap.com): layout and styles
-* [Font Awesome](http://fontawesome.io): icons
-* [JSON Web Token](https://jwt.io): user authentication
-* [Angular 2 JWT](https://github.com/auth0/angular2-jwt): JWT helper for Angular
-* [Bcrypt.js](https://github.com/dcodeIO/bcrypt.js): password encryption
+## Demo
+~~[Admin Page](https://sleepy-mountain-8012.herokuapp.com/admin)~~ currently down for maintenance
+  - login with demo/password
+  
+~~[Session Demo](https://sleepy-mountain-8012.herokuapp.com/run/test)~~ currently down for maintenance
 
-## Prerequisites
-1. Install [Node.js](https://nodejs.org) and [MongoDB](https://www.mongodb.com)
-2. Install Angular CLI: `npm i -g @angular/cli`
-3. From project root folder install all the dependencies: `npm i`
 
-## Run
-### Development mode
-`npm run dev`: [concurrently](https://github.com/kimmobrunfeldt/concurrently) execute MongoDB, Angular build, TypeScript compiler and Express server.
+## Technologies
+- Node 5.12
+- Angular 1.6
+- Mongo DB 3.2
+- Google Drive
+- it should be noted that this app employs an experimental web technology called [WebRTC](https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API). As such, this app will only work on the latest [Chrome browser](https://www.google.ca/chrome/browser/desktop/index.html). 
 
-A window will automatically open at [localhost:4200](http://localhost:4200). Angular and Express files are being watched. Any change automatically creates a new bundle, restart Express server and reload your browser.
 
-### Production mode
-`npm run prod`: run the project with a production bundle and AOT compilation listening at [localhost:3000](http://localhost:3000) 
+## Getting started on your local machine
 
-## Deploy (Heroku)
-1. Go to Heroku and create a new app
-2. Install [Heroku CLI](https://devcenter.heroku.com/articles/heroku-command-line)
-3. `heroku login`
-4. `cd my-project/`
-5. `git init`
-6. `heroku git:remote -a your-app-name`
-7. Download this repo and copy all files into `my-project` folder
-8. Edit `.gitignore` and remove line with `/dist`
-9. Edit `.env` and replace the MongoDB URI with a real remote MongoDB server. You can create a MongoDB server with Heroku or mLab.
-10. `npm i`
-11. `ng build -prod` or `ng build -aot -prod`
-12. `tsc -p server`
-13. `git add .`
-14. `git commit -m "Going to Heroku"`
-15. `git push heroku master`
-16. `heroku open`
-17. A window will open with your app online
+1. Install [Node.js](https://nodejs.org/en/download/) to run the web server
+2. Create a free account on [mLab](https://mlab.com/signup/) for hosting your Mongo Database
+3. Login to mLab and create a new Single-node Sandbox database
+4. Create a new user for this database with a username and password of your choice
+5. Copy the mongodb:// url, swapping the <dbuser> and <dbpassword> for the ones you just created
+6. Create a file called `mLab.json` in the project's `credentials` folder and paste your mongodb url in this format  
+    ```
+    {  
+      "URL": "<your_url_here>",  
+      "user": "<your_database_username_here>",  
+      "password": "<your_database_password_here>"  
+    }  
+    ```
+7. Gain access to the [Google API Console](https://console.developers.google.com) using your google account
+8. In the API Console, create a new project called "eLab" and then enable the Google Drive API for it
+9. Create a [service account](https://console.developers.google.com/permissions/serviceaccounts) for your eLab project
+  - Service account name: videoStore
+  - Role: Owner
+  - Check **Furnish a new private key** and choose a Key type of **JSON**
+10. Move the JSON file that gets downloaded into the `credentials` folder of the project and rename it to `googleDrive.json`
+11. Create a file called `jwtSecret.json` in the project's `credentials` folder enter text in this format:
+    ```
+    {  
+      "secret": "<some_secret_string_of_your_choice>"  
+    }  
+    ```
+12. Create a file called `admin.json` in the project's `credentials` folder and enter text in this format:
+  ```
+  {  
+    "username": "<username_of_your_choice>",  
+    "password": "<password_of_your_choice>"  
+  }  
+  ```
+13. From the root folder, enter `npm install` into the terminal to install the dependencies for the server project
+14. From the root folder, enter `node server.js` to start the web server
 
-## Preview
-![Preview](https://raw.githubusercontent.com/DavideViolante/Angular2-Full-Stack/master/demo.gif "Preview")
 
-## Please open an issue if
-* you have any suggestion to improve this project
-* you noticed any problem or error
+## Deploying the eLab to Heroku
 
-## To do
-* More tests
+**Coming soon**
 
-## Running frontend unit tests
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running frontend end-to-end tests
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/). 
-Before running the tests make sure you are serving the app via `npm start`.
+## Usage
 
-## Running backend tests
-Run `mongod` to run an instance of MongoDB daemon and then run `npm run testbe` to execute the backend tests via [Mocha](https://mochajs.org/).
+Note: your `<base_url>` is the url for your webserver (e.g. localhost:3030, or your heroku deployment's url).
 
-## Running TSLint
-Run `ng lint` (frontend) and `npm run lintbe` (backend) to execute the linter via [TSLint](https://palantir.github.io/tslint/).
+### 1. Setup your Qualtrics post-survey
 
-## Further help
-To get more help on the `angular-cli` use `ng --help` or go check out the [Angular-CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+  - Login to your Qualtrics account and create or edit your post-survey
+  - In your **Survey Flow**, as your first element, [add a new **Embedded Data** element](https://www.qualtrics.com/support/survey-platform/survey-module/survey-flow/standard-elements/embedded-data/)
+  - Add 3 empty fields to the **Embedded Data** element: `sid`, `pid`, and `stopTime`
+    - These fields will be filled by the webapp via the url query parameters when it redirects to your post-survey
 
-To get more help about this project, [visit the wiki](https://github.com/DavideViolante/Angular-Full-Stack/wiki).
+### 2. Create a new study
 
-### Author
-* [Davide Violante](https://github.com/DavideViolante)
+  - Navigate to the admin page at `<base_url>/admin` and login with the credentials you provided in `admin.json`
+  - In the **Manage Studies** section, enter a **Study ID** of your choice to identify your study.
+  - In your browser, navigate to the youtube video that you want to use. 
+  The url should be of the format `https://www.youtube.com/watch?v=<youtube_id>`. 
+  Copy and paste the `<youtube_id>` into your new study's YouTube ID field.
+  - Click the **Edit Instructions** button and enter your pre-video briefing text into the popup
+  - Enter the url that you want to redirect your participants to in the **Post-Survey URL** field
+    - When the participant stops the video or the video ends, they will be redirected to this url
+    - This url will have a query string appended to it of the format: 
+  `?sid=<the_study_id>&pid=<a_unique_participant_id>&stopTime=<when_the_video_was_stopped>`
+  - Click the **Add** button
+  - Copy your generated **Study Key** to your clipboard for the pre-survey setup
+  - In the **Share AV Data** section enter a **Name** and **Gmail**, and select a **Permission**
+    - The permission should always be `reader`
+    - This shares the app's session recordings with the given gmail user
+    - They can access these recordings by logging into their personal Google Drive and clicking **Shared with me**
+      - It will show as a folder called **eLab**
+  
+### 3. Setup your Qualtrics pre-survey
+
+  - Login to your Qualtrics account and create or edit your pre-survey
+  
+  - In your **Survey Flow**, as your first element [add a new **Embedded Data** element](https://www.qualtrics.com/support/survey-platform/survey-module/survey-flow/standard-elements/embedded-data/)
+  - Add 2 fields to the **Embedded Data** element: `sid`, and `pid`
+  - Enter your study's id into the `sid` field, and leave the `pid` field blank
+    - the `pid` field will be populated by the **Web Service** element (below)
+  
+  - At the end of your **Survey Flow**, before your **End of Survey** element [add a new **Web Service** element](https://www.qualtrics.com/support/survey-platform/survey-module/survey-flow/advanced-elements/web-service/)
+  - In the URL field, enter `<base_url>/api/auth/generateKey`
+  - Add a parameter called `studyKey` with the **Study Key** that was generated for your study as the value
+  - Then click **Test URL**
+  - If it is successful, you will be presented with the option to add `pid` as embedded data
+  - If it is not successful, make sure that your eLab server is running and the url is correct
+  - Click **Add Embedded Data**
+  
+  - On your **End of Survey** element, click **Customize**
+  - In the popup that appears, check off the **Redirect to a URL** option
+  - In the redirect field, enter a URL of this form: `<base_url>?sid=${e://Field/sid}&pid=${e://Field/pid}`
+    - this syntax swaps the values from your **Embedded Data** element into the url's query parameters
+
+### 4. Do a test run of your study
+
+  - Walk through your survey process from pre-survey to post-survey to ensure that the flow is as expected
+  
+  - If you want to test run the app only, first generate a `pid` by entering `<base_url>/api/auth/generateKey?studyKey=<your_generated_study_key>` into your browser
+  - Copy the `pid` from the response that you recieve in your browser
+  - To start the webapp, in a Chrome browser enter `<base_url>?sid=<your_study_id>&pid=<your_copied_pid>`
+
+# Cool stuff
+  - query parameters get stripped from url on entry
+  - route guards!

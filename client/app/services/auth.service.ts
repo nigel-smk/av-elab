@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelper } from 'angular2-jwt';
-
-// replace userservice with admin validation and active user validation
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
 
 @Injectable()
 export class AuthService {
@@ -21,8 +21,11 @@ export class AuthService {
     }
   }
 
-  login(emailAndPassword) {
-    return null;
+  login(session: string, study: string) {
+    // TODO request auth from server. Store auth results. Next 'true' to indicate completion.
+
+    return Observable.of(null);
+    // TODO fetch credentials from query parameters and strip from url
     // return this.userService.login(emailAndPassword).map(res => res.json()).map(
     //   res => {
     //     localStorage.setItem('token', res.token);

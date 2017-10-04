@@ -13,6 +13,9 @@ import {InvalidBrowserComponent} from './invalid-browser/invalid-browser.compone
 import {BriefingComponent} from './briefing/briefing.component';
 import {StimulusComponent} from './stimulus/stimulus.component';
 import {AdminLoginComponent} from './admin-login/admin-login.component';
+import {InvalidBrowserGuardService} from './services/invalid-browser-guard.service';
+import {EntryGuardService} from './services/entry-guard.service';
+import {PhaseGuardService} from './services/phase-guard.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,10 @@ import {AdminLoginComponent} from './admin-login/admin-login.component';
   providers: [
     AuthService,
     AuthGuardLogin,
-    AuthGuardAdmin
+    AuthGuardAdmin,
+    InvalidBrowserGuardService,
+    EntryGuardService,
+    PhaseGuardService
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

@@ -11,10 +11,10 @@ import 'rxjs/add/observable/defer';
 @Injectable()
 export class UserMediaService {
 
-  private sourceSwitch$ = new ReplaySubject<Observable<MediaStream>>(1);
+  private sourceSwitch$ = new Subject<Observable<MediaStream>>();
   private mediaStream$: Observable<MediaStream> = this.sourceSwitch$
     .switchMap((obs) => obs)
-    .multicast(new Subject())
+    .multicast(new ReplaySubject(1))
     .refCount();
 
   constructor() { }
@@ -32,14 +32,6 @@ export class UserMediaService {
 
     this.sourceSwitch$.next(deferredPromise$);
 
-  }
-
-  reload() {
-    console.log('reload clicked');
-  }
-
-  continue() {
-    console.log('continue clicked');
   }
 
 }

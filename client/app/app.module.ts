@@ -17,6 +17,10 @@ import {InvalidBrowserGuardService} from './services/invalid-browser-guard.servi
 import {EntryGuardService} from './services/entry-guard.service';
 import {PhaseGuardService} from './services/phase-guard.service';
 import {UserMediaService} from './services/user-media.service';
+import {MicCalibrationComponent} from './calibration/mic-calibration/mic-calibration.component';
+import {WebcamCalibrationComponent} from './calibration/webcam-calibration/webcam-calibration.component';
+import {SpeakerCalibrationComponent} from './calibration/speaker-calibration/speaker-calibration.component';
+import {WebcamMonitorComponent} from './calibration/webcam-calibration/webcam-monitor/webcam-monitor.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +28,10 @@ import {UserMediaService} from './services/user-media.service';
     InvalidBrowserComponent,
     AvAccessComponent,
     CalibrationComponent,
+    MicCalibrationComponent,
+    WebcamCalibrationComponent,
+    WebcamMonitorComponent,
+    SpeakerCalibrationComponent,
     BriefingComponent,
     StimulusComponent,
     AdminLoginComponent,

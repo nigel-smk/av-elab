@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CalibrationComponent implements OnInit {
 
+  public expectedEvents = new Set(['micCalibrated', 'webcamCalibrated', 'speakersCalibrated']);
+
   constructor() { }
 
   ngOnInit() {

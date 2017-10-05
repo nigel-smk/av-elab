@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UserMediaService} from '../services/user-media.service';
 import 'rxjs/add/operator/subscribeOn';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-av-access',
@@ -11,7 +12,7 @@ export class AvAccessComponent implements OnInit {
 
   public access = 'denied';
 
-  constructor(private userMedia: UserMediaService) { }
+  constructor(private router: Router, private userMedia: UserMediaService) { }
 
   ngOnInit() {
     this.userMedia.$.subscribe(() => {
@@ -29,6 +30,14 @@ export class AvAccessComponent implements OnInit {
       audio: true,
       video: true
     });
+  }
+
+  reload() {
+    console.log('reload clicked');
+  }
+
+  continue() {
+    this.router.navigate(['/calibration']);
   }
 
 }

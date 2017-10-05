@@ -16,6 +16,7 @@ import {AdminLoginComponent} from './admin-login/admin-login.component';
 import {InvalidBrowserGuardService} from './services/invalid-browser-guard.service';
 import {EntryGuardService} from './services/entry-guard.service';
 import {PhaseGuardService} from './services/phase-guard.service';
+import {UserMediaService} from './services/user-media.service';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import {PhaseGuardService} from './services/phase-guard.service';
     AuthGuardAdmin,
     InvalidBrowserGuardService,
     EntryGuardService,
-    PhaseGuardService
+    PhaseGuardService,
+    UserMediaService
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

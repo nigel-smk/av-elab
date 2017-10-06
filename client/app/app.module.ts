@@ -21,6 +21,11 @@ import {MicCalibrationComponent} from './calibration/mic-calibration/mic-calibra
 import {WebcamCalibrationComponent} from './calibration/webcam-calibration/webcam-calibration.component';
 import {SpeakerCalibrationComponent} from './calibration/speaker-calibration/speaker-calibration.component';
 import {WebcamMonitorComponent} from './calibration/webcam-calibration/webcam-monitor/webcam-monitor.component';
+import {MicMonitorComponent} from './calibration/mic-calibration/mic-monitor/mic-monitor.component';
+import {FrequencyDataService} from './services/frequency-data.service';
+import {VolumeDataService} from './services/volume-data.service';
+
+// TODO split the code into modules
 
 @NgModule({
   declarations: [
@@ -29,6 +34,7 @@ import {WebcamMonitorComponent} from './calibration/webcam-calibration/webcam-mo
     AvAccessComponent,
     CalibrationComponent,
     MicCalibrationComponent,
+    MicMonitorComponent,
     WebcamCalibrationComponent,
     WebcamMonitorComponent,
     SpeakerCalibrationComponent,
@@ -48,7 +54,9 @@ import {WebcamMonitorComponent} from './calibration/webcam-calibration/webcam-mo
     InvalidBrowserGuardService,
     EntryGuardService,
     PhaseGuardService,
-    UserMediaService
+    UserMediaService,
+    FrequencyDataService,
+    VolumeDataService
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

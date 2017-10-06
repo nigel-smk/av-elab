@@ -1,3 +1,9 @@
-<p>
-  mic-calibration works!
-</p>
+<div ng-style="borders.microphone" class="col-md-4 parent">
+  <div [ngClass]="{'calibration-success':complete}" class="panel panel-default calibrator calibration-height text-center">
+    <div class="panel-heading"><span *ngIf="!complete">Increase your microphone volume and tap the microphone until the meter fills up</span><span *ngIf="complete">Microphone calibration complete</span></div>
+    <div class="panel-body calibration-height">
+      <app-mic-monitor></app-mic-monitor>
+    </div>
+  </div>
+</div>
+

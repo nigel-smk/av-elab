@@ -3,13 +3,13 @@
 </div>
 <div class="row-fluid">
   <div>
-    <app-webcam-calibration></app-webcam-calibration>
+    <app-webcam-calibration (onCalibrated)="onCalibrated('webcam')"></app-webcam-calibration>
   </div>
   <div>
-    <app-mic-calibration></app-mic-calibration>
+    <app-mic-calibration (onCalibrated)="onCalibrated('mic')"></app-mic-calibration>
   </div>
   <div>
-    <app-speaker-calibration></app-speaker-calibration>
+    <app-speaker-calibration (onCalibrated)="onCalibrated('speakers')"></app-speaker-calibration>
   </div>
 </div>
 <div *ngIf="expectedEvents.size == 0" class="col-md-6 col-md-offset-3 text-center">

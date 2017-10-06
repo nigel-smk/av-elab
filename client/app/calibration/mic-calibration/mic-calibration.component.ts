@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {VolumeDataService} from '../../services/volume-data.service';
 
 @Component({
   selector: 'app-mic-calibration',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MicCalibrationComponent implements OnInit {
 
-  constructor() { }
+  @Output() onCalibrated: EventEmitter<void> = new EventEmitter<void>();
+  public complete = false;
+
+  constructor(private volumeData: VolumeDataService) { }
 
   ngOnInit() {
+    this.volumeData.$.subscribe((volumeData: number) => {
+      if (volumeData === 255) {
+        this.onCalibrated.emit();
+        this.complete = true;
+      }
+    });
   }
 
 }

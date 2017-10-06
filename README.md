@@ -131,3 +131,10 @@ Note: your `<base_url>` is the url for your webserver (e.g. localhost:3030, or y
 # Cool stuff
   - query parameters get stripped from url on entry
   - route guards!
+  - observable getUserMedia
+  - using animationFrame schedule
+  - writing an observable service that subscribes to other observables
+
+# Experimental Tech
+https://developer.mozilla.org/en-US/docs/Web/API/Window/URL
+https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia

@@ -1,3 +1,14 @@
-<p>
-  stimulus works!
-</p>
+<div style="pointer-events: none" class="text-center">
+  <div id='overlay' style='position: relative; z-index: 0'>
+    <youtube-player style='position: relative; z-index: -1'
+                    [width]="800"
+                    [height]="600"
+                    [playerVars]="playerVars"
+                    [videoId]="id"
+                    (ready)="savePlayer($event)"
+                    (change)="onStateChange($event)"
+    ></youtube-player>
+  </div>
+</div>
+
+

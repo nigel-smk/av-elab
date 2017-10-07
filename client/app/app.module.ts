@@ -24,6 +24,7 @@ import {WebcamMonitorComponent} from './calibration/webcam-calibration/webcam-mo
 import {MicMonitorComponent} from './calibration/mic-calibration/mic-monitor/mic-monitor.component';
 import {FrequencyDataService} from './services/frequency-data.service';
 import {VolumeDataService} from './services/volume-data.service';
+import {YoutubePlayerModule} from 'ngx-youtube-player';
 
 // TODO split the code into modules
 
@@ -45,7 +46,8 @@ import {VolumeDataService} from './services/volume-data.service';
   ],
   imports: [
     RoutingModule,
-    SharedModule
+    SharedModule,
+    YoutubePlayerModule
   ],
   providers: [
     AuthService,

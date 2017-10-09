@@ -3,7 +3,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 @Component({
   selector: 'app-webcam-calibration',
   templateUrl: './webcam-calibration.component.html',
-  styleUrls: ['./webcam-calibration.component.css']
+  styleUrls: ['./webcam-calibration.component.scss']
 })
 export class WebcamCalibrationComponent implements OnInit {
 

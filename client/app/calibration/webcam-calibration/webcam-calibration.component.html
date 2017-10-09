@@ -1,15 +1,13 @@
-<div class="col-md-4 parent">
-  <div [ngClass]='{"calibration-success": isCalibrated}' class="panel panel-default calibrator calibration-height">
-    <div class="text-center">
-      <div class="panel-heading"><span *ngIf="!isCalibrated">Center the camera on your face</span><span *ngIf="isCalibrated">Webcam calibration complete</span></div>
-      <div class="panel-body">
-        <app-webcam-monitor *ngIf="!isCalibrated"><img src="/images/liveFeedPlaceholder.gif"/></app-webcam-monitor>
-        <div class="row-fluid">
-          <div class="text-center">
-            <button (click)="complete()" *ngIf="!isCalibrated">Done</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<app-calibration-template *ngIf="!isCalibrated">
+  <card-header>Center the camera on your face</card-header>
+  <card-body>
+    <app-webcam-monitor>
+      <img src="/images/liveFeedPlaceholder.gif"/>
+    </app-webcam-monitor>
+  </card-body>
+  <card-footer>
+    <button (click)="complete()">Done</button>
+  </card-footer>
+</app-calibration-template>
+
+<div class="alert alert-success" *ngIf="isCalibrated">Webcam calibration complete</div>

@@ -1,9 +1,9 @@
-<div ng-style="borders.microphone" class="col-md-4 parent">
-  <div [ngClass]="{'calibration-success':complete}" class="panel panel-default calibrator calibration-height text-center">
-    <div class="panel-heading"><span *ngIf="!complete">Increase your microphone volume and tap the microphone until the meter fills up</span><span *ngIf="complete">Microphone calibration complete</span></div>
-    <div class="panel-body calibration-height">
-      <app-mic-monitor></app-mic-monitor>
-    </div>
-  </div>
-</div>
-
+<app-calibration-template *ngIf="!complete">
+  <card-header>
+    Increase your microphone volume and tap the microphone until the meter fills up
+  </card-header>
+  <card-body>
+    <app-mic-monitor></app-mic-monitor>
+  </card-body>
+</app-calibration-template>
+<div class="alert alert-success" *ngIf="complete">Microphone calibration complete</div>

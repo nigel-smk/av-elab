@@ -12,85 +12,85 @@ body {
 
 /*TODO place these styles in their respective components*/
 
-.pid {
-  margin-top: 30px;
-  margin-bottom: 20px;
-}
-
-.parent {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.center-y {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.calibration-height {
-  height: 250px;
-}
-
-.calibrator {
-  border-color: #f00;
-}
-
-.calibrator .panel-heading {
-  background-color: rgba(202,51,79,0.42);
-}
-
-.calibrator.calibration-success {
-  border-color: #008000;
-}
-
-.calibration-height.calibration-success {
-  height: auto;
-}
-
-.calibration-success .panel-body {
-  display: none;
-}
-
-.calibrator.calibration-success .panel-heading {
-  background-color: rgba(0,128,0,0.22);
-}
-
-.calibrator.speaker-calibrator input {
-  width: 80%;
-}
-
-.centred {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-#analyser {
-  width: 20%;
-  height: 100px;
-  border: 2px solid #000;
-  margin-top: 30px;
-}
-
-#webcam-live {
-  height: 150px;
-}
-
-.videoTest {
-  float: left;
-}
-
-.audioTest {
-  float: left;
-}
-
-.info-message {
-  margin-bottom: 30px;
-}
-
-label input {
-  margin-left: 5px;
-}
+//.pid {
+//  margin-top: 30px;
+//  margin-bottom: 20px;
+//}
+//
+//.parent {
+//  display: flex;
+//  flex-direction: column;
+//  justify-content: center;
+//}
+//
+//.center-y {
+//  position: absolute;
+//  top: 50%;
+//  transform: translateY(-50%);
+//}
+//
+//.calibration-height {
+//  height: 250px;
+//}
+//
+//.calibrator {
+//  border-color: #f00;
+//}
+//
+//.calibrator .panel-heading {
+//  background-color: rgba(202,51,79,0.42);
+//}
+//
+//.calibrator.calibration-success {
+//  border-color: #008000;
+//}
+//
+//.calibration-height.calibration-success {
+//  height: auto;
+//}
+//
+//.calibration-success .panel-body {
+//  display: none;
+//}
+//
+//.calibrator.calibration-success .panel-heading {
+//  background-color: rgba(0,128,0,0.22);
+//}
+//
+//.calibrator.speaker-calibrator input {
+//  width: 80%;
+//}
+//
+//.centred {
+//  position: fixed;
+//  top: 50%;
+//  left: 50%;
+//  transform: translate(-50%, -50%);
+//}
+//
+//#analyser {
+//  width: 20%;
+//  height: 100px;
+//  border: 2px solid #000;
+//  margin-top: 30px;
+//}
+//
+//#webcam-live {
+//  height: 150px;
+//}
+//
+//.videoTest {
+//  float: left;
+//}
+//
+//.audioTest {
+//  float: left;
+//}
+//
+//.info-message {
+//  margin-bottom: 30px;
+//}
+//
+//label input {
+//  margin-left: 5px;
+//}

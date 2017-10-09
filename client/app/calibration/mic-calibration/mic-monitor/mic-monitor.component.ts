@@ -21,6 +21,8 @@ export class MicMonitorComponent implements AfterViewInit, OnDestroy {
 
   private subscription: ISubscription;
 
+  public loaded = false;
+
   constructor(private volumeData: VolumeDataService) {
   }
 
@@ -28,6 +30,7 @@ export class MicMonitorComponent implements AfterViewInit, OnDestroy {
     this.context = this.canvas.nativeElement.getContext('2d');
 
     this.subscription = this.volumeData.$.subscribe((volumeData: number) => {
+      this.loaded = true;
       this.maxObservedVolume = Math.max(this.maxObservedVolume, volumeData);
       this.draw(volumeData);
     });
@@ -41,6 +44,8 @@ export class MicMonitorComponent implements AfterViewInit, OnDestroy {
   draw(data) {
     const context = this.context;
     const radius = this.radius;
+    this.canvas.nativeElement.width = radius * 2;
+    this.canvas.nativeElement.height = radius * 2;
 
     // clear canvas
     context.clearRect(0, 0, radius * 2, radius * 2);

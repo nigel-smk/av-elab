@@ -25,6 +25,7 @@ import {MicMonitorComponent} from './calibration/mic-calibration/mic-monitor/mic
 import {FrequencyDataService} from './services/frequency-data.service';
 import {VolumeDataService} from './services/volume-data.service';
 import {YoutubePlayerModule} from 'ngx-youtube-player';
+import {CalibrationTemplateComponent} from './calibration/calibration-template/calibration-template.component';
 
 // TODO split the code into modules
 
@@ -34,6 +35,7 @@ import {YoutubePlayerModule} from 'ngx-youtube-player';
     InvalidBrowserComponent,
     AvAccessComponent,
     CalibrationComponent,
+    CalibrationTemplateComponent,
     MicCalibrationComponent,
     MicMonitorComponent,
     WebcamCalibrationComponent,

@@ -11,11 +11,15 @@ export class WebcamMonitorComponent implements AfterViewInit, OnDestroy {
 
   @ViewChild('webcamout') el: ElementRef;
   private subscription: ISubscription;
+  public loaded = false;
 
   constructor(private userMedia: UserMediaService) { }
 
+
   ngAfterViewInit() {
     this.subscription = this.userMedia.$.subscribe((stream: MediaStream) => {
+      // TODO fix ExpressionChangedAfterItHasBeenCheckedError
+      this.loaded = true;
       this.gotStream(stream);
     });
   }

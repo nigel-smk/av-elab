@@ -6,7 +6,7 @@ import {Router} from '@angular/router';
 @Component({
   selector: 'app-av-access',
   templateUrl: './av-access.component.html',
-  styleUrls: ['./av-access.component.css']
+  styleUrls: ['./av-access.component.scss']
 })
 export class AvAccessComponent implements OnInit {
 
@@ -34,6 +34,7 @@ export class AvAccessComponent implements OnInit {
 
   reload() {
     console.log('reload clicked');
+    window.location.reload();
   }
 
   continue() {

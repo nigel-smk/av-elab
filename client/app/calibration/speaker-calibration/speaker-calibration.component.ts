@@ -10,6 +10,7 @@ export class SpeakerCalibrationComponent implements OnInit {
   @Output() onCalibrated: EventEmitter<void> = new EventEmitter<void>();
   @ViewChild('audioTest') audioElement: ElementRef;
   public userInput = '';
+  public isCalibrated = false;
 
   constructor() { }
 
@@ -22,6 +23,7 @@ export class SpeakerCalibrationComponent implements OnInit {
 
   onUpdate(input: string) {
     if (input === 'welcome') {
+      this.isCalibrated = true;
       this.onCalibrated.emit();
     }
   }

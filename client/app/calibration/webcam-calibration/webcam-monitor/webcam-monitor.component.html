@@ -1,1 +1,2 @@
-<video #webcamout autoplay muted ></video>
+<video #webcamout autoplay muted [hidden]="!loaded"></video>
+<img src="/assets/loading.gif" [hidden]="loaded">

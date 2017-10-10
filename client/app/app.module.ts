@@ -26,6 +26,7 @@ import {FrequencyDataService} from './services/frequency-data.service';
 import {VolumeDataService} from './services/volume-data.service';
 import {YoutubePlayerModule} from 'ngx-youtube-player';
 import {CalibrationTemplateComponent} from './calibration/calibration-template/calibration-template.component';
+import {SessionDataService} from './services/session-data.service';
 
 // TODO split the code into modules
 
@@ -60,7 +61,8 @@ import {CalibrationTemplateComponent} from './calibration/calibration-template/c
     PhaseGuardService,
     UserMediaService,
     FrequencyDataService,
-    VolumeDataService
+    VolumeDataService,
+    SessionDataService
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

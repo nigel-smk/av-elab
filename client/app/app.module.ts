@@ -27,6 +27,7 @@ import {VolumeDataService} from './services/volume-data.service';
 import {YoutubePlayerModule} from 'ngx-youtube-player';
 import {CalibrationTemplateComponent} from './calibration/calibration-template/calibration-template.component';
 import {SessionDataService} from './services/session-data.service';
+import {ImageCaptureService} from './services/image-capture.service';
 
 // TODO split the code into modules
 
@@ -62,7 +63,8 @@ import {SessionDataService} from './services/session-data.service';
     UserMediaService,
     FrequencyDataService,
     VolumeDataService,
-    SessionDataService
+    SessionDataService,
+    ImageCaptureService
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

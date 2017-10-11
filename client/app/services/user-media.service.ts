@@ -23,11 +23,15 @@ export class UserMediaService {
     return this.mediaStream$;
   }
 
-  getUserMedia(constraints: MediaStreamConstraints) {
+  getUserMedia() {
 
+    // TODO get the constraints from environment
     // we must defer the fromPromise to make it a "cold" observable. Otherwise errors get thrown before there are subscribers
     const deferredPromise$ = Observable.defer(() => {
-      return Observable.fromPromise(navigator.mediaDevices.getUserMedia(constraints));
+      return Observable.fromPromise(navigator.mediaDevices.getUserMedia({
+        audio: true,
+        video: { width: 200, height: 200 }
+      }));
     });
 
     this.sourceSwitch$.next(deferredPromise$);

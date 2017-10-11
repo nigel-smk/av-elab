@@ -1,9 +1,18 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {ISubscription} from 'rxjs/Subscription';
-import {Router} from '@angular/router';
 import {SessionData} from '../../models/session-data';
 import {SessionDataService} from '../services/session-data.service';
+import {ImageCaptureService} from '../services/image-capture.service';
+
+enum YTEvent {
+  UNSTARTED = -1,
+  ENDED,
+  PLAYING,
+  PAUSED,
+  BUFFERING,
+  VIDEOCUED = 5
+}
 
 @Component({
   selector: 'app-stimulus',
@@ -11,8 +20,6 @@ import {SessionDataService} from '../services/session-data.service';
   styleUrls: ['./stimulus.component.css']
 })
 export class StimulusComponent implements OnInit, OnDestroy {
-
-  // TODO redirect at video end
 
   public sessionDataSubscription: ISubscription;
   private keypressSubscription: ISubscription;
@@ -33,12 +40,14 @@ export class StimulusComponent implements OnInit, OnDestroy {
     disablekb: 0
   };
 
-  constructor(private router: Router, private sessionData: SessionDataService) { }
+  constructor(private sessionData: SessionDataService, private imageCapture: ImageCaptureService) { }
 
   ngOnInit() {
+    this.imageCapture.start();
+
     this.keypressSubscription = Observable.fromEvent(document, 'keypress').subscribe((event: KeyboardEvent) => {
       if (event.keyCode == 32 && this.data) {
-        window.location.href = this.data.redirectUrl;
+        this.onStimulusEnd()
       }
     });
 
@@ -59,6 +68,21 @@ export class StimulusComponent implements OnInit, OnDestroy {
 
   onStateChange(event) {
     console.log('player state', event.data);
+    // video ends without user input
+    if (event.data === YTEvent.ENDED) {
+      this.onStimulusEnd();
+    }
+  }
+
+  onStimulusEnd() {
+    this.data.stopTime = this.player.getCurrentTime();
+    this.imageCapture.stop();
+    // append query parameters to url
+    let redirectUrl = this.data.redirectUrl + '?';
+    redirectUrl += this.data.session ? 'session="' + this.data.session + '"&' : '';
+    redirectUrl += this.data.study ? 'study="' + this.data.study + '"&' : '';
+    redirectUrl += this.data.stopTime ? 'stop-time="' + this.data.stopTime + '"&' : '';
+    window.location.href = redirectUrl.substr(0, redirectUrl.length - 1);
   }
 
 }

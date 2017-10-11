@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {UserMediaService} from '../services/user-media.service';
 import 'rxjs/add/operator/subscribeOn';
 import {Router} from '@angular/router';
+import {ImageCaptureService} from '../services/image-capture.service';
 
 @Component({
   selector: 'app-av-access',
@@ -15,6 +16,7 @@ export class AvAccessComponent implements OnInit {
   constructor(private router: Router, private userMedia: UserMediaService) { }
 
   ngOnInit() {
+
     this.userMedia.$.subscribe(() => {
       this.access = 'granted';
     },
@@ -25,11 +27,7 @@ export class AvAccessComponent implements OnInit {
       }
     });
 
-    // TODO set constraints in environment file
-    this.userMedia.getUserMedia({
-      audio: true,
-      video: true
-    });
+    this.userMedia.getUserMedia();
   }
 
   reload() {

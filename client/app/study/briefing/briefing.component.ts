@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {SessionDataService} from '../services/session-data.service';
-import {SessionData} from '../../models/session-data';
 import {Observable} from 'rxjs/Observable';
 import {ISubscription} from 'rxjs/Subscription';
 import {Router} from '@angular/router';
+import {SessionData} from '../../models/session-data';
 
 @Component({
   selector: 'app-briefing',

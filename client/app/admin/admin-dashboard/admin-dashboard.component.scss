@@ -1,0 +1,29 @@
+:host {
+  display: flex;
+}
+
+.sidebar {
+  background-color: cadetblue;
+  height: 100vh;
+  width: 200px;
+}
+.router {
+  flex-grow: 1;
+}
+
+.menu-item {
+  background-color: #EEEEEE;
+  border: solid transparent medium;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+  margin: 10px;
+  padding: 20px;
+  text-align: center;
+}
+
+.active-menu-item {
+  border-color: black;
+  text-decoration: underline;
+  background-color: lightgrey;
+}

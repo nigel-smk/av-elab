@@ -1,14 +1,21 @@
 import * as express from 'express';
 
 import ImageUploadCtrl from './controllers/image-upload';
+import StudyCtrl from './controllers/study';
 
 export default function setRoutes(app) {
 
   const router = express.Router();
 
   const imageUploadCtrl = new ImageUploadCtrl();
+  const studyCtrl = new StudyCtrl();
 
   router.route('/image-upload').post(imageUploadCtrl.upload);
+
+  router.route('/studies').get(studyCtrl.getAll);
+  router.route('/studies').post(studyCtrl.insert);
+  router.route('/study/:id').put(studyCtrl.update);
+  router.route('/study/:id').delete(studyCtrl.delete);
 
   // const userCtrl = new UserCtrl();
   //

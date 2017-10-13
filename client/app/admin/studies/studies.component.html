@@ -1,3 +1,43 @@
-<p>
-  studies works!
-</p>
+<table class="table table-bordered">
+  <thead>
+  <tr>
+    <th>Study ID</th>
+    <th>Study Key</th>
+    <th>YouTube ID</th>
+    <th>Instructions</th>
+    <th>Post-Survey URL</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let study of studies">
+    <td>{{ study.study }}</td>
+    <td>{{ study.token }}</td>
+    <td>{{ study.youtubeId }}</td>
+    <td>
+      <button (click)="openDialog(study.instructions)">View Instructions</button>
+    </td>
+    <td>{{ study.redirect }}</td>
+    <td>
+      <button (click)="deleteStudy(study)">Delete</button>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <input type="text" name="sid" [(ngModel)]="newStudy.study"/>
+    </td>
+    <td><i>Generated on "Add"...</i></td>
+    <td>
+      <input type="text" name="youtubeId" [(ngModel)]="newStudy.youtubeId"/>
+    </td>
+    <td>
+      <button (click)="openDialog(newStudy.instructions)">Edit Instructions</button>
+    </td>
+    <td>
+      <input type="text" name="redirect" [(ngModel)]="newStudy.redirect"/>
+    </td>
+    <td>
+      <button (click)="createStudy()">Add</button>
+    </td>
+  </tr>
+  </tbody>
+</table>

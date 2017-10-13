@@ -1,0 +1,7 @@
+import BaseCtrl from './base';
+import Study from '../models/study';
+
+// TODO do not serve the study's token with getAll
+export default class StudyCtrl extends BaseCtrl {
+  model = Study;
+}

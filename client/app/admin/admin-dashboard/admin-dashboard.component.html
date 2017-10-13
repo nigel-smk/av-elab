@@ -1,2 +1,8 @@
-<h1>Router Dashboard</h1>
-<router-outlet></router-outlet>
+<div class="sidebar">
+  <a class="menu-item" routerLink="/admin/studies" routerLinkActive="active-menu-item">Studies</a>
+  <a class="menu-item" routerLink="/admin/shares" routerLinkActive="active-menu-item">Shares</a>
+  <a class="menu-item" routerLink="/admin/activity" routerLinkActive="active-menu-item">Activity</a>
+</div>
+<div class="router">
+  <router-outlet></router-outlet>
+</div>

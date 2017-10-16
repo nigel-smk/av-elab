@@ -1,0 +1,13 @@
+<div class="modal-header">
+  <h4 class="modal-title">Enter study instructions...</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <textarea rows="20" cols="50" autofocus ngDefaultControl [(ngModel)]="instructions"></textarea>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close(instructions)">Save</button>
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.dismiss('Cancelled')">Cancel</button>
+</div>

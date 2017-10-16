@@ -14,11 +14,11 @@
     <td>{{ study.token }}</td>
     <td>{{ study.youtubeId }}</td>
     <td>
-      <button (click)="openDialog(study.instructions)">View Instructions</button>
+      <button (click)="openInstructionsDialog(study)">View Instructions</button>
     </td>
     <td>{{ study.redirect }}</td>
     <td>
-      <button (click)="deleteStudy(study)">Delete</button>
+      <button (click)="openDeleteDialog(study)">Delete</button>
     </td>
   </tr>
   <tr>
@@ -30,7 +30,7 @@
       <input type="text" name="youtubeId" [(ngModel)]="newStudy.youtubeId"/>
     </td>
     <td>
-      <button (click)="openDialog(newStudy.instructions)">Edit Instructions</button>
+      <button (click)="openInstructionsDialog(newStudy)">Edit Instructions</button>
     </td>
     <td>
       <input type="text" name="redirect" [(ngModel)]="newStudy.redirect"/>

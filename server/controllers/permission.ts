@@ -1,6 +1,6 @@
 import gdrive from '../services/gdrive';
 
-export default class ShareCtrl {
+export default class PermissionCtrl {
 
   constructor() { }
 
@@ -22,7 +22,7 @@ export default class ShareCtrl {
       })
   }
 
-  get(req, res) {
+  getAll(req, res) {
     gdrive.getPermissions(['eLab'])
       .then((permissions) => {
         const readerPermissions = permissions.filter((permission) => permission.role === 'reader');
@@ -35,13 +35,13 @@ export default class ShareCtrl {
   }
 
   delete(req, res) {
-    const email = req.body.email;
-    if (!email) {
+    const id = req.params.id;
+    if (!id) {
       // TODO give more details
       res.status(400).send();
     }
 
-    gdrive.deletePermission(['eLab'], email)
+    gdrive.deletePermissionById(['eLab'], id)
       .then(() => res.status(200).end())
       .catch((err) => res.status(500).end());
   }

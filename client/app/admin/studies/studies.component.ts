@@ -40,7 +40,6 @@ export class StudiesComponent implements OnInit {
     });
   }
 
-  // TODO use component approach
   openInstructionsDialog(study: StudyData) {
     const modalRef = this.modalService.open(InstructionsModalComponent);
     modalRef.componentInstance.instructions = study.instructions;

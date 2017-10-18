@@ -3,35 +3,26 @@
   <tr>
     <th>Name</th>
     <th>Gmail</th>
-    <th>Permission</th>
     <th></th>
   </tr>
   </thead>
   <tbody>
-  <!--<tr ng-repeat="share in shares">-->
-    <!--<td>{{ share.name }}</td>-->
-    <!--<td>{{ share.email }}</td>-->
-    <!--<td>{{ share.permission }}</td>-->
-    <!--<td>-->
-      <!--<button ng-click="unshareAvData(share)">Remove</button>-->
-    <!--</td>-->
-  <!--</tr>-->
+  <tr *ngFor="let permission of permissions">
+    <td>{{ permission.displayName }}</td>
+    <td>{{ permission.emailAddress }}</td>
+    <td>
+      <button (click)="deletePermission(permission)">Remove</button>
+    </td>
+  </tr>
   <tr>
     <td>
-      <input type="text" name="userName" ng-model="newShare.name"/>
+      <i>Fetched on 'add'</i>
     </td>
     <td>
-      <input type="text" name="email" ng-model="newShare.email"/>
+      <input type="text" name="email" [(ngModel)]="newPermission.emailAddress"/>
     </td>
     <td>
-      <select ng-model="newShare.permission">
-        <option>reader</option>
-        <option>writer</option>
-        <option>owner</option>
-      </select>
-    </td>
-    <td>
-      <button ng-click="shareAvData()">Add</button>
+      <button (click)="createPermission()">Add</button>
     </td>
   </tr>
   </tbody>

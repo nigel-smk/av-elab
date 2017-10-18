@@ -2,6 +2,7 @@ import * as express from 'express';
 
 import ImageUploadCtrl from './controllers/image-upload';
 import StudyCtrl from './controllers/study';
+import PermissionCtrl from './controllers/permission';
 
 export default function setRoutes(app) {
 
@@ -9,6 +10,7 @@ export default function setRoutes(app) {
 
   const imageUploadCtrl = new ImageUploadCtrl();
   const studyCtrl = new StudyCtrl();
+  const permissionCtrl = new PermissionCtrl();
 
   router.route('/image-upload').post(imageUploadCtrl.upload);
 
@@ -16,6 +18,10 @@ export default function setRoutes(app) {
   router.route('/studies').post(studyCtrl.insert);
   router.route('/study/:id').put(studyCtrl.update);
   router.route('/study/:id').delete(studyCtrl.delete);
+
+  router.route('/permissions').get(permissionCtrl.getAll);
+  router.route('/permissions').post(permissionCtrl.create);
+  router.route('/permission/:id').delete(permissionCtrl.delete);
 
   // const userCtrl = new UserCtrl();
   //

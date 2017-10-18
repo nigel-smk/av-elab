@@ -176,7 +176,7 @@ class GDrive {
   async createPermission(path: string[], email: string, role: PermissionsResourceRole, type: PermissionsResourceType) {
     const fileNode = this.cd(path);
 
-    return this.drive.permissions.create({
+    const response =  await this.drive.permissions.create({
       fileId: fileNode.file.id,
       resource: {
         role: role,
@@ -184,6 +184,10 @@ class GDrive {
         emailAddress: email
       }
     });
+
+    await this.buildFileTree();
+
+    return response;
   }
 
   async deletePermission(path: string[], email: string) {
@@ -197,10 +201,28 @@ class GDrive {
       return;
     }
 
-    this.drive.permissions.delete({
+    const response = await this.drive.permissions.delete({
       fileId: fileNode.file.id,
       permissionId: permission.id
     });
+
+    await this.buildFileTree();
+
+    return response;
+  }
+
+  // can't put email in delete request url, gotta do it by id
+  async deletePermissionById(path: string[], id: string) {
+    const fileNode = this.cd(path);
+
+    const response = await this.drive.permissions.delete({
+      fileId: fileNode.file.id,
+      permissionId: id
+    });
+
+    await this.buildFileTree();
+
+    return response;
   }
 
   async getPermissions(path: string[]): Promise<PermissionsResource[]> {

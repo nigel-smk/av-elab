@@ -6,6 +6,7 @@ import { StudyDataService } from './services/study-data.service';
 import {AuthService} from './services/auth.service';
 import {AuthGuardAdmin} from './services/auth-guard-admin.service';
 import {AuthGuardLogin} from './services/auth-guard-login.service';
+import {PermissionsDataService} from './services/permissions-data.service';
 
 @NgModule({
   imports: [
@@ -33,6 +34,7 @@ export class SharedModule {
       ngModule: SharedModule,
       providers: [
         StudyDataService,
+        PermissionsDataService,
         AuthService,
         AuthGuardAdmin,
         AuthGuardLogin

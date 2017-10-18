@@ -1,12 +1,17 @@
 import * as fs from'fs';
 import * as stream from 'stream';
+import gdrive from '../services/gdrive';
 
 export default class ImageUploadCtrl {
 
   constructor() { }
 
   upload(req, res) {
-    console.log(req.body.snapshot);
+    // TODO better way to validate input?
+    if (!req.body.snapshot || !req.body.filename) {
+      res.status(400).end();
+      return;
+    }
 
     let stream;
 
@@ -20,7 +25,7 @@ export default class ImageUploadCtrl {
 
     res.status(200).end();
 
-    stream.data.pipe(fs.createWriteStream('testPic.jpeg'));
+    gdrive.writeFile(['eLab', 'testStudy', req.body.filename], stream.data);
   }
 
 }

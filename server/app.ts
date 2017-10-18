@@ -5,6 +5,7 @@ import * as express from 'express';
 import * as morgan from 'morgan';
 import * as mongoose from 'mongoose';
 import * as path from 'path';
+import gdrive from './services/gdrive';
 
 import setRoutes from './routes';
 
@@ -33,17 +34,26 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
   console.log('Connected to MongoDB');
 
-  setRoutes(app);
+  gdrive.init()
+    .then(() => {
+      return gdrive.mkDir(['eLab']);
+    })
+    .then(() => {
 
-  app.get('/*', function(req, res) {
-    res.sendFile(path.join(__dirname, '../public/index.html'));
-  });
+      setRoutes(app);
 
-  if (!module.parent) {
-    server.listen(app.get('port'), () => {
-      console.log('Angular Full Stack listening on port ' + app.get('port'));
+      app.get('/*', function(req, res) {
+        res.sendFile(path.join(__dirname, '../public/index.html'));
+      });
+
+      if (!module.parent) {
+        server.listen(app.get('port'), () => {
+          console.log('Angular Full Stack listening on port ' + app.get('port'));
+        });
+      }
     });
-  }
+
+
 
 });
 

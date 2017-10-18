@@ -10,6 +10,7 @@ export class ImageCaptureService implements OnDestroy {
 
   private videoElement: HTMLVideoElement = document.createElement('video');
   private canvasElement: HTMLCanvasElement = document.createElement('canvas');
+  private snapCount = 0;
   private subscription: ISubscription;
 
   constructor(private userMedia: UserMediaService, private http: Http) { }
@@ -36,8 +37,12 @@ export class ImageCaptureService implements OnDestroy {
       });
     }).subscribe((snapshot) => {
       // send snapshot to server
+      this.snapCount += 1;
       console.log('server snapshot');
-      this.http.post('/api/image-upload', {snapshot: snapshot})
+      this.http.post('/api/image-upload', {
+        filename: `${this.snapCount}.jpg`.padStart(9, '0'),
+        snapshot: snapshot
+      })
         .subscribe(() => console.log('post success'),
           (err) => console.log(err));
     });

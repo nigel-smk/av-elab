@@ -5,7 +5,7 @@ import * as util from 'util';
 // some better way to do this with the api?
 const FILE_FIELDS = 'files/parents,files/name,files/permissions,files/id,files/mimeType,files/kind';
 
-export class GDrive {
+class GDrive {
 
   private drive;
   private fileRoot: FileNode = new FileNode({ id: 'root' });
@@ -43,6 +43,9 @@ export class GDrive {
   }
 
   private async buildFileTree() {
+    // reset fileTree
+    this.fileRoot = new FileNode({ id: 'root' });
+
     // fetch list of all files
     let files = [];
     let response = await this.drive.files.list({ pageSize: 1000, fields: FILE_FIELDS });
@@ -79,8 +82,8 @@ export class GDrive {
     }
 
     const segment = path.shift();
-    const match = parentNode.children.filter((child: FileNode) => {
-      return child.file.name === segment;
+    const match = parentNode.children.filter((childNode: FileNode) => {
+      return childNode.file.name === segment;
     })[0];
 
     if (!match) {
@@ -100,7 +103,7 @@ export class GDrive {
     }
 
     const filename = file.pop();
-    const directory = file.length != 0 ? await this.mkDir(file) : this.fileRoot;
+    const directoryNode = file.length != 0 ? await this.mkDir(file) : this.fileRoot;
 
     const media = {
       body: data
@@ -109,12 +112,14 @@ export class GDrive {
     const newFile = await this.drive.files.create({
       resource: {
         name: filename,
-        parents: [directory.file.id]
+        parents: [directoryNode.file.id]
       },
-      media: media
+      media: media,
+      // TODO why are these fields not namespaced like the list ones?
+      fields: 'id,kind,name,mimeType,parents,permissions'
     });
 
-    directory.children.push(new FileNode(newFile));
+    directoryNode.children.push(new FileNode(newFile));
 
     return newFile;
   }
@@ -157,20 +162,22 @@ export class GDrive {
   }
 
   async unLink(path: string[]) {
-    // TODO remove from fileTree
+    const fileNode = this.cd(path);
 
-    const toUnLink = this.cd(path);
-
-    return this.drive.files.delete({
-      fileId: toUnLink.file.id
+    const response = await this.drive.files.delete({
+      fileId: fileNode.file.id
     });
+
+    await this.buildFileTree();
+
+    return response;
   }
 
   async createPermission(path: string[], email: string, role: PermissionsResourceRole, type: PermissionsResourceType) {
-    const file = this.cd(path);
+    const fileNode = this.cd(path);
 
-    this.drive.permissions.create({
-      fileId: file.file.id,
+    return this.drive.permissions.create({
+      fileId: fileNode.file.id,
       resource: {
         role: role,
         type: type,
@@ -179,8 +186,27 @@ export class GDrive {
     });
   }
 
-  async deletePermission(path: string[]) {
+  async deletePermission(path: string[], email: string) {
+    const fileNode = this.cd(path);
+    const permission = fileNode.file.permissions.filter((permission: PermissionsResource) => {
+      return permission.emailAddress === email
+    })[0];
 
+    // don't bother throwing an error if the permission doesn't exist
+    if (!permission) {
+      return;
+    }
+
+    this.drive.permissions.delete({
+      fileId: fileNode.file.id,
+      permissionId: permission.id
+    });
+  }
+
+  async getPermissions(path: string[]): Promise<PermissionsResource[]> {
+    const fileNode = this.cd(path);
+
+    return fileNode.file.permissions;
   }
 
 }
@@ -191,6 +217,13 @@ class FileNode {
 
 }
 
+// TODO is this an ideal way to share a singleton throughout the app?
+const gdrive = new GDrive();
+
+export default gdrive;
+
+
+
 
 
 
@@ -198,7 +231,14 @@ class FileNode {
 interface FilesResource {
   id: string,
   name?: string,
-  parents?: [string]
+  parents?: [string],
+  permissions?: [PermissionsResource]
+}
+interface PermissionsResource {
+  id: string,
+  emailAddress: string,
+  type: PermissionsResourceType,
+  role: PermissionsResourceRole
 }
 // https://developers.google.com/drive/v3/reference/permissions
 type PermissionsResourceRole = 'organizer' | 'owner' | 'writer' | 'commenter' | 'reader';

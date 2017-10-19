@@ -20,9 +20,6 @@ export class BriefingComponent implements OnInit {
   }
 
   ngOnInit() {
-    // TODO call this after auth
-    this.sessionData.fetchSessionData();
-
     this.subscription = Observable.fromEvent(document, 'keypress').subscribe((event: KeyboardEvent) => {
       if (event.keyCode == 32) {
         this.router.navigate(['/stimulus']);

@@ -78,11 +78,19 @@ export class StimulusComponent implements OnInit, OnDestroy {
     this.data.stopTime = this.player.getCurrentTime();
     this.imageCapture.stop();
     // append query parameters to url
-    let redirectUrl = this.data.redirectUrl + '?';
-    redirectUrl += this.data.session ? 'session="' + this.data.session + '"&' : '';
-    redirectUrl += this.data.study ? 'study="' + this.data.study + '"&' : '';
-    redirectUrl += this.data.stopTime ? 'stop-time="' + this.data.stopTime + '"&' : '';
-    window.location.href = redirectUrl.substr(0, redirectUrl.length - 1);
+    // TODO can '?' be anywhere in a url other than the start of the query string?
+    const hasQueryString: boolean = this.data.redirect.indexOf('?') != -1;
+    let redirect = `${this.data.redirect}${hasQueryString ? '&' : '?'}`;
+    if (this.data.subject) {
+      redirect += `subject=${this.data.subject}&`;
+    }
+    if (this.data.subject) {
+      redirect += `study=${this.data.study}&`;
+    }
+    if (this.data.stopTime) {
+      redirect += `stop-time=${this.data.stopTime}&`;
+    }
+    window.location.href = redirect.substr(0, redirect.length - 1);
   }
 
 }

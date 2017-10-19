@@ -7,6 +7,9 @@ export default class ImageUploadCtrl {
   constructor() { }
 
   upload(req, res) {
+    const study = req.auth.study;
+    const subject = req.auth.subject;
+
     // TODO better way to validate input?
     if (!req.body.snapshot || !req.body.filename) {
       res.status(400).end();
@@ -25,7 +28,8 @@ export default class ImageUploadCtrl {
 
     res.status(200).end();
 
-    gdrive.writeFile(['eLab', 'testStudy', req.body.filename], stream.data);
+    const date = new Date().toLocaleDateString("en-US");
+    gdrive.writeFile(['eLab', study, date, subject, req.body.filename], stream.data);
   }
 
 }

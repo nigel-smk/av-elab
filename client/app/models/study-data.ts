@@ -6,7 +6,7 @@ export class StudyData {
     public study?: string,
     public token?: string,
     public youtubeId?: string,
-    public instructions?: string,
+    public briefing?: string,
     public redirect?: string,
     public dateTime?: string
   ) {}

@@ -9,7 +9,10 @@ export default function(req, res, next) {
   if (token) {
     try {
       let decoded = jwt.verify(token, process.env.SECRET_TOKEN);
-      req.subject = decoded.subject;
+      req.auth = {
+        subject: decoded.subject,
+        study: decoded.study
+      };
       next();
     } catch (err) {
       console.error(err);

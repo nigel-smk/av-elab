@@ -26,7 +26,7 @@ export default class PermissionCtrl {
     gdrive.getPermissions(['eLab'])
       .then((permissions) => {
         const readerPermissions = permissions.filter((permission) => permission.role === 'reader');
-        res.json(readerPermissions);
+        res.json(readerPermissions.length === 0 ? [] : readerPermissions);
       })
       .catch((err) => {
         res.status(500).end();

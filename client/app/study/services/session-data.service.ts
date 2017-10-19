@@ -6,17 +6,18 @@ import {ReplaySubject} from 'rxjs/ReplaySubject';
 @Injectable()
 export class SessionDataService {
 
-  private sessionData$: ReplaySubject<SessionData> = new ReplaySubject(1);
+  private sessionData$: ReplaySubject<SessionData> = new ReplaySubject();
 
-  constructor() { }
+  constructor() {
+    this.sessionData$.next(Object.assign({}, demoData));
+  }
 
   get $() {
     return this.sessionData$.asObservable();
   }
 
-  fetchSessionData() {
-    // if user is demo user
-    this.sessionData$.next(Object.assign({}, demoData));
+  setSessionData(data: SessionData) {
+    this.sessionData$.next(data);
   }
 
 }

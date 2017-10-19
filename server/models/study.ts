@@ -4,7 +4,7 @@ const studySchema = mongoose.Schema({
   study: String,
   token: String,
   youtubeId: String,
-  instructions: String,
+  briefing: String,
   redirect: String,
   dateTime: {type: Date, default: Date.now()}
 });

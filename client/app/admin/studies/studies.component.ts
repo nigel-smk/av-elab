@@ -4,6 +4,7 @@ import {StudyData} from '../../models/study-data';
 import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {InstructionsModalComponent} from './instructions-modal/instructions-modal.component';
 import {DeleteModalComponent} from './delete-modal/delete-modal.component';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-studies',
@@ -17,7 +18,7 @@ export class StudiesComponent implements OnInit {
 
   private closeResult: string;
 
-  constructor(private studyData: StudyDataService, private modalService: NgbModal) { }
+  constructor(private studyData: StudyDataService, private modalService: NgbModal, private router: Router) { }
 
   ngOnInit() {
     this.getStudies();
@@ -34,6 +35,10 @@ export class StudiesComponent implements OnInit {
     });
   }
 
+  testStudy(study: StudyData) {
+    this.router.navigate(['/'], { queryParams: { study: study.study, subject: 'test' } });
+  }
+
   deleteStudy(study: StudyData) {
     this.studyData.delete(study).subscribe(() => {
       this.getStudies();
@@ -42,10 +47,10 @@ export class StudiesComponent implements OnInit {
 
   openInstructionsDialog(study: StudyData) {
     const modalRef = this.modalService.open(InstructionsModalComponent);
-    modalRef.componentInstance.instructions = study.instructions;
+    modalRef.componentInstance.briefing = study.briefing;
 
     modalRef.result.then((result) => {
-      study.instructions = result;
+      study.briefing = result;
     }, (reason) => {
       this.closeResult = `Dismissed for some reason`;
     });

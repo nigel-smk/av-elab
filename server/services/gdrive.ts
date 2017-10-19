@@ -42,6 +42,18 @@ class GDrive {
 
   }
 
+  public async listFiles() {
+    let files = [];
+    let response = await this.drive.files.list({ pageSize: 1000, fields: FILE_FIELDS });
+    files = files.concat(response.files);
+    while (response.nextPageToken) {
+      response = await this.drive.files.list({ pageSize: 1000 , pageToken: response.nextPageToken, fields: FILE_FIELDS });
+      files = files.concat(response.files);
+    }
+
+    console.log(files);
+  }
+
   private async buildFileTree() {
     // reset fileTree
     this.fileRoot = new FileNode({ id: 'root' });
@@ -55,10 +67,9 @@ class GDrive {
       files = files.concat(response.files);
     }
 
-    console.log(files);
-
     // build fileId-to-FileNode map
     let fileIdMap: { string: FileNode } = Object.create(null);
+
     files.forEach((file: FilesResource) => {
       fileIdMap[file.id] = new FileNode(file);
     });
@@ -166,6 +177,16 @@ class GDrive {
 
     const response = await this.drive.files.delete({
       fileId: fileNode.file.id
+    });
+
+    await this.buildFileTree();
+
+    return response;
+  }
+
+  async unLinkById(id: string) {
+    const response = await this.drive.files.delete({
+      fileId: id
     });
 
     await this.buildFileTree();

@@ -21,6 +21,7 @@ import {UserMediaService} from './services/user-media.service';
 import {VolumeDataService} from './services/volume-data.service';
 import {SharedModule} from '../shared/shared.module';
 import {YoutubePlayerModule} from 'ngx-youtube-player';
+import { LoginFailureComponent } from './login-failure/login-failure.component';
 
 @NgModule({
   imports: [
@@ -39,7 +40,8 @@ import {YoutubePlayerModule} from 'ngx-youtube-player';
     SpeakerCalibrationComponent,
     InvalidBrowserComponent,
     NotFoundComponent,
-    StimulusComponent
+    StimulusComponent,
+    LoginFailureComponent
   ],
   exports: [
     AvAccessComponent,

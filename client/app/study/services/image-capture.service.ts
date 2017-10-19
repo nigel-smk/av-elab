@@ -3,7 +3,8 @@ import {UserMediaService} from './user-media.service';
 import {ISubscription} from 'rxjs/Subscription';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/interval';
-import {Http} from '@angular/http';
+import {Http, Headers} from '@angular/http';
+import {AuthService} from '../../shared/services/auth.service';
 
 @Injectable()
 export class ImageCaptureService implements OnDestroy {
@@ -13,7 +14,12 @@ export class ImageCaptureService implements OnDestroy {
   private snapCount = 0;
   private subscription: ISubscription;
 
-  constructor(private userMedia: UserMediaService, private http: Http) { }
+  private headers: Headers;
+
+  constructor(private userMedia: UserMediaService, private http: Http, private auth: AuthService) {
+    this.headers = new Headers();
+    this.headers.append('x-access-token', this.auth.token);
+  }
 
   ngOnDestroy() {
       this.stop();
@@ -40,9 +46,9 @@ export class ImageCaptureService implements OnDestroy {
       this.snapCount += 1;
       console.log('server snapshot');
       this.http.post('/api/image-upload', {
-        filename: `${this.snapCount}.jpg`.padStart(9, '0'),
+        filename: `${this.snapCount}.jpg`.padStart(8, '0'),
         snapshot: snapshot
-      })
+      }, {headers: this.headers})
         .subscribe(() => console.log('post success'),
           (err) => console.log(err));
     });

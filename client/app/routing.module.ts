@@ -13,6 +13,7 @@ import {AdminDashboardComponent} from './admin/admin-dashboard/admin-dashboard.c
 import {StudiesComponent} from './admin/studies/studies.component';
 import {SharesComponent} from './admin/shares/shares.component';
 import {ActivityLogComponent} from './admin/activity-log/activity-log.component';
+import {LoginFailureComponent} from './study/login-failure/login-failure.component';
 
 const routes: Routes = [
   // the empty path will always be redirected via the EntryGuardService
@@ -31,6 +32,7 @@ const routes: Routes = [
       { path: 'activity', component: ActivityLogComponent }
     ]
   },
+  { path: 'login-failed', component: LoginFailureComponent },
   { path: 'notfound', component: NotFoundComponent },
   { path: '**', redirectTo: '/notfound' },
 ];

@@ -5,27 +5,50 @@ import { AuthService } from '../../shared/services/auth.service';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
+import {AdminAuthService} from '../../shared/services/admin-auth.service';
 
 @Injectable()
 export class EntryGuardService implements CanActivate {
 
-  constructor(private router: Router, private location: Location, private auth: AuthService) { }
+  constructor(private router: Router, private location: Location, private auth: AuthService, private adminAuth: AdminAuthService) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     // fetch queryParams
-    const session: string = route.queryParamMap.get('session');
+    const subject: string = route.queryParamMap.get('subject');
     const study: string = route.queryParamMap.get('study');
 
     // strip queryParams from url
     this.location.replaceState('');
 
-    // login
-    return this.auth.login(session, study).map(() => {
-
+    //demo mode
+    if (!subject || !study) {
+      // TODO set demo mode flag somewhere
       this.router.navigate(['/invalid-browser']);
-
-      // resolve route guard to false
       return false;
+    }
+
+    //test mode
+    if (subject === 'test') {
+      // TODO set test mode flag?
+      // admin must be logged in to do test run
+      if (!this.adminAuth.loggedIn) {
+        this.router.navigate(['/api/admin/login']);
+        return false;
+      }
+      return this.auth.testRunLogin(study).map(() => {
+        this.router.navigate(['/invalid-browser']);
+        return false;
+      }, (err) => {
+        this.router.navigate(['/login-failed']);
+      });
+    }
+
+    // login
+    return this.auth.login(subject, study).map(() => {
+      this.router.navigate(['/invalid-browser']);
+      return false;
+    }, (err) => {
+      this.router.navigate(['/login-failed']);
     });
   }
 }

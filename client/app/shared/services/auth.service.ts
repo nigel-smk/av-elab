@@ -1,39 +1,51 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelper } from 'angular2-jwt';
-import 'rxjs/add/observable/of';
-import {Observable} from 'rxjs/Observable';
+import {Http, Response, Headers} from '@angular/http';
+import {SessionDataService} from '../../study/services/session-data.service';
+import {SessionData} from '../../models/session-data';
+import {AdminAuthService} from './admin-auth.service';
 
 @Injectable()
 export class AuthService {
   // TODO demo behaviour and test behaviour
 
-  loggedIn = false;
-
   jwtHelper: JwtHelper = new JwtHelper();
+  loggedIn = false;
+  token = '';
+  currentSession: SessionData;
 
-  currentSession = {
-    subject: '',
-    youtubeId: '',
-    instructions: '',
-    redirect: ''
-  };
+  constructor(private router: Router, private http: Http, private sessionData: SessionDataService, private adminAuth: AdminAuthService) { }
 
-  constructor(private router: Router) { }
+  login(subject: string, study: string) {
+    return this.http.post('/api/session/login', { subject: subject, study: study })
+      .map((response: Response) => response.json().token )
+      .do((token) => {
+        this.token = token;
+        const session = this.decodeSessionFromToken(token);
+        this.setCurrentSession(session);
+      })
+      .take(1);
+  }
 
-  login(session: string, study: string) {
-    // TODO
-    return Observable.of(null);
+  testRunLogin(study: string) {
+    let headers = new Headers();
+    headers.append('x-access-token', this.adminAuth.token);
+
+    return this.http.post('/api/session/test-login',
+      { subject: 'test', study: study }, { headers: headers })
+      .map((response: Response) => response.json().token )
+      .do((token) => {
+        this.token = token;
+        const session = this.decodeSessionFromToken(token);
+        this.setCurrentSession(session);
+      })
+      .take(1);
   }
 
   logout() {
     this.loggedIn = false;
-    this.currentSession = {
-      subject: '',
-        youtubeId: '',
-        instructions: '',
-        redirect: ''
-    };
+    this.currentSession = null;
     this.router.navigate(['/']);
   }
 
@@ -43,10 +55,13 @@ export class AuthService {
 
   setCurrentSession(decodedSession) {
     this.loggedIn = true;
-    this.currentSession.subject = decodedSession.subject;
-    this.currentSession.youtubeId = decodedSession.youtubeId;
-    this.currentSession.instructions = decodedSession.instructions;
-    this.currentSession.redirect = decodedSession.redirect;
+    const newSession = new SessionData(
+      decodedSession.briefing,
+      decodedSession.youtubeId,
+      decodedSession.redirect,
+      decodedSession.subject,
+      decodedSession.study);
+    this.sessionData.setSessionData(newSession);
   }
 
 }

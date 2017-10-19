@@ -1,17 +1,23 @@
 import { Injectable } from '@angular/core';
-import {Http, Response} from '@angular/http';
+import {Http, Response, Headers} from '@angular/http';
 import {StudyData} from '../../models/study-data';
 import {Observable} from 'rxjs/Observable';
+import {AdminAuthService} from './admin-auth.service';
 
 @Injectable()
 export class StudyDataService {
 
   // TODO handle http errors
 
-  constructor(private http: Http) { }
+  private headers: Headers;
+
+  constructor(private http: Http, private adminAuth: AdminAuthService) {
+    this.headers = new Headers();
+    this.headers.append('x-access-token', this.adminAuth.token);
+  }
 
   getAll(): Observable<StudyData[]> {
-    return this.http.get('/api/studies')
+    return this.http.get('/api/studies', { headers: this.headers })
       .map((response: Response) => {
         return response.json() as StudyData[];
       })
@@ -19,11 +25,11 @@ export class StudyDataService {
   }
 
   create(data: StudyData) {
-    return this.http.post('/api/studies', data).take(1);
+    return this.http.post('/api/studies', data, { headers: this.headers }).take(1);
   }
 
   delete(data: StudyData) {
-    return this.http.delete(`/api/study/${ data._id }`).take(1);
+    return this.http.delete(`/api/study/${ data._id }`, { headers: this.headers }).take(1);
   }
 
 }

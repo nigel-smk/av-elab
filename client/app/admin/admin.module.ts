@@ -1,4 +1,4 @@
-import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, ModuleWithProviders, NgModule} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {AdminLoginComponent} from './admin-login/admin-login.component';
 import {SharedModule} from '../shared/shared.module';
@@ -10,6 +10,8 @@ import { AdminRoutingModule } from './admin-routing.module';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { InstructionsModalComponent } from './studies/instructions-modal/instructions-modal.component';
 import { DeleteModalComponent } from './studies/delete-modal/delete-modal.component';
+import {AdminAuthService} from '../shared/services/admin-auth.service';
+import {AdminAuthGuardService} from './services/admin-auth-guard.service';
 
 @NgModule({
   imports: [
@@ -33,4 +35,14 @@ import { DeleteModalComponent } from './studies/delete-modal/delete-modal.compon
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class AdminModule { }
+export class AdminModule {
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: AdminModule,
+      providers: [
+        AdminAuthService,
+        AdminAuthGuardService
+      ]
+    }
+  }
+}

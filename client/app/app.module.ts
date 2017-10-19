@@ -17,7 +17,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     NgbModule.forRoot(),
     SharedModule.forRoot(),
     StudyModule.forRoot(),
-    AdminModule,
+    AdminModule.forRoot(),
     RoutingModule
   ],
   providers: [],

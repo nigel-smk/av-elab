@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { StudyDataService } from './services/study-data.service';
 import {AuthService} from './services/auth.service';
-import {AuthGuardAdmin} from './services/auth-guard-admin.service';
 import {AuthGuardLogin} from './services/auth-guard-login.service';
 import {PermissionsDataService} from './services/permissions-data.service';
 
@@ -36,7 +35,6 @@ export class SharedModule {
         StudyDataService,
         PermissionsDataService,
         AuthService,
-        AuthGuardAdmin,
         AuthGuardLogin
       ]
     }

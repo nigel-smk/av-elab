@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {StudyDataService} from '../../shared/services/study-data.service';
+import {AdminAuthService} from '../../shared/services/admin-auth.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -8,9 +8,12 @@ import {StudyDataService} from '../../shared/services/study-data.service';
 })
 export class AdminDashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private adminAuth: AdminAuthService) { }
 
   ngOnInit() {
   }
 
+  logOut() {
+    this.adminAuth.logout();
+  }
 }

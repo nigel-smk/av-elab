@@ -9,7 +9,10 @@ export default function(req, res, next) {
   if (token) {
     try {
       let decoded = jwt.verify(token, process.env.SECRET_TOKEN);
-      req.subject = decoded.subject;
+      //check if user is admin
+      if (!decoded.admin) {
+        throw new Error('Not admin');
+      }
       next();
     } catch (err) {
       console.error(err);

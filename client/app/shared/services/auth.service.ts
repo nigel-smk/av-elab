@@ -1,60 +1,52 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelper } from 'angular2-jwt';
-import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class AuthService {
+  // TODO demo behaviour and test behaviour
+
   loggedIn = false;
-  isAdmin = false;
 
   jwtHelper: JwtHelper = new JwtHelper();
 
-  currentUser = { _id: '', username: '', role: '' };
+  currentSession = {
+    subject: '',
+    youtubeId: '',
+    instructions: '',
+    redirect: ''
+  };
 
-  constructor(private router: Router) {
-    const token = localStorage.getItem('token');
-    if (token) {
-      const decodedUser = this.decodeUserFromToken(token);
-      this.setCurrentUser(decodedUser);
-    }
-  }
+  constructor(private router: Router) { }
 
   login(session: string, study: string) {
-    // TODO request auth from server. Store auth results. Next 'true' to indicate completion.
-
+    // TODO
     return Observable.of(null);
-    // TODO fetch credentials from query parameters and strip from url
-    // return this.userService.login(emailAndPassword).map(res => res.json()).map(
-    //   res => {
-    //     localStorage.setItem('token', res.token);
-    //     const decodedUser = this.decodeUserFromToken(res.token);
-    //     this.setCurrentUser(decodedUser);
-    //     return this.loggedIn;
-    //   }
-    // );
   }
 
   logout() {
-    localStorage.removeItem('token');
     this.loggedIn = false;
-    this.isAdmin = false;
-    this.currentUser = { _id: '', username: '', role: '' };
+    this.currentSession = {
+      subject: '',
+        youtubeId: '',
+        instructions: '',
+        redirect: ''
+    };
     this.router.navigate(['/']);
   }
 
-  decodeUserFromToken(token) {
-    return this.jwtHelper.decodeToken(token).user;
+  decodeSessionFromToken(token) {
+    return this.jwtHelper.decodeToken(token);
   }
 
-  setCurrentUser(decodedUser) {
+  setCurrentSession(decodedSession) {
     this.loggedIn = true;
-    this.currentUser._id = decodedUser._id;
-    this.currentUser.username = decodedUser.username;
-    this.currentUser.role = decodedUser.role;
-    decodedUser.role === 'admin' ? this.isAdmin = true : this.isAdmin = false;
-    delete decodedUser.role;
+    this.currentSession.subject = decodedSession.subject;
+    this.currentSession.youtubeId = decodedSession.youtubeId;
+    this.currentSession.instructions = decodedSession.instructions;
+    this.currentSession.redirect = decodedSession.redirect;
   }
 
 }

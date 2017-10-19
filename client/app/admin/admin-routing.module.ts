@@ -5,10 +5,11 @@ import {AdminDashboardComponent} from './admin-dashboard/admin-dashboard.compone
 import {StudiesComponent} from './studies/studies.component';
 import {SharesComponent} from './shares/shares.component';
 import {ActivityLogComponent} from './activity-log/activity-log.component';
+import {AdminAuthGuardService} from './services/admin-auth-guard.service';
 
 const adminRoutes: Routes = [
   { path: 'admin/login', component: AdminLoginComponent },
-  { path: 'admin', component: AdminDashboardComponent,
+  { path: 'admin', component: AdminDashboardComponent, canActivate: [AdminAuthGuardService],
     children: [
       { path: '', redirectTo: 'studies', pathMatch: 'full' },
       { path: 'studies', component: StudiesComponent },
@@ -16,7 +17,7 @@ const adminRoutes: Routes = [
       { path: 'activity', component: ActivityLogComponent }
     ]
   }
-]
+];
 
 @NgModule({
   imports: [ RouterModule.forChild(adminRoutes) ],

@@ -22,6 +22,7 @@ import {VolumeDataService} from './services/volume-data.service';
 import {SharedModule} from '../shared/shared.module';
 import {YoutubePlayerModule} from 'ngx-youtube-player';
 import { LoginFailureComponent } from './login-failure/login-failure.component';
+import {CalibrationTemplateComponent} from './calibration/calibration-template/calibration-template.component';
 
 @NgModule({
   imports: [
@@ -33,6 +34,7 @@ import { LoginFailureComponent } from './login-failure/login-failure.component';
     AvAccessComponent,
     BriefingComponent,
     CalibrationComponent,
+    CalibrationTemplateComponent,
     MicCalibrationComponent,
     MicMonitorComponent,
     WebcamCalibrationComponent,

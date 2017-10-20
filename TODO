@@ -1,0 +1,37 @@
+Build admin page with directives and services
+
+Demo mode when no sid or pid are passed in
+
+Redirect at end of session
+
+start use "sessions" on server side
+
+track user progress through app and store to db
+
+fix auth
+add auth to upload endpoint
+
+initialize gdrive folder structure within the module
+
+Take metadata from stream to create files.
+Safeguard against gdrive quotas by uploading only X files at a time. Store others on disk until space is open for upload.
+
+
+
+
+
+
+
+OLD
+
+Admin
+    Study does not store false active
+    activate active
+    obfuscate password
+
+general
+    browser testing
+
+ unexpected behaviour handling
+    study not valid
+    register user as having started to prevent restarting

@@ -64,7 +64,8 @@
     "socket.io-stream": "^0.9.1",
     "tether": "1.4.0",
     "websocket-stream": "^5.0.1",
-    "zone.js": "^0.8.14"
+    "zone.js": "^0.8.14",
+    "ngx-youtube-player": "0.0.41"
   },
   "devDependencies": {
     "@angular/language-service": "^4.2.4",
@@ -84,7 +85,6 @@
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
     "mocha": "^3.4.2",
-    "ngx-youtube-player": "0.0.41",
     "nodemon": "1.11.0",
     "protractor": "~5.1.2",
     "ts-node": "~3.2.0",

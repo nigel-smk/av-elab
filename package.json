@@ -5,7 +5,12 @@
   "author": "Davide Violante",
   "description": "Angular Full Stack project built using Angular 2+, Express, Mongoose and Node.",
   "angular-cli": {},
+  "engine": {
+    "node": "8.4.0",
+    "npm": "5.3.0"
+  },
   "scripts": {
+    "postinstall": "ng build --aot -prod",
     "ng": "ng",
     "build": "ng build",
     "start": "node dist/server/app.js",

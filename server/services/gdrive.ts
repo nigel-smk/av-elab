@@ -1,6 +1,7 @@
 import * as google from 'googleapis';
 import {Stream} from 'stream';
 import * as util from 'util';
+import * as promiseRetry from 'promise-retry';
 
 // some better way to do this with the api?
 const FILE_FIELDS = 'files/parents,files/name,files/permissions,files/id,files/mimeType,files/kind';
@@ -25,15 +26,37 @@ class GDrive {
 
     this.drive = {
       files: {
-        list: util.promisify(drive.files.list),
-        create: util.promisify(drive.files.create),
-        delete: util.promisify(drive.files.delete),
+        list: this.promisifretry(drive.files.list),
+        create: this.promisifretry(drive.files.create),
+        delete: this.promisifretry(drive.files.delete),
       },
       permissions: {
-        create: util.promisify(drive.permissions.create),
-        delete: util.promisify(drive.permissions.delete)
+        create: this.promisifretry(drive.permissions.create),
+        delete: this.promisifretry(drive.permissions.delete)
       }
     };
+  }
+
+  private promisifretry(fn) {
+    fn = util.promisify(fn);
+    return function(...args) {
+      const options = {
+        retries: 5,
+        randomize: true
+      };
+      return promiseRetry(options, (retry, number) => {
+        console.log('attempt number', number);
+        return fn(...args)
+          .catch((err) => {
+          console.log(err);
+          // https://developers.google.com/drive/v3/web/handle-errors#403_rate_limit_exceeded
+            if ((err.code === 403 || err.code === 429) && err.message === 'Rate Limit Exceeded') {
+              retry(err);
+            }
+            throw err;
+          });
+      });
+    }
   }
 
   async init() {

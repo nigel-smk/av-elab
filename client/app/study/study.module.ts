@@ -21,8 +21,9 @@ import {UserMediaService} from './services/user-media.service';
 import {VolumeDataService} from './services/volume-data.service';
 import {SharedModule} from '../shared/shared.module';
 import {YoutubePlayerModule} from 'ngx-youtube-player';
-import { LoginFailureComponent } from './login-failure/login-failure.component';
+import {LoginFailureComponent} from './login-failure/login-failure.component';
 import {CalibrationTemplateComponent} from './calibration/calibration-template/calibration-template.component';
+import {AudioCaptureService} from './services/audio-capture.service';
 
 @NgModule({
   imports: [
@@ -67,8 +68,9 @@ export class StudyModule {
         PhaseGuardService,
         SessionDataService,
         UserMediaService,
-        VolumeDataService
+        VolumeDataService,
+        AudioCaptureService
       ]
-    }
+    };
   }
 }

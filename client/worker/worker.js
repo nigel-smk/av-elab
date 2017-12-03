@@ -1,4 +1,4 @@
-importScripts('worker/lame.all.js');
+importScripts('lame.min.js');
 
 const CHANNELS = 1;
 const SAMPLE_RATE = 44100;
@@ -7,17 +7,14 @@ const KBPS = 128;
 class Converter {
 
     constructor() {
-        this.output = [];
         this.mp3encoder = new lamejs.Mp3Encoder(CHANNELS, SAMPLE_RATE, KBPS);
-        this.socket = new WebSocket("ws://localhost:3000");
+        postMessage('ready');
     }
 
     consume(chunk) {
         const mp3buf = this.mp3encoder.encodeBuffer(chunk);
         if (mp3buf.length > 0) {
-            this.output.push(mp3buf);
-            // TODO need to wait for socket.onopen
-            this.socket.send(mp3buf);
+          postMessage(mp3buf);
         }
     }
 
@@ -25,21 +22,21 @@ class Converter {
         const mp3buf = this.mp3encoder.flush();   //finish writing mp3
 
         if (mp3buf.length > 0) {
-            this.output.push(new Int8Array(mp3buf));
-            this.socket.send(mp3buf);
+            // why do we need an Int8Array for this call?
+            postMessage(new Int8Array(mp3buf));
         }
 
-        postMessage(new Blob(this.output, {type: 'audio/mp3'}));
+        postMessage(null);
     }
 
 }
 
-const converter = new Converter();
-
 onmessage = ({data}) => {
-    if (data === null) {
-        converter.complete();
-        return;
-    }
-    converter.consume(data);
+  if (data === null) {
+    converter.complete();
+    return;
+  }
+  converter.consume(data);
 };
+
+const converter = new Converter();

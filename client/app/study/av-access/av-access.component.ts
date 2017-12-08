@@ -3,7 +3,7 @@ import {UserMediaService} from '../services/user-media.service';
 import 'rxjs/add/operator/subscribeOn';
 import {Router} from '@angular/router';
 import {ImageCaptureService} from '../services/image-capture.service';
-import {AudioCaptureService} from '../services/audio-capture.service';
+import {Mp3EncoderService} from '../services/mp3-encoder.service';
 
 @Component({
   selector: 'app-av-access',
@@ -14,7 +14,7 @@ export class AvAccessComponent implements OnInit {
 
   public access = 'denied';
 
-  constructor(private router: Router, private userMedia: UserMediaService, private audioCapture: AudioCaptureService) { }
+  constructor(private router: Router, private userMedia: UserMediaService, private audioCapture: Mp3EncoderService) { }
 
   ngOnInit() {
 

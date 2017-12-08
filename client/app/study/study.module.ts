@@ -23,7 +23,7 @@ import {SharedModule} from '../shared/shared.module';
 import {YoutubePlayerModule} from 'ngx-youtube-player';
 import {LoginFailureComponent} from './login-failure/login-failure.component';
 import {CalibrationTemplateComponent} from './calibration/calibration-template/calibration-template.component';
-import {AudioCaptureService} from './services/audio-capture.service';
+import {Mp3EncoderService} from './services/mp3-encoder.service';
 
 @NgModule({
   imports: [
@@ -69,7 +69,7 @@ export class StudyModule {
         SessionDataService,
         UserMediaService,
         VolumeDataService,
-        AudioCaptureService
+        Mp3EncoderService
       ]
     };
   }

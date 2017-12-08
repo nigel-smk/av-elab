@@ -10,10 +10,11 @@ import {ReplaySubject} from 'rxjs/ReplaySubject';
 const BUFFER_SIZE = 2048;
 
 @Injectable()
-export class Int16AudioService implements OnDestroy {
+export class PcmDataService implements OnDestroy {
 
-  private int16Data$: Observable<Int16Array>;
+  private pcmData$: Observable<Int16Array>;
   private subscription: ISubscription;
+  private killSwitch: Subject<any> = new Subject();
 
   constructor(private userMedia: UserMediaService) { }
 
@@ -22,14 +23,20 @@ export class Int16AudioService implements OnDestroy {
       this.init();
     }
 
-    return this.int16Data$;
+    return this.pcmData$;
+  }
+
+  completeStream() {
+    // TODO does unsubscribing send an onComplete?
+    this.killSwitch.next('kill!');
+    this.subscription.unsubscribe();
   }
 
   init() {
     const pipe = new ReplaySubject<MediaStream>(1);
     const output = new Subject<Int16Array>();
 
-    this.int16Data$ = pipe.switchMap((stream: MediaStream) => {
+    this.pcmData$ = pipe.switchMap((stream: MediaStream) => {
       const audioCtx = new AudioContext();
       const source = audioCtx.createMediaStreamSource(stream);
       const processor = audioCtx.createScriptProcessor(BUFFER_SIZE, 1, 1);
@@ -44,6 +51,7 @@ export class Int16AudioService implements OnDestroy {
 
       return output.asObservable();
     })
+      .takeUntil(this.killSwitch)
       .multicast(new Subject())
       .refCount();
 

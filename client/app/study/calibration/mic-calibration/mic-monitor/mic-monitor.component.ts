@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, ElementRef, OnDestroy, ViewChild} from '@angular/core';
 import {ISubscription} from 'rxjs/Subscription';
-import {VolumeDataService} from '../../../services/volume-data.service';
+import {VolumeDataService} from '../../../../web-rtc/services/volume-data.service';
 
 import * as D3Scale from 'd3-scale';
 import * as D3ScaleChromatic from 'd3-scale-chromatic';

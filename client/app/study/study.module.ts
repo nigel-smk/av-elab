@@ -12,18 +12,14 @@ import {SpeakerCalibrationComponent} from './calibration/speaker-calibration/spe
 import {WebcamMonitorComponent} from './calibration/webcam-calibration/webcam-monitor/webcam-monitor.component';
 import {WebcamCalibrationComponent} from './calibration/webcam-calibration/webcam-calibration.component';
 import {EntryGuardService} from './services/entry-guard.service';
-import {FrequencyDataService} from './services/frequency-data.service';
 import {ImageCaptureService} from './services/image-capture.service';
 import {InvalidBrowserGuardService} from './services/invalid-browser-guard.service';
 import {PhaseGuardService} from './services/phase-guard.service';
 import {SessionDataService} from './services/session-data.service';
-import {UserMediaService} from './services/user-media.service';
-import {VolumeDataService} from './services/volume-data.service';
 import {SharedModule} from '../shared/shared.module';
 import {YoutubePlayerModule} from 'ngx-youtube-player';
 import {LoginFailureComponent} from './login-failure/login-failure.component';
 import {CalibrationTemplateComponent} from './calibration/calibration-template/calibration-template.component';
-import {Mp3EncoderService} from './services/mp3-encoder.service';
 
 @NgModule({
   imports: [
@@ -62,14 +58,10 @@ export class StudyModule {
       ngModule: StudyModule,
       providers: [
         EntryGuardService,
-        FrequencyDataService,
         ImageCaptureService,
         InvalidBrowserGuardService,
         PhaseGuardService,
-        SessionDataService,
-        UserMediaService,
-        VolumeDataService,
-        Mp3EncoderService
+        SessionDataService
       ]
     };
   }

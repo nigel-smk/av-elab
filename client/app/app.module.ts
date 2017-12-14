@@ -6,8 +6,8 @@ import { AppComponent } from './app.component';
 import {StudyModule} from './study/study.module';
 import {AdminModule} from './admin/admin.module';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {WebRtcModule} from './web-rtc/web-rtc.module';
 
-// TODO split the code into modules
 
 @NgModule({
   declarations: [
@@ -18,6 +18,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     SharedModule.forRoot(),
     StudyModule.forRoot(),
     AdminModule.forRoot(),
+    WebRtcModule.forRoot(),
     RoutingModule
   ],
   providers: [],

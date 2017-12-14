@@ -1,5 +1,5 @@
 import {Injectable, OnDestroy} from '@angular/core';
-import {UserMediaService} from './user-media.service';
+import {UserMediaService} from '../../web-rtc/services/user-media.service';
 import {ISubscription} from 'rxjs/Subscription';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/interval';

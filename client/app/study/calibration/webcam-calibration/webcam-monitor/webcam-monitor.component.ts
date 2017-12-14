@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {UserMediaService} from '../../../services/user-media.service';
+import {UserMediaService} from '../../../../web-rtc/services/user-media.service';
 import {ISubscription} from 'rxjs/Subscription';
 
 @Component({

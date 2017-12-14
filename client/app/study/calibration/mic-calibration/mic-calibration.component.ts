@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {VolumeDataService} from '../../services/volume-data.service';
+import {VolumeDataService} from '../../../web-rtc/services/volume-data.service';
 
 @Component({
   selector: 'app-mic-calibration',

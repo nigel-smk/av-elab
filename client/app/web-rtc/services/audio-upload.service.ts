@@ -9,18 +9,9 @@ import {Mp3EncoderService} from './mp3-encoder.service';
 export class AudioUploadService implements OnDestroy {
 
   private socket: WebSocket;
-  private pcmData$: Observable<Int16Array>;
   private subscription: ISubscription;
 
   constructor(private mp3Encoder: Mp3EncoderService) { }
-
-  get $() {
-    if (!this.subscription) {
-      this.init();
-    }
-
-    return this.pcmData$;
-  }
 
   init() {
     // this.socket = new WebSocket('ws://localhost:3000');
@@ -32,7 +23,6 @@ export class AudioUploadService implements OnDestroy {
   onSocketReady() {
     // TODO close socket on complete
     this.subscription = this.mp3Encoder.$
-      .takeWhile((mp3Data: Int8Array) => mp3Data != null)
       .subscribe(
         (mp3Data: Int8Array) => {
           console.log(mp3Data);

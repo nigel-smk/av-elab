@@ -13,11 +13,12 @@ export class Mp3EncoderService implements OnDestroy {
   constructor(private pcmData: PcmDataService) { }
 
   get $() {
-    if (!this.subscription) {
+    if (!this.subscription || this.subscription.closed) {
       this.init();
     }
 
-    return this.mp3Data$.asObservable();
+    return this.mp3Data$.asObservable()
+      .takeWhile((mp3Data: Int8Array) => mp3Data != null);
   }
 
   init() {
@@ -40,12 +41,11 @@ export class Mp3EncoderService implements OnDestroy {
   private onEncodedData(event: MessageEvent) {
     if (event.data === null) {
       this.worker.terminate();
-      return;
     }
 
     this.mp3Data$.next(event.data as Int8Array);
   }
-  
+
   private onComplete() {
     this.worker.postMessage(null);
   }

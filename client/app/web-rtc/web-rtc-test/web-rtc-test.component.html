@@ -1,3 +1,5 @@
-<p>
-  web-rtc-test works!
-</p>
+<button (click)="start()">Start</button>
+<button (click)="stop()">Stop</button>
+<audio controls="controls">
+  <source src="{{ mp3Url$ | async }}">
+</audio>

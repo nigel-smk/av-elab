@@ -11,10 +11,10 @@ import 'rxjs/add/observable/defer';
 @Injectable()
 export class UserMediaService {
 
-  private sourceSwitch$ = new Subject<Observable<MediaStream>>();
+  private sourceSwitch$ = new ReplaySubject<Observable<MediaStream>>(1);
   private mediaStream$: Observable<MediaStream> = this.sourceSwitch$
     .switchMap((obs) => obs)
-    .multicast(new ReplaySubject(1))
+    .multicast(new Subject())
     .refCount();
 
   constructor() { }

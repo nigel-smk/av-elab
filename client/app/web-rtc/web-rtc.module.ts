@@ -8,6 +8,7 @@ import {UserMediaService} from './services/user-media.service';
 import {VolumeDataService} from './services/volume-data.service';
 import { WebRtcTestComponent } from './web-rtc-test/web-rtc-test.component';
 import {WebRtcRoutingModule} from './web-rtc-routing.module';
+import {Mp3BlobService} from './services/mp3-blob.service';
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ export class WebRtcModule {
         Mp3EncoderService,
         PcmDataService,
         UserMediaService,
-        VolumeDataService
+        VolumeDataService,
+        Mp3BlobService
       ]
     }
   }

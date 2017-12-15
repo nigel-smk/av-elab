@@ -6,7 +6,6 @@ import {Scheduler} from 'rxjs/Rx';
 import 'rxjs/add/observable/interval';
 import 'rxjs/add/operator/switchMap';
 import {Subject} from 'rxjs/Subject';
-import {ReplaySubject} from 'rxjs/ReplaySubject';
 
 @Injectable()
 export class FrequencyDataService implements OnDestroy {
@@ -25,7 +24,7 @@ export class FrequencyDataService implements OnDestroy {
   }
 
   init() {
-    const pipe = new ReplaySubject<MediaStream>(1);
+    const pipe = new Subject<MediaStream>();
 
     this.frequencyData$ = pipe.switchMap((stream: MediaStream) => {
       const audioCtx = new AudioContext();

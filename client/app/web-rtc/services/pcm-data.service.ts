@@ -19,7 +19,7 @@ export class PcmDataService implements OnDestroy {
   constructor(private userMedia: UserMediaService) { }
 
   get $() {
-    if (!this.subscription) {
+    if (!this.subscription || this.subscription.closed) {
       this.init();
     }
 

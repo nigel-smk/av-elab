@@ -1,5 +1,5 @@
 <button (click)="start()">Start</button>
 <button (click)="stop()">Stop</button>
-<audio controls="controls">
-  <source src="{{ mp3Url$ | async }}">
+<audio #playback controls="controls">
+  <source #playbackSource [src]="(mp3Url$ | async) || ''" type="audio/mp3">
 </audio>

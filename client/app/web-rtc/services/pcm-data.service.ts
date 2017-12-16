@@ -6,15 +6,18 @@ import 'rxjs/add/observable/interval';
 import 'rxjs/add/operator/switchMap';
 import {Subject} from 'rxjs/Subject';
 import {ReplaySubject} from 'rxjs/ReplaySubject';
+import {ConnectableObservable} from 'rxjs/Rx';
 
 const BUFFER_SIZE = 2048;
 
 @Injectable()
 export class PcmDataService implements OnDestroy {
 
-  private pcmData$: Observable<Int16Array>;
+  private pcmData$: ConnectableObservable<Int16Array>;
   private subscription: ISubscription;
-  private killSwitch: Subject<any> = new Subject();
+  private end$: Subject<any> = new Subject();
+
+  private audioCtx: AudioContext = new AudioContext();
 
   constructor(private userMedia: UserMediaService) { }
 
@@ -26,20 +29,24 @@ export class PcmDataService implements OnDestroy {
     return this.pcmData$;
   }
 
-  completeStream() {
-    // TODO does unsubscribing send an onComplete?
-    this.killSwitch.next('kill!');
+  start() {
+    this.pcmData$.connect();
+  }
+
+  stop() {
+    this.end$.next('');
     this.subscription.unsubscribe();
   }
 
   init() {
+    // TODO why does this need to be a ReplaySubject?
     const pipe = new ReplaySubject<MediaStream>(1);
-    const output = new Subject<Int16Array>();
 
     this.pcmData$ = pipe.switchMap((stream: MediaStream) => {
-      const audioCtx = new AudioContext();
-      const source = audioCtx.createMediaStreamSource(stream);
-      const processor = audioCtx.createScriptProcessor(BUFFER_SIZE, 1, 1);
+      // TODO do these observables get cancelled (and released from memory) when init is called again?
+      const output = new Subject<Int16Array>();
+      const source = this.audioCtx.createMediaStreamSource(stream);
+      const processor = this.audioCtx.createScriptProcessor(BUFFER_SIZE, 1, 1);
       processor.onaudioprocess = (event: AudioProcessingEvent) => {
         const float32Data = event.inputBuffer.getChannelData(0);
         const data = this._float32toInt16(float32Data);
@@ -47,13 +54,12 @@ export class PcmDataService implements OnDestroy {
       };
       source.connect(processor);
       // apparently data flows only once there is a destination?
-      processor.connect(audioCtx.destination);
+      processor.connect(this.audioCtx.destination);
 
       return output.asObservable();
     })
-      .takeUntil(this.killSwitch)
-      .multicast(new Subject())
-      .refCount();
+      .takeUntil(this.end$)
+      .multicast(new Subject());
 
     this.subscription = this.userMedia.$.subscribe(pipe);
 

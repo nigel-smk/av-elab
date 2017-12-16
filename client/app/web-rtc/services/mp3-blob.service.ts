@@ -1,4 +1,4 @@
-import {Injectable, OnDestroy, OnInit} from '@angular/core';
+import {Injectable, OnDestroy} from '@angular/core';
 import {Mp3EncoderService} from './mp3-encoder.service';
 import {ISubscription} from 'rxjs/Subscription';
 import {Subject} from 'rxjs/Subject';

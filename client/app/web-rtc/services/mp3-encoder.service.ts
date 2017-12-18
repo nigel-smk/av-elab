@@ -13,18 +13,16 @@ export class Mp3EncoderService implements OnDestroy {
   constructor(private pcmData: PcmDataService) { }
 
   get $() {
-    if (!this.subscription || this.subscription.closed) {
-      this.init();
-    }
-
     return this.mp3Data$.asObservable()
       .takeWhile((mp3Data: Int8Array) => mp3Data != null);
   }
 
   init() {
-    // TODO multiple calls to init() could create race conditions (would worker get garbage collected?)
-    this.worker = new Worker('worker/worker.js');
-    this.worker.onmessage = this.onWorkerReady.bind(this);
+    if ((!this.subscription || this.subscription.closed) && this.worker == null) {
+      this.pcmData.init();
+      this.worker = new Worker('worker/worker.js');
+      this.worker.onmessage = this.onWorkerReady.bind(this);
+    }
   }
 
   private onWorkerReady(event: MessageEvent) {
@@ -36,11 +34,13 @@ export class Mp3EncoderService implements OnDestroy {
         complete: this.onComplete.bind(this)
       });
     }
+
   }
 
   private onEncodedData(event: MessageEvent) {
     if (event.data === null) {
       this.worker.terminate();
+      this.worker = null;
     }
 
     this.mp3Data$.next(event.data as Int8Array);

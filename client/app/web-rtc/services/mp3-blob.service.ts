@@ -15,26 +15,26 @@ export class Mp3BlobService implements OnDestroy {
   constructor(private mp3Encoder: Mp3EncoderService) { }
 
   get $() {
-    if (!this.subscription || this.subscription.closed) {
-      this.init();
-    }
-
     return this.mp3Blob$;
   }
 
   init() {
-    const pipe: Subject<Int8Array> = new Subject();
+    if (!this.subscription || this.subscription.closed) {
+      this.mp3Encoder.init();
 
-    const mp3Blob$ = pipe
-      .reduce((acc, chunk): Int8Array[] => {
-        acc.push(chunk);
-        return acc;
-      }, [])
-      .map((binary: Int8Array[]) => new Blob(binary, {type: 'audio/mp3'}))
-      .do({complete: () => this.init()});
+      const pipe: Subject<Int8Array> = new Subject();
 
-    this.sourceSwitch$.next(mp3Blob$);
-    this.subscription = this.mp3Encoder.$.subscribe(pipe);
+      const mp3Blob$ = pipe
+        .reduce((acc, chunk): Int8Array[] => {
+          acc.push(chunk);
+          return acc;
+        }, [])
+        .map((binary: Int8Array[]) => new Blob(binary, {type: 'audio/mp3'}))
+        .do({complete: () => this.init()});
+
+      this.sourceSwitch$.next(mp3Blob$);
+      this.subscription = this.mp3Encoder.$.subscribe(pipe);
+    }
   }
 
   ngOnDestroy() {

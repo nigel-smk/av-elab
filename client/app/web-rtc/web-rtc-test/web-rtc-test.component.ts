@@ -42,7 +42,12 @@ export class WebRtcTestComponent implements OnInit, AfterViewChecked {
   }
 
   start() {
+    this.mp3Blob.init();
     this.pcmData.start();
+  }
+
+  pause() {
+    this.pcmData.pause();
   }
 
   stop() {

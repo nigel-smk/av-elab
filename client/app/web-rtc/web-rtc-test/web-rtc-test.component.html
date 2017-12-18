@@ -1,4 +1,5 @@
 <button (click)="start()">Start</button>
+<button (click)="pause()">Pause</button>
 <button (click)="stop()">Stop</button>
 <audio #playback controls="controls">
   <source #playbackSource [src]="(mp3Url$ | async) || ''" type="audio/mp3">

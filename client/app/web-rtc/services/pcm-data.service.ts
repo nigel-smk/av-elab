@@ -1,7 +1,6 @@
 import {Injectable, OnDestroy} from '@angular/core';
 import {UserMediaService} from './user-media.service';
 import {ISubscription} from 'rxjs/Subscription';
-import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/interval';
 import 'rxjs/add/operator/switchMap';
 import {Subject} from 'rxjs/Subject';
@@ -15,6 +14,7 @@ export class PcmDataService implements OnDestroy {
 
   private pcmData$: ConnectableObservable<Int16Array>;
   private subscription: ISubscription;
+  private connection: ISubscription;
   private end$: Subject<any> = new Subject();
 
   private audioCtx: AudioContext = new AudioContext();
@@ -22,15 +22,17 @@ export class PcmDataService implements OnDestroy {
   constructor(private userMedia: UserMediaService) { }
 
   get $() {
-    if (!this.subscription || this.subscription.closed) {
-      this.init();
-    }
-
     return this.pcmData$;
   }
 
   start() {
-    this.pcmData$.connect();
+    this.connection = this.pcmData$.connect();
+  }
+
+  pause() {
+    if (this.connection !== null) {
+      this.connection.unsubscribe();
+    }
   }
 
   stop() {
@@ -39,30 +41,31 @@ export class PcmDataService implements OnDestroy {
   }
 
   init() {
-    // TODO why does this need to be a ReplaySubject?
-    const pipe = new ReplaySubject<MediaStream>(1);
+    if (!this.subscription || this.subscription.closed) {
+      // TODO why does this need to be a ReplaySubject?
+      const pipe = new ReplaySubject<MediaStream>(1);
 
-    this.pcmData$ = pipe.switchMap((stream: MediaStream) => {
-      // TODO do these observables get cancelled (and released from memory) when init is called again?
-      const output = new Subject<Int16Array>();
-      const source = this.audioCtx.createMediaStreamSource(stream);
-      const processor = this.audioCtx.createScriptProcessor(BUFFER_SIZE, 1, 1);
-      processor.onaudioprocess = (event: AudioProcessingEvent) => {
-        const float32Data = event.inputBuffer.getChannelData(0);
-        const data = this._float32toInt16(float32Data);
-        output.next(data);
-      };
-      source.connect(processor);
-      // apparently data flows only once there is a destination?
-      processor.connect(this.audioCtx.destination);
+      this.pcmData$ = pipe.switchMap((stream: MediaStream) => {
+        // TODO do these observables get cancelled (and released from memory) when init is called again?
+        const output = new Subject<Int16Array>();
+        const source = this.audioCtx.createMediaStreamSource(stream);
+        const processor = this.audioCtx.createScriptProcessor(BUFFER_SIZE, 1, 1);
+        processor.onaudioprocess = (event: AudioProcessingEvent) => {
+          const float32Data = event.inputBuffer.getChannelData(0);
+          const data = this._float32toInt16(float32Data);
+          output.next(data);
+        };
+        source.connect(processor);
+        // apparently data flows only once there is a destination?
+        processor.connect(this.audioCtx.destination);
 
-      return output.asObservable();
-    })
-      .takeUntil(this.end$)
-      .multicast(new Subject());
+        return output.asObservable();
+      })
+        .takeUntil(this.end$)
+        .multicast(new Subject());
 
-    this.subscription = this.userMedia.$.subscribe(pipe);
-
+      this.subscription = this.userMedia.$.subscribe(pipe);
+    }
   }
 
   private _float32toInt16(float32: Float32Array): Int16Array {

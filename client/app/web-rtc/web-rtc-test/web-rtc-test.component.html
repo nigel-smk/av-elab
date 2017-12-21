@@ -2,5 +2,7 @@
 <button (click)="pause()">Pause</button>
 <button (click)="stop()">Stop</button>
 <audio #playback controls="controls">
+  <source #playbackSourceStored [src]="storedMp3" type="audio/mp3">
   <source #playbackSource [src]="(mp3Url$ | async) || ''" type="audio/mp3">
 </audio>
+

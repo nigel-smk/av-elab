@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {UserMediaService} from '../../web-rtc/services/user-media.service';
 import 'rxjs/add/operator/subscribeOn';
 import {Router} from '@angular/router';
 import {AudioUploadService} from '../../web-rtc/services/audio-upload.service';
+import {UserMediaService} from '../../web-audio/user-media.service';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-av-access',
@@ -13,13 +14,10 @@ export class AvAccessComponent implements OnInit {
 
   public access = 'denied';
 
-  constructor(private router: Router, private userMedia: UserMediaService, private audioCapture: AudioUploadService) { }
+  constructor(private router: Router, private userMedia: UserMediaService) { }
 
   ngOnInit() {
-
-    //this.audioCapture.init();
-
-    this.userMedia.$.subscribe(() => {
+    this.userMedia.mediaStream$.subscribe(() => {
       this.access = 'granted';
     },
     (err: DOMException) => {
@@ -30,7 +28,7 @@ export class AvAccessComponent implements OnInit {
       }
     });
 
-    this.userMedia.getUserMedia();
+    this.userMedia.init(environment.mediaConstraints);
   }
 
   reload() {

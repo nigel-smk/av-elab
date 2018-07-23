@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {UserMediaService} from '../../../../web-rtc/services/user-media.service';
 import {ISubscription} from 'rxjs/Subscription';
+import {UserMediaService} from '../../../../web-audio/user-media.service';
 
 @Component({
   selector: 'app-webcam-monitor',
@@ -17,7 +17,7 @@ export class WebcamMonitorComponent implements AfterViewInit, OnDestroy {
 
 
   ngAfterViewInit() {
-    this.subscription = this.userMedia.$.subscribe((stream: MediaStream) => {
+    this.subscription = this.userMedia.mediaStream$.subscribe((stream: MediaStream) => {
       // TODO fix ExpressionChangedAfterItHasBeenCheckedError
       this.loaded = true;
       this.gotStream(stream);

@@ -6,7 +6,7 @@
 export const environment = {
   production: false,
   clientId: '<your google drive client id>',
-  mediaConstraints: { audio: true }, // passed to getUserMedia
+  mediaConstraints: { audio: true, video: true }, // passed to getUserMedia
   pcmDataBufferSize: 2048,  // buffer size for pcm data
   driveUploadBufferSize: 256 * 1024 // buffer size for drive upload
 };

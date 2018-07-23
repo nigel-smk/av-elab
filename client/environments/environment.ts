@@ -5,8 +5,10 @@
 
 export const environment = {
   production: false,
-  mediaStreamConstraints: {
-    audio: true,
-    video: true
-  }
+  clientId: '<your google drive client id>',
+  mediaConstraints: { audio: true }, // passed to getUserMedia
+  pcmDataBufferSize: 2048,  // buffer size for pcm data
+  driveUploadBufferSize: 256 * 1024 // buffer size for drive upload
 };
+
+// you must create an environment.ts file in this directory with these values

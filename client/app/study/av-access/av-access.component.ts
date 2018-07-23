@@ -23,6 +23,7 @@ export class AvAccessComponent implements OnInit {
       this.access = 'granted';
     },
     (err: DOMException) => {
+      console.error(err);
       // TODO handle error accordingly
       if (err.name === 'DevicesNotFoundError') {
         this.access = 'notFound';

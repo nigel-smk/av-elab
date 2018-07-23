@@ -9,6 +9,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {WebRtcModule} from './web-rtc/web-rtc.module';
 import {WebAudioModule} from './web-audio/web-audio.module';
 import {AudioRecorderModule} from './audio-recorder/audio-recorder.module';
+import {StartupService} from './startup.service';
 
 
 @NgModule({
@@ -25,7 +26,7 @@ import {AudioRecorderModule} from './audio-recorder/audio-recorder.module';
     AudioRecorderModule.forRoot(),
     RoutingModule
   ],
-  providers: [],
+  providers: [StartupService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })

@@ -26,8 +26,7 @@ export class WebcamMonitorComponent implements AfterViewInit, OnDestroy {
 
   gotStream(stream: MediaStream) {
     const videoElem = this.el.nativeElement;
-    const vendorURL = window.URL;
-    videoElem.src = vendorURL.createObjectURL(stream);
+    videoElem.srcObject = stream;
   }
 
   ngOnDestroy() {

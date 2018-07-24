@@ -9,6 +9,7 @@ export class UserMediaService {
   private mediaStreamSwitch$: Subject<Observable<MediaStream>> = new Subject;
   public mediaStream$: Observable<MediaStream> = this.mediaStreamSwitch$.pipe(
     switchAll(),
+    // TODO shareReplay does not seem to work (test with audio-context service)
     shareReplay(1)
   );
 

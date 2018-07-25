@@ -1,10 +1,11 @@
 import {Injectable, OnDestroy} from '@angular/core';
-import {UserMediaService} from '../../web-rtc/services/user-media.service';
 import {ISubscription} from 'rxjs/Subscription';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/interval';
 import {Http, Headers} from '@angular/http';
 import {AuthService} from '../../shared/services/auth.service';
+import {UserMediaService} from '../../web-audio/user-media.service';
+import {switchMap} from 'rxjs/operators';
 
 @Injectable()
 export class ImageCaptureService implements OnDestroy {
@@ -26,22 +27,24 @@ export class ImageCaptureService implements OnDestroy {
   }
 
   start() {
-    this.subscription = this.userMedia.$.switchMap((stream: MediaStream) => {
-      const canvas = this.canvasElement;
-      const video = this.videoElement;
+    this.subscription = this.userMedia.mediaStream$.pipe(
+      switchMap((stream: MediaStream) => {
+        const canvas = this.canvasElement;
+        const video = this.videoElement;
 
-      this.videoElement.src = window.URL.createObjectURL(stream);
+        this.videoElement.srcObject = stream;
 
-      canvas.width = 200;
-      canvas.height = 200;
+        canvas.width = 200;
+        canvas.height = 200;
 
-      // TODO set interval and canvas size and image type/quality in environment
-      return Observable.interval(2000).map(() => {
-        canvas.getContext('2d')
-          .drawImage(video, 0, 0, canvas.width, canvas.height);
-        return canvas.toDataURL('image/jpeg', 0.1);
-      });
-    }).subscribe((snapshot) => {
+        // TODO set interval and canvas size and image type/quality in environment
+        return Observable.interval(2000).map(() => {
+          canvas.getContext('2d')
+            .drawImage(video, 0, 0, canvas.width, canvas.height);
+          return canvas.toDataURL('image/jpeg', 0.1);
+        });
+      })
+    ).subscribe((snapshot) => {
       // send snapshot to server
       this.snapCount += 1;
       console.log('server snapshot');

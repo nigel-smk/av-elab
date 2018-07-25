@@ -4,6 +4,7 @@ import {ISubscription} from 'rxjs/Subscription';
 import {SessionData} from '../../models/session-data';
 import {SessionDataService} from '../services/session-data.service';
 import {ImageCaptureService} from '../services/image-capture.service';
+import {AudioCaptureService} from '../services/audio-capture.service';
 
 enum YTEvent {
   UNSTARTED = -1,
@@ -40,9 +41,13 @@ export class StimulusComponent implements OnInit, OnDestroy {
     disablekb: 0
   };
 
-  constructor(private sessionData: SessionDataService, private imageCapture: ImageCaptureService) { }
+  constructor(
+    private sessionData: SessionDataService,
+    private imageCapture: ImageCaptureService,
+    private audioCapture: AudioCaptureService) { }
 
   ngOnInit() {
+    this.audioCapture.start();
     this.imageCapture.start();
 
     this.keypressSubscription = Observable.fromEvent(document, 'keypress').subscribe((event: KeyboardEvent) => {
@@ -77,6 +82,7 @@ export class StimulusComponent implements OnInit, OnDestroy {
   onStimulusEnd() {
     this.data.stopTime = this.player.getCurrentTime();
     this.imageCapture.stop();
+    this.audioCapture.stop();
     // append query parameters to url
     // TODO can '?' be anywhere in a url other than the start of the query string?
     const hasQueryString: boolean = this.data.redirect.indexOf('?') != -1;

@@ -1,7 +1,7 @@
 import {Observable} from 'rxjs/Observable';
 import {using} from 'rxjs/observable/using';
 import {ISubscription} from 'rxjs/Subscription';
-import {map, switchAll, zip} from 'rxjs/operators';
+import {combineLatest, map, switchAll} from 'rxjs/operators';
 import {Scheduler} from 'rxjs/Rx';
 
 export function fourierTransform(audioContext$: Observable<AudioContext>) {
@@ -9,8 +9,8 @@ export function fourierTransform(audioContext$: Observable<AudioContext>) {
   return (mediaStream$: Observable<MediaStream>) => {
 
     return mediaStream$.pipe(
-      // zip with audioContext as both are needed to create an FFTResource
-      zip(audioContext$, (mediaStream: MediaStream, audioContext: AudioContext) => {
+      // combine with audioContext as both are needed to create an FFTResource
+      combineLatest(audioContext$, (mediaStream: MediaStream, audioContext: AudioContext) => {
 
         const resourceFactory = () => new FFTResource(mediaStream, audioContext);
 
@@ -41,6 +41,7 @@ class FFTResource implements ISubscription {
 
   // TODO accept options object to define fft params
   constructor(mediaStream: MediaStream, audioContext: AudioContext) {
+    console.log("build it up");
     this.source = audioContext.createMediaStreamSource(mediaStream);
     this.analyser = audioContext.createAnalyser();
     this.source.connect(this.analyser);
@@ -49,6 +50,7 @@ class FFTResource implements ISubscription {
   }
 
   unsubscribe(): void {
+    console.log("tear it down!");
     // disconnect nodes
     this.analyser.disconnect();
     this.source.disconnect();

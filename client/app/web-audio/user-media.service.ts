@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import {Subject} from 'rxjs/Subject';
 import {Observable} from 'rxjs/Observable';
 import {switchAll, shareReplay} from 'rxjs/operators';
+import {ReplaySubject} from 'rxjs/ReplaySubject';
 
 @Injectable()
 export class UserMediaService {
 
-  private mediaStreamSwitch$: Subject<Observable<MediaStream>> = new Subject;
+  private mediaStreamSwitch$: ReplaySubject<Observable<MediaStream>> = new ReplaySubject(1);
   public mediaStream$: Observable<MediaStream> = this.mediaStreamSwitch$.pipe(
     switchAll(),
     // TODO shareReplay does not seem to work (test with audio-context service)

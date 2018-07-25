@@ -1,9 +1,9 @@
-import {AfterViewInit, Component, ElementRef, OnDestroy, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, OnDestroy, ViewChild} from '@angular/core';
 import {ISubscription} from 'rxjs/Subscription';
-import {VolumeDataService} from '../../../../web-rtc/services/volume-data.service';
 
 import * as D3Scale from 'd3-scale';
 import * as D3ScaleChromatic from 'd3-scale-chromatic';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'app-mic-monitor',
@@ -12,6 +12,7 @@ import * as D3ScaleChromatic from 'd3-scale-chromatic';
 })
 export class MicMonitorComponent implements AfterViewInit, OnDestroy {
 
+  @Input() volumeData$: Observable<number>;
   @ViewChild('micmonitor') canvas: ElementRef;
   private context: CanvasRenderingContext2D;
   private radius = 100;
@@ -23,13 +24,10 @@ export class MicMonitorComponent implements AfterViewInit, OnDestroy {
 
   public loaded = false;
 
-  constructor(private volumeData: VolumeDataService) {
-  }
-
   ngAfterViewInit() {
     this.context = this.canvas.nativeElement.getContext('2d');
 
-    this.subscription = this.volumeData.$.subscribe((volumeData: number) => {
+    this.subscription = this.volumeData$.subscribe((volumeData: number) => {
       this.loaded = true;
       this.maxObservedVolume = Math.max(this.maxObservedVolume, volumeData);
       this.draw(volumeData);

@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import {UserMediaService} from './web-audio/user-media.service';
 import {AudioContextService} from './web-audio/audio-context.service';
 import {AudioRecorderService} from './audio-recorder/audio-recorder.service';
-import {fourierTransform} from './web-audio/fourier-transform';
+import {fourierTransform} from './web-audio/operators/fourier-transform';
 import {of} from 'rxjs/observable/of';
+import {AudioCaptureService} from './study/services/audio-capture.service';
 
 @Injectable()
 export class StartupService {
@@ -11,7 +12,8 @@ export class StartupService {
   constructor(
     private audioRecorder: AudioRecorderService,
     private userMedia: UserMediaService,
-    private audioContext: AudioContextService
+    private audioContext: AudioContextService,
+    private audioCapture: AudioCaptureService
   ) { }
 
   init() {
@@ -21,9 +23,11 @@ export class StartupService {
   }
 
   test() {
-    this.userMedia.mediaStream$.pipe(
-      fourierTransform(this.audioContext.audioContext$)
-    ).subscribe(console.log, console.error);
+    this.audioCapture.start();
+    setTimeout(() => this.audioCapture.stop(), 20000);
+    // this.userMedia.mediaStream$.pipe(
+    //   fourierTransform(this.audioContext.audioContext$)
+    // ).subscribe(console.log, console.error);
   }
 
 }

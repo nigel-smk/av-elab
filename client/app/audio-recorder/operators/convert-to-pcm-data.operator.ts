@@ -1,12 +1,13 @@
 import {Observable} from 'rxjs/Observable';
-import {mergeAll, switchMap, zip} from 'rxjs/operators';
+import {combineLatest, switchMap} from 'rxjs/operators';
 
 // TODO this pollutes the AudioContext somewhat irreversibly? Can we reverse changes to the AudioContext on unsubscribe?
+// use the strategy in the fourier transform operator
 
 // TODO need complete and error functions
 export function convertToPcmData(audioContext$: Observable<AudioContext>, bufferSize: number) {
   return (mediaStream$: Observable<MediaStream>) => {
-    const createPCMStream = zip(audioContext$, (mediaStream: MediaStream, audioContext: AudioContext) => {
+    const createPCMStream = combineLatest(audioContext$, (mediaStream: MediaStream, audioContext: AudioContext) => {
       return new Observable(observer => {
         const source = audioContext.createMediaStreamSource(mediaStream);
         const processor = audioContext.createScriptProcessor(bufferSize);

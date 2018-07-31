@@ -1,11 +1,16 @@
+@import '../../../sass/base/typography';
+
 :host {
   display: flex;
   flex-direction: column;
+  padding: 30px;
   text-align: center;
 }
 
 .briefing {
-  font-size: 1.5em;
+  @include font-size-large;
+  font-family: $font-family-display;
+  padding-bottom: 30px;
 }
 
 .access-status {

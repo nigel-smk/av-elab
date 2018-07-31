@@ -1,4 +1,4 @@
-<div class="briefing alert alert-info">
+<div class="briefing">
   In order to make sure that you are
   not in a distracting environment, we
   need to collect audio and video data during this task. This data will be stored on a secure server,
@@ -6,24 +6,31 @@
   will only be accessible by researchers affiliated with this project.
 </div>
 
-<div class="access-status">
-  <div *ngIf="access == 'denied'" class="alert alert-danger">
-      Access to your webcam and microphone is currently blocked. <br>
+<app-actionable type="success">
+  <header>
+    <div class="access-status">
+      <div *ngIf="access == 'denied'" class="alert alert-danger">
+        Access to your webcam and microphone is currently blocked
+      </div>
+
+      <div *ngIf="access == 'notFound'" class="alert alert-danger">
+        You need a webcam and microphone attached to your computer to continue
+      </div>
+
+      <div *ngIf="access == 'granted'" class="alert alert-success">
+        Your camera and microphone are ready
+      </div>
+    </div>
+  </header>
+  <body>
+  <div class="continue">
+    <p *ngIf="access == 'denied'">
       Please click this button <img src="/assets/browser-bar-buttons-pointer.png"/> on the
       right side of your browser bar <br>
       and select the "Always allow.." option.
+    </p>
+    <button app-button *ngIf="access != 'granted'" (click)="reload()">Reload Page</button>
+    <button app-button *ngIf="access == 'granted'" (click)="continue()">Continue</button>
   </div>
-
-  <div *ngIf="access == 'notFound'" class="alert alert-danger">
-      You need a webcam and microphone attached to your computer to continue.
-  </div>
-
-  <div *ngIf="access == 'granted'" class="alert alert-success">
-      Your camera and microphone are ready!
-  </div>
-</div>
-
-<div class="continue">
-  <button *ngIf="access != 'granted'" (click)="reload()">Reload Page</button>
-  <button *ngIf="access == 'granted'" (click)="continue()">Continue</button>
-</div>
+  </body>
+</app-actionable>

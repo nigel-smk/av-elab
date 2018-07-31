@@ -1,0 +1,42 @@
+@import '../../../sass/abstracts/placeholders';
+@import '../../../sass/abstracts/variables';
+@import '../../../sass/base/typography';
+
+.actionable {
+  @extend %actionable-container;
+  @include font-size-regular;
+  padding: 1px;
+}
+
+.header {
+  background-color: black;
+  border-radius: 5px 5px 0 0;
+  color: white;
+  font-family: $font-family-text;
+  font-weight: $font-weight-bold;
+  padding: 20px;
+}
+.header--info {
+  background-color: $title-blue;
+}
+.header--success {
+  background-color: $title-green;
+}
+.header--danger {
+  background-color: $title-red;
+}
+
+.body {
+  font-family: $font-family-display;
+  //margin: 0 auto;
+  padding: 10px;
+}
+.body--info {
+  background-color: $content-blue;
+}
+.body--success {
+  background-color: $content-green;
+}
+.body--danger {
+  background-color: $content-red;
+}

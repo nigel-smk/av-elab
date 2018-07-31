@@ -2,7 +2,27 @@ import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@a
 
 @Component({
   selector: 'app-speaker-calibration',
-  templateUrl: './speaker-calibration.component.html',
+  template: `
+    <div class="alert alert-success" *ngIf="isCalibrated">Speaker calibration complete</div>
+    <app-actionable [type]="isCalibrated ? 'success' : 'info'">
+      <header *ngIf="!isCalibrated">
+        Press play and then enter the spoken word
+      </header>
+      <header *ngIf="isCalibrated">
+        Headphone calibration complete
+      </header>
+      <body>
+        <div class="instructions">
+          Enter the word from<br>
+          <button (click)="playTestSound()">this audio clip</button><br/>
+          <input type="text" class="user-input form-control" placeholder="in this field" [(ngModel)]="userInput" (ngModelChange)="onUpdate($event)" required>
+        </div>
+      </body>
+    </app-actionable>
+    <audio #audioTest>
+      <source src="/assets/welcome.mp3" type="audio/mpeg"/>
+    </audio>
+  `,
   styleUrls: ['./speaker-calibration.component.css']
 })
 export class SpeakerCalibrationComponent implements OnInit {

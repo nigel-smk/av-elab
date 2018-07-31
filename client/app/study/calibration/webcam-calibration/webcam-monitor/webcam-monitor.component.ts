@@ -5,7 +5,7 @@ import {UserMediaService} from '../../../../web-audio/user-media.service';
 @Component({
   selector: 'app-webcam-monitor',
   templateUrl: './webcam-monitor.component.html',
-  styleUrls: ['./webcam-monitor.component.css']
+  styleUrls: ['./webcam-monitor.component.scss']
 })
 export class WebcamMonitorComponent implements AfterViewInit, OnDestroy {
 

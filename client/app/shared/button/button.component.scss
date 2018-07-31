@@ -1,0 +1,21 @@
+@import '../../../sass/base/typography';
+
+:host {
+  font-family: $font-family-text;
+  font-weight: $font-weight-bold;
+  text-transform: uppercase;
+  color: black; //TODO store in variable
+  cursor: pointer;
+  background-color: rgb(245, 246, 247); //TODO store in variable
+  border-radius: 3px;
+  border: 3px solid black;
+  margin: 0;
+  padding: 8px 16px;
+  transition: background 0.1s ease-out, box-shadow 0.15s cubic-bezier(0.47, 0.03, 0.49, 1.38);
+  outline: none;
+}
+
+:host:hover {
+  color: white;
+  background-color: black;
+}

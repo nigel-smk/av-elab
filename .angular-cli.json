@@ -11,15 +11,15 @@
         "assets",
         "assets/favicon.ico",
         {
-          "glob": "worker.js",
-          "input": "./worker",
-          "output": "./worker"
-        },
+  "glob": "worker.js",
+  "input": "./worker",
+  "output": "./worker"
+},
         {
-          "glob": "lame.min.js",
-          "input": "../node_modules/lamejs",
-          "output": "./worker"
-        }
+  "glob": "lame.min.js",
+  "input": "../node_modules/lamejs",
+  "output": "./worker"
+}
       ],
       "index": "index.html",
       "main": "main.ts",
@@ -30,7 +30,7 @@
       "prefix": "app",
       "styles": [
         "../node_modules/font-awesome/css/font-awesome.min.css",
-        "styles.scss"
+        "sass/styles.scss"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",
@@ -66,6 +66,7 @@
   },
   "defaults": {
     "styleExt": "scss",
-    "component": {}
+    "component": {
+    }
   }
 }

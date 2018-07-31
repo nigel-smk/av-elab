@@ -1,17 +1,22 @@
+@import '../../../sass/base/typography';
+
 :host {
   display: flex;
   flex-direction: column;
   text-align: center;
+  padding: 30px;
 }
 
 .briefing {
-  font-size: 1.5em;
+  font-family: $font-family-display;
+  @include font-size-large;
+  padding-bottom:30px;
 }
 
 .calibration {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: stretch;
   justify-content: space-between;
 }
 

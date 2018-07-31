@@ -10,21 +10,14 @@ import {volumeTransform} from '../../web-audio/operators/volume-transform';
 @Component({
   selector: 'app-calibration',
   styleUrls: ['./calibration.component.scss'],
-  // templateUrl: './calibration.component.html',
   template: `
     <div class="briefing alert alert-info">
       Please complete the three calibration tasks below to ensure your webcam, microphone and headphones are properly set up.
     </div>
     <div class="calibration">
-      <div class="calibrator">
-        <app-webcam-calibration (onCalibrated)="onCalibrated('webcam')"></app-webcam-calibration>
-      </div>
-      <div class="calibrator">
-        <app-mic-calibration [volumeData$]="volumeData$" (onCalibrated)="onCalibrated('mic')"></app-mic-calibration>
-      </div>
-      <div class="calibrator">
-        <app-speaker-calibration (onCalibrated)="onCalibrated('speakers')"></app-speaker-calibration>
-      </div>
+      <app-webcam-calibration (onCalibrated)="onCalibrated('webcam')"></app-webcam-calibration>
+      <app-mic-calibration [volumeData$]="volumeData$" (onCalibrated)="onCalibrated('mic')"></app-mic-calibration>
+      <app-speaker-calibration (onCalibrated)="onCalibrated('speakers')"></app-speaker-calibration>
     </div>
     <div class="continue" *ngIf="expectedEvents.size == 0">
       Once you begin the study, you must complete it in one sitting.<br>

@@ -4,25 +4,27 @@ import {takeWhile} from 'rxjs/operators';
 
 @Component({
   selector: 'app-mic-calibration',
-  // templateUrl: './mic-calibration.component.html',
-  styleUrls: ['./mic-calibration.component.css'],
-  template: `
-    <app-calibration-template *ngIf="!complete">
-      <card-header>
+  styleUrls: ['./mic-calibration.component.scss'],
+  template: `    
+    <app-actionable [type]="isCalibrated ? 'success' : 'info'">
+      <header *ngIf="!isCalibrated">
         Increase your microphone volume and tap the microphone until the meter fills up
-      </card-header>
-      <card-body>
+      </header>
+      <header *ngIf="isCalibrated">
+        Microphone calibration complete
+      </header>
+      <body class="actionable-body">
+        <app-checkmark-overlay *ngIf="isCalibrated"></app-checkmark-overlay>
         <app-mic-monitor [volumeData$]="volumeData$"></app-mic-monitor>
-      </card-body>
-    </app-calibration-template>
-    <div class="alert alert-success" *ngIf="complete">Microphone calibration complete</div>
+      </body>
+    </app-actionable>
   `
 })
 export class MicCalibrationComponent implements OnInit {
 
   @Input() volumeData$: Observable<number>;
   @Output() onCalibrated: EventEmitter<void> = new EventEmitter<void>();
-  public complete = false;
+  public isCalibrated = false;
 
   constructor() { }
 
@@ -32,7 +34,7 @@ export class MicCalibrationComponent implements OnInit {
     ).subscribe({
       complete: () => {
         this.onCalibrated.emit();
-        this.complete = true;
+        this.isCalibrated = true;
       }
     });
   }

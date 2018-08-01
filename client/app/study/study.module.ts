@@ -19,7 +19,6 @@ import {SessionDataService} from './services/session-data.service';
 import {SharedModule} from '../shared/shared.module';
 import {YoutubePlayerModule} from 'ngx-youtube-player';
 import {LoginFailureComponent} from './login-failure/login-failure.component';
-import {CalibrationTemplateComponent} from './calibration/calibration-template/calibration-template.component';
 import {AudioCaptureService} from './services/audio-capture.service';
 import { CheckmarkOverlayComponent } from './calibration/checkmark-overlay/checkmark-overlay.component';
 
@@ -33,7 +32,6 @@ import { CheckmarkOverlayComponent } from './calibration/checkmark-overlay/check
     AvAccessComponent,
     BriefingComponent,
     CalibrationComponent,
-    CalibrationTemplateComponent,
     MicCalibrationComponent,
     MicMonitorComponent,
     WebcamCalibrationComponent,

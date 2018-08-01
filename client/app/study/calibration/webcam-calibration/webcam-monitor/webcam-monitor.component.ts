@@ -7,7 +7,7 @@ import {UserMediaService} from '../../../../web-audio/user-media.service';
   templateUrl: './webcam-monitor.component.html',
   styleUrls: ['./webcam-monitor.component.scss']
 })
-export class WebcamMonitorComponent implements AfterViewInit, OnDestroy {
+export class WebcamMonitorComponent implements OnInit, OnDestroy {
 
   @ViewChild('webcamout') el: ElementRef;
   private subscription: ISubscription;
@@ -16,7 +16,7 @@ export class WebcamMonitorComponent implements AfterViewInit, OnDestroy {
   constructor(private userMedia: UserMediaService) { }
 
 
-  ngAfterViewInit() {
+  ngOnInit() {
     this.subscription = this.userMedia.mediaStream$.subscribe((stream: MediaStream) => {
       // TODO fix ExpressionChangedAfterItHasBeenCheckedError
       this.loaded = true;

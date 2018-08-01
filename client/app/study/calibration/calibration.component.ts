@@ -16,20 +16,15 @@ import {volumeTransform} from '../../web-audio/operators/volume-transform';
     </div>
     <div class="calibration" [ngSwitch]="currentPhase">
       <app-webcam-calibration 
-        *ngSwitchCase="'webcam'"
         (onCalibrated)="onCalibrated('webcam')"
       ></app-webcam-calibration>
       <app-mic-calibration 
-        *ngSwitchCase="'mic'"
         [volumeData$]="volumeData$" 
         (onCalibrated)="onCalibrated('mic')"
       ></app-mic-calibration>
-      <app-speaker-calibration 
-        *ngSwitchCase="'speakers'"
-        (onCalibrated)="onCalibrated('speakers')"
-      ></app-speaker-calibration>
+      <app-speaker-calibration (onCalibrated)="onCalibrated('speakers')"></app-speaker-calibration>
     </div>
-    <div class="continue" *ngIf="phases.length == 0">
+    <div class="continue" *ngIf="expectedEvents.size == 0">
       Once you begin the study, you must complete it in one sitting.<br>
       Press space bar when you are ready to begin the study...
     </div>
@@ -38,7 +33,8 @@ import {volumeTransform} from '../../web-audio/operators/volume-transform';
 export class CalibrationComponent implements OnInit, OnDestroy {
 
   public phases = ['webcam', 'mic', 'speakers'];
-  public currentPhase = this.phases[0];
+  public currentPhase = 'webcam';
+  public expectedEvents = new Set(this.phases);
   public volumeData$: Observable<number>;
 
   private subscription: ISubscription;
@@ -57,7 +53,7 @@ export class CalibrationComponent implements OnInit, OnDestroy {
   ngOnInit() {
     // TODO some way other than referencing global document variable?
     this.subscription = Observable.fromEvent(document, 'keypress').subscribe((event: KeyboardEvent) => {
-      if (event.keyCode == 32 && this.phases.length == 0) {
+      if (event.keyCode == 32 && this.expectedEvents.size == 0) {
         this.router.navigate(['/briefing']);
       }
     });
@@ -68,9 +64,6 @@ export class CalibrationComponent implements OnInit, OnDestroy {
   }
 
   onCalibrated(event: string) {
-    setTimeout(() => {
-      this.phases = this.phases.filter(phase => phase !== event);
-      this.currentPhase = this.phases[0];
-    }, 2000);
+    this.expectedEvents.delete(event);
   }
 }

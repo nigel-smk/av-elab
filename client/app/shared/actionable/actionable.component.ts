@@ -3,14 +3,13 @@ import {Component, Input} from '@angular/core';
 @Component({
   selector: 'app-actionable',
   template: `
-    <div class="actionable">
       <div class="header" [ngClass]="getHeaderType()">
         <ng-content select="header" ></ng-content>
       </div>
       <div class="body" [ngClass]="getBodyType()">
         <ng-content select="body"></ng-content>
       </div>
-    </div>    `,
+  `,
   styleUrls: ['./actionable.component.scss']
 })
 export class ActionableComponent {

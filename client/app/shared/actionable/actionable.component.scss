@@ -2,10 +2,12 @@
 @import '../../../sass/abstracts/variables';
 @import '../../../sass/base/typography';
 
-.actionable {
+:host {
   @extend %actionable-container;
   @include font-size-regular;
   padding: 1px;
+  display: flex;
+  flex-direction: column;
 }
 
 .header {
@@ -30,6 +32,10 @@
   font-family: $font-family-display;
   //margin: 0 auto;
   padding: 10px;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .body--info {
   background-color: $content-blue;

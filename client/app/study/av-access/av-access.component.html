@@ -1,12 +1,8 @@
 <div class="briefing">
-  In order to make sure that you are
-  not in a distracting environment, we
-  need to collect audio and video data during this task. This data will be stored on a secure server,
-  separately from your provided information, and separately from any identifying information. This data
-  will only be accessible by researchers affiliated with this project.
+  In order to make sure that you are not in a distracting environment, we need to collect audio and video data during this task. This data will be stored on a secure server, separately from your provided information, and separately from any identifying information. This data will only be accessible by researchers affiliated with this project.
 </div>
 
-<app-actionable type="success">
+<app-actionable [type]="access == 'granted' ? 'success' : 'danger'">
   <header>
     <div class="access-status">
       <div *ngIf="access == 'denied'" class="alert alert-danger">
@@ -14,7 +10,7 @@
       </div>
 
       <div *ngIf="access == 'notFound'" class="alert alert-danger">
-        You need a webcam and microphone attached to your computer to continue
+        You need a webcam and microphone connected to continue
       </div>
 
       <div *ngIf="access == 'granted'" class="alert alert-success">
@@ -27,9 +23,9 @@
     <p *ngIf="access == 'denied'">
       Please click this button <img src="/assets/browser-bar-buttons-pointer.png"/> on the
       right side of your browser bar <br>
-      and select the "Always allow.." option.
+      and select the <strong>Always allow...</strong> option.
     </p>
-    <button app-button *ngIf="access != 'granted'" (click)="reload()">Reload Page</button>
+    <button app-button *ngIf="access != 'granted'" (click)="reload()">Retry</button>
     <button app-button *ngIf="access == 'granted'" (click)="continue()">Continue</button>
   </div>
   </body>

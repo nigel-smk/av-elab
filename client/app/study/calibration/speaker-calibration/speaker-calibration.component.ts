@@ -3,7 +3,6 @@ import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@a
 @Component({
   selector: 'app-speaker-calibration',
   template: `
-    <div class="alert alert-success" *ngIf="isCalibrated">Speaker calibration complete</div>
     <app-actionable [type]="isCalibrated ? 'success' : 'info'">
       <header *ngIf="!isCalibrated">
         Press play and then enter the spoken word
@@ -12,18 +11,29 @@ import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@a
         Headphone calibration complete
       </header>
       <body>
-        <div class="instructions">
-          Enter the word from<br>
-          <button (click)="playTestSound()">this audio clip</button><br/>
-          <input type="text" class="user-input form-control" placeholder="in this field" [(ngModel)]="userInput" (ngModelChange)="onUpdate($event)" required>
-        </div>
+        <app-checkmark-overlay *ngIf="isCalibrated"></app-checkmark-overlay>
+        <!-- TODO get spinDuration from HTMLMediaElement.duration -->
+        <app-play-button 
+          (click)="playTestSound()"
+          [spinDuration]="1"
+        ></app-play-button>
+        <!-- TODO set focus on play button click -->
+        <input
+          [(ngModel)]="userInput" 
+          (ngModelChange)="onUpdate($event)"
+          [disabled]="isCalibrated"
+          type="text" 
+          class="user-input form-control" 
+          placeholder="Enter here..." 
+          required
+        />
       </body>
     </app-actionable>
     <audio #audioTest>
       <source src="/assets/welcome.mp3" type="audio/mpeg"/>
     </audio>
   `,
-  styleUrls: ['./speaker-calibration.component.css']
+  styleUrls: ['./speaker-calibration.component.scss']
 })
 export class SpeakerCalibrationComponent implements OnInit {
 

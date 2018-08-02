@@ -21,6 +21,7 @@ import {YoutubePlayerModule} from 'ngx-youtube-player';
 import {LoginFailureComponent} from './login-failure/login-failure.component';
 import {AudioCaptureService} from './services/audio-capture.service';
 import { CheckmarkOverlayComponent } from './calibration/checkmark-overlay/checkmark-overlay.component';
+import { PlayButtonComponent } from './calibration/speaker-calibration/play-button/play-button.component';
 
 @NgModule({
   imports: [
@@ -41,7 +42,8 @@ import { CheckmarkOverlayComponent } from './calibration/checkmark-overlay/check
     NotFoundComponent,
     StimulusComponent,
     LoginFailureComponent,
-    CheckmarkOverlayComponent
+    CheckmarkOverlayComponent,
+    PlayButtonComponent
   ],
   exports: [
     AvAccessComponent,

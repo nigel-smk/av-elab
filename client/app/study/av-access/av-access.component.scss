@@ -3,14 +3,17 @@
 :host {
   display: flex;
   flex-direction: column;
-  padding: 30px;
+  align-items: center;
+  padding: 50px;
   text-align: center;
 }
 
 .briefing {
   @include font-size-large;
-  font-family: $font-family-display;
-  padding-bottom: 30px;
+  font-family: $font-family-text;
+  margin: 0 auto;
+  padding-bottom: 50px;
+  max-width: 75%;
 }
 
 .access-status {
@@ -20,5 +23,6 @@
 
 .continue {
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
 }

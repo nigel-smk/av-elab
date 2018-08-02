@@ -3,6 +3,17 @@
   flex: 1;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+app-play-button {
+  margin-bottom: 20px;
+}
+
 .user-input {
   width: 8em;
 }

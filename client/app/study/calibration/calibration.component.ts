@@ -11,10 +11,10 @@ import {volumeTransform} from '../../web-audio/operators/volume-transform';
   selector: 'app-calibration',
   styleUrls: ['./calibration.component.scss'],
   template: `
-    <div class="briefing alert alert-info">
+    <div class="briefing">
       Please complete the three calibration tasks below to ensure your webcam, microphone and headphones are properly set up.
     </div>
-    <div class="calibration" [ngSwitch]="currentPhase">
+    <div class="calibration">
       <app-webcam-calibration 
         (onCalibrated)="onCalibrated('webcam')"
       ></app-webcam-calibration>
@@ -25,7 +25,6 @@ import {volumeTransform} from '../../web-audio/operators/volume-transform';
       <app-speaker-calibration (onCalibrated)="onCalibrated('speakers')"></app-speaker-calibration>
     </div>
     <div class="continue" *ngIf="expectedEvents.size == 0">
-      Once you begin the study, you must complete it in one sitting.<br>
       Press space bar when you are ready to begin the study...
     </div>
   `
@@ -33,7 +32,6 @@ import {volumeTransform} from '../../web-audio/operators/volume-transform';
 export class CalibrationComponent implements OnInit, OnDestroy {
 
   public phases = ['webcam', 'mic', 'speakers'];
-  public currentPhase = 'webcam';
   public expectedEvents = new Set(this.phases);
   public volumeData$: Observable<number>;
 

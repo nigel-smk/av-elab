@@ -3,20 +3,15 @@ import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-play-button',
-  template: `
-    <i class="fa fa-play fa-2x"></i>
-  `,
+  template: `<i class="fa fa-play fa-2x"></i>`,
   styleUrls: ['./play-button.component.scss']
 })
 export class PlayButtonComponent implements OnInit {
 
-  @Input() spinDuration: number = 1;
   @Input() src: string;
-
-  private audioElement: HTMLAudioElement;
-
   // TODO use angular animations?
   @HostBinding('style.animation') animation: string;
+  private audioElement: HTMLAudioElement;
 
   constructor(private sanitizer: DomSanitizer) { }
 

@@ -12,13 +12,12 @@ import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@a
       </header>
       <body>
         <app-checkmark-overlay *ngIf="isCalibrated"></app-checkmark-overlay>
-        <!-- TODO get spinDuration from HTMLMediaElement.duration -->
         <app-play-button 
-          [spinDuration]="1"
+          (click)="onPlay()"
           src="/assets/welcome.mp3"
         ></app-play-button>
         <!-- TODO set focus on play button click -->
-        <input
+        <input #input
           [(ngModel)]="userInput" 
           (ngModelChange)="onUpdate($event)"
           [disabled]="isCalibrated"
@@ -29,16 +28,13 @@ import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@a
         />
       </body>
     </app-actionable>
-    <!--<audio #audioTest>-->
-      <!--<source src="/assets/welcome.mp3" type="audio/mpeg"/>-->
-    <!--</audio>-->
   `,
   styleUrls: ['./speaker-calibration.component.scss']
 })
 export class SpeakerCalibrationComponent implements OnInit {
 
   @Output() onCalibrated: EventEmitter<void> = new EventEmitter<void>();
-  @ViewChild('audioTest') audioElement: ElementRef;
+  @ViewChild('input') inputElement: ElementRef;
   public userInput = '';
   public isCalibrated = false;
 
@@ -47,9 +43,9 @@ export class SpeakerCalibrationComponent implements OnInit {
   ngOnInit() {
   }
 
-  // playTestSound() {
-  //   (this.audioElement.nativeElement as HTMLAudioElement).play();
-  // }
+  onPlay() {
+    this.inputElement.nativeElement.focus();
+  }
 
   onUpdate(input: string) {
     if (input === 'welcome') {

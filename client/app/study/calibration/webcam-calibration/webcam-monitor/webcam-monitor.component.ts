@@ -4,7 +4,11 @@ import {UserMediaService} from '../../../../web-audio/user-media.service';
 
 @Component({
   selector: 'app-webcam-monitor',
-  templateUrl: './webcam-monitor.component.html',
+  template: `
+    <video #webcamout autoplay [hidden]="!loaded"></video>
+    <img src="/assets/loading.gif" [hidden]="loaded">
+
+  `,
   styleUrls: ['./webcam-monitor.component.scss']
 })
 export class WebcamMonitorComponent implements OnInit, OnDestroy {
@@ -18,7 +22,6 @@ export class WebcamMonitorComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscription = this.userMedia.mediaStream$.subscribe((stream: MediaStream) => {
-      // TODO fix ExpressionChangedAfterItHasBeenCheckedError
       this.loaded = true;
       this.gotStream(stream);
     });
@@ -26,6 +29,8 @@ export class WebcamMonitorComponent implements OnInit, OnDestroy {
 
   gotStream(stream: MediaStream) {
     const videoElem = this.el.nativeElement;
+    // TODO why doesn't the muted attribute work on the video tag? https://stackoverflow.com/questions/14111917/html5-video-muted-but-stilly-playing
+    videoElem.muted = true;
     videoElem.srcObject = stream;
   }
 

@@ -1,31 +1,31 @@
 @import '../../../sass/base/typography';
 
 :host {
+  align-items: center;
   display: flex;
   flex-direction: column;
   text-align: center;
-  padding: 30px;
+  padding: 50px;
 }
 
 .briefing {
-  font-family: $font-family-display;
+  font-family: $font-family-text;
   @include font-size-large;
-  padding-bottom:30px;
+  padding-bottom:50px;
+  width: 75%;
 }
 
 .calibration {
+  align-items: stretch;
   display: flex;
   flex-direction: row;
-  align-items: stretch;
   justify-content: space-between;
-}
-
-.calibrator {
-  width: 33%;
+  padding-bottom: 50px;
 }
 
 .continue {
-  font-size: 1.5em;
+  @include font-size-x-large;
+  font-family: $font-family-text;
 }
 
 app-webcam-calibration, app-mic-calibration {

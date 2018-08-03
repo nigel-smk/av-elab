@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import 'rxjs/add/operator/subscribeOn';
 import {Router} from '@angular/router';
-import {AudioUploadService} from '../../web-rtc/services/audio-upload.service';
 import {UserMediaService} from '../../web-audio/user-media.service';
 import {environment} from '../../../environments/environment';
 

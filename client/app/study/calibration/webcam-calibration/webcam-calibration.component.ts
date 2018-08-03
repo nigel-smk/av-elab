@@ -9,7 +9,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
       <body class="actionable-body">
         <app-checkmark-overlay *ngIf="isCalibrated"></app-checkmark-overlay>
         <app-webcam-monitor class="monitor">
-          <img src="/images/liveFeedPlaceholder.gif"/>
+          <img src="/assets/loading.gif"/>
         </app-webcam-monitor>
         <button app-button (click)="complete()">Done</button>
       </body>

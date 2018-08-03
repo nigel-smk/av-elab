@@ -7,12 +7,19 @@ import {SessionData} from '../../models/session-data';
 
 @Component({
   selector: 'app-briefing',
-  templateUrl: './briefing.component.html',
+  template: `
+    <div class="instructions">
+      {{ (data | async).briefing }}
+    </div>
+    <div class="continue">
+      Press space bar to start the video...
+    </div>
+  `,
   styleUrls: ['./briefing.component.scss']
 })
 export class BriefingComponent implements OnInit {
 
-  public data: Observable<SessionData> = Observable.never();
+  public data: Observable<SessionData>;
   private subscription: ISubscription;
 
   constructor(private sessionData: SessionDataService, private router: Router) {

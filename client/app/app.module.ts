@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import {StudyModule} from './study/study.module';
 import {AdminModule} from './admin/admin.module';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {WebRtcModule} from './web-rtc/web-rtc.module';
 import {WebAudioModule} from './web-audio/web-audio.module';
 import {AudioRecorderModule} from './audio-recorder/audio-recorder.module';
 import {StartupService} from './startup.service';
@@ -21,7 +20,6 @@ import {StartupService} from './startup.service';
     SharedModule.forRoot(),
     StudyModule.forRoot(),
     AdminModule.forRoot(),
-    WebRtcModule.forRoot(),
     WebAudioModule.forRoot(),
     AudioRecorderModule.forRoot(),
     RoutingModule

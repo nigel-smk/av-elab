@@ -44,6 +44,8 @@ class FFTResource implements ISubscription {
     console.log("build it up");
     this.source = audioContext.createMediaStreamSource(mediaStream);
     this.analyser = audioContext.createAnalyser();
+    this.analyser.disconnect();
+    this.source.disconnect();
     this.source.connect(this.analyser);
     this.analyser.fftSize = 32;
     this.frequencyData = new Uint8Array(this.analyser.frequencyBinCount);
@@ -51,7 +53,6 @@ class FFTResource implements ISubscription {
 
   unsubscribe(): void {
     console.log("tear it down!");
-    // disconnect nodes
     this.analyser.disconnect();
     this.source.disconnect();
     this.closed = true;

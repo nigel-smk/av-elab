@@ -16,7 +16,19 @@ app-play-button {
 
 .user-input {
   width: 8em;
+  text-align: center;
 }
+
+// TODO place in mixin
+// from https://stackoverflow.com/questions/9707021/how-do-i-auto-hide-placeholder-text-upon-focus-using-css-or-jquery#answer-17402192
+/* WebKit browsers */
+.user-input:focus::-webkit-input-placeholder { color:transparent; }
+/* Mozilla Firefox 4 to 18 */
+.user-input:focus:-moz-placeholder { color:transparent; }
+/* Mozilla Firefox 19+ */
+.user-input:focus::-moz-placeholder { color:transparent; }
+/* Internet Explorer 10+ */
+.user-input:focus:-ms-input-placeholder { color:transparent; }
 
 .instructions {
   display: flex;

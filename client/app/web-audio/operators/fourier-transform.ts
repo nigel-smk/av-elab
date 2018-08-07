@@ -1,8 +1,5 @@
-import {Observable} from 'rxjs/Observable';
-import {using} from 'rxjs/observable/using';
-import {ISubscription} from 'rxjs/Subscription';
+import {Observable, using, animationFrameScheduler, Unsubscribable, interval} from 'rxjs';
 import {combineLatest, map, switchAll} from 'rxjs/operators';
-import {Scheduler} from 'rxjs/Rx';
 
 export function fourierTransform(audioContext$: Observable<AudioContext>) {
 
@@ -15,7 +12,7 @@ export function fourierTransform(audioContext$: Observable<AudioContext>) {
         const resourceFactory = () => new FFTResource(mediaStream, audioContext);
 
         // refresh the frequencyData array on each animationFrame
-        const fft$Factory = (resource: FFTResource) => Observable.interval(0, Scheduler.animationFrame).pipe(
+        const fft$Factory = (resource: FFTResource) => interval(0, animationFrameScheduler).pipe(
           map(() => {
             const {analyser, frequencyData} = resource;
             analyser.getByteFrequencyData(frequencyData);
@@ -31,7 +28,7 @@ export function fourierTransform(audioContext$: Observable<AudioContext>) {
   };
 }
 
-class FFTResource implements ISubscription {
+class FFTResource implements Unsubscribable {
 
   public closed = false;
 

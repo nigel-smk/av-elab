@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { demoData } from './demo-session-data';
 import {SessionData} from '../../models/session-data';
-import {ReplaySubject} from 'rxjs/ReplaySubject';
+import {ReplaySubject} from 'rxjs';
 
 @Injectable()
 export class SessionDataService {

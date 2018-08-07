@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { JwtHelper } from 'angular2-jwt';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
 import {Http, Response} from '@angular/http';
+import {map, take, tap} from 'rxjs/operators';
+import {} from 'rxjs/internal/operators';
 
 @Injectable()
 export class AdminAuthService {
@@ -19,14 +18,15 @@ export class AdminAuthService {
   }
 
   login(username: string, password: string) {
-    return this.http.post('/api/admin/auth', {username: username, password: password})
-      .map((response: Response) => response.json().token)
-      .do((token) => {
+    return this.http.post('/api/admin/auth', {username: username, password: password}).pipe(
+      map((response: Response) => response.json().token),
+      tap((token: string) => {
         localStorage.setItem('token', token);
         this.loggedIn = true;
         this.token = token;
-      })
-      .take(1);
+      }),
+      take(1)
+    );
   }
 
   logout() {

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {UserMediaService} from '../../web-audio/user-media.service';
 import {AudioContextService} from '../../web-audio/audio-context.service';
 import {RecordingSession} from '../../web-audio/recording-session';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 
 @Injectable()
 export class AudioCaptureService {

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import {Http, Response, Headers} from '@angular/http';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {PermissionData} from '../../models/permission-data';
 import {AdminAuthService} from './admin-auth.service';
+import {take, map} from 'rxjs/internal/operators';
 
 @Injectable()
 export class PermissionsDataService {
@@ -17,19 +18,20 @@ export class PermissionsDataService {
   }
 
   getAll(): Observable<PermissionData[]> {
-    return this.http.get('/api/permissions', { headers: this.headers })
-      .map((response: Response) => {
+    return this.http.get('/api/permissions', { headers: this.headers }).pipe(
+      map((response: Response) => {
         return response.json() as PermissionData[];
-      })
-      .take(1);
+      }),
+      take(1)
+    );
   }
 
   create(email: string) {
-    return this.http.post('/api/permissions', {email: email}, { headers: this.headers }).take(1);
+    return this.http.post('/api/permissions', {email: email}, { headers: this.headers }).pipe(take(1));
   }
 
   delete(data: PermissionData) {
-    return this.http.delete(`/api/permission/${ data.id }`, { headers: this.headers }).take(1);
+    return this.http.delete(`/api/permission/${ data.id }`, { headers: this.headers }).pipe(take(1));
   }
 
 }

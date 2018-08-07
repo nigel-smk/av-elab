@@ -1,6 +1,6 @@
 import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
-import {Observable} from 'rxjs/Observable';
-import {switchMap, take} from 'rxjs/operators';
+import {Observable} from 'rxjs';
+import {switchMap, take, map} from 'rxjs/operators';
 
 export function initializeResumeableUpload(http: HttpClient, accessToken$: Observable<string>): Observable<string> {
 
@@ -18,5 +18,5 @@ export function initializeResumeableUpload(http: HttpClient, accessToken$: Obser
         observe: 'response'
       })
     )
-  ).map((resp: HttpResponse<string>) => resp.headers.get('Location'));
+  ).pipe(map((resp: HttpResponse<string>) => resp.headers.get('Location')));
 }

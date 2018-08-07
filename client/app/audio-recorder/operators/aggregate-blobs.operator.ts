@@ -1,5 +1,5 @@
-import {Observable} from 'rxjs/Observable';
 import {map, reduce} from 'rxjs/operators';
+import {Observable} from 'rxjs';
 
 export function aggregateBlobs(mimeType: string) {
   return (source: Observable<Blob>) => {

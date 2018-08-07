@@ -1,9 +1,9 @@
 import {AfterViewInit, Component, ElementRef, Input, OnDestroy, ViewChild} from '@angular/core';
-import {ISubscription} from 'rxjs/Subscription';
+import {Subscription} from 'rxjs';
 
 import * as D3Scale from 'd3-scale';
 import * as D3ScaleChromatic from 'd3-scale-chromatic';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-mic-monitor',
@@ -20,7 +20,7 @@ export class MicMonitorComponent implements AfterViewInit, OnDestroy {
   private colourScale = D3Scale.scaleLinear().domain([0, 255]).range([0, 1]);
   private radiusScale = D3Scale.scaleLinear().domain([0, 255]).range([10, this.radius]);
 
-  private subscription: ISubscription;
+  private subscription: Subscription;
 
   public loaded = false;
 

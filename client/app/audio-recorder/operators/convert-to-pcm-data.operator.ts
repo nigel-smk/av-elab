@@ -1,5 +1,5 @@
-import {Observable} from 'rxjs/Observable';
 import {combineLatest, switchMap} from 'rxjs/operators';
+import {Observable} from 'rxjs/index';
 
 // TODO this pollutes the AudioContext somewhat irreversibly? Can we reverse changes to the AudioContext on unsubscribe?
 // use the strategy in the fourier transform operator

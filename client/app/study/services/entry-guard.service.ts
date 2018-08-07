@@ -2,10 +2,8 @@ import { Injectable } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { AuthService } from '../../shared/services/auth.service';
-import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
-import 'rxjs/add/operator/map';
 import {AdminAuthService} from '../../shared/services/admin-auth.service';
+import {map} from 'rxjs/operators';
 
 @Injectable()
 export class EntryGuardService implements CanActivate {
@@ -35,20 +33,20 @@ export class EntryGuardService implements CanActivate {
         this.router.navigate(['/api/admin/login']);
         return false;
       }
-      return this.auth.testRunLogin(study).map(() => {
+      return this.auth.testRunLogin(study).pipe(map(() => {
         this.router.navigate(['/invalid-browser']);
         return false;
       }, (err) => {
         this.router.navigate(['/login-failed']);
-      });
+      }));
     }
 
     // login
-    return this.auth.login(subject, study).map(() => {
+    return this.auth.login(subject, study).pipe(map(() => {
       this.router.navigate(['/invalid-browser']);
       return false;
     }, (err) => {
       this.router.navigate(['/login-failed']);
-    });
+    }));
   }
 }

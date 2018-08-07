@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {SessionDataService} from '../services/session-data.service';
-import {Observable} from 'rxjs/Observable';
-import {ISubscription} from 'rxjs/Subscription';
+import {fromEvent, Observable, Subscription} from 'rxjs';
 import {Router} from '@angular/router';
 import {SessionData} from '../../models/session-data';
 
@@ -20,14 +19,14 @@ import {SessionData} from '../../models/session-data';
 export class BriefingComponent implements OnInit {
 
   public data: Observable<SessionData>;
-  private subscription: ISubscription;
+  private subscription: Subscription;
 
   constructor(private sessionData: SessionDataService, private router: Router) {
     this.data = sessionData.$;
   }
 
   ngOnInit() {
-    this.subscription = Observable.fromEvent(document, 'keypress').subscribe((event: KeyboardEvent) => {
+    this.subscription = fromEvent(document, 'keypress').subscribe((event: KeyboardEvent) => {
       if (event.keyCode == 32) {
         this.router.navigate(['/stimulus']);
       }

@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import {Observable} from 'rxjs/Observable';
-import {ISubscription} from 'rxjs/Subscription';
+import {fromEvent, Observable, Subscription} from 'rxjs';
 import {Router} from '@angular/router';
 import {UserMediaService} from '../../web-audio/user-media.service';
 import {AudioContextService} from '../../web-audio/audio-context.service';
@@ -35,7 +34,7 @@ export class CalibrationComponent implements OnInit, OnDestroy {
   public expectedEvents = new Set(this.phases);
   public volumeData$: Observable<number>;
 
-  private subscription: ISubscription;
+  private subscription: Subscription;
 
   constructor(
     private router: Router,
@@ -50,7 +49,7 @@ export class CalibrationComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // TODO some way other than referencing global document variable?
-    this.subscription = Observable.fromEvent(document, 'keypress').subscribe((event: KeyboardEvent) => {
+    this.subscription = fromEvent(document, 'keypress').subscribe((event: KeyboardEvent) => {
       if (event.keyCode == 32 && this.expectedEvents.size == 0) {
         this.router.navigate(['/briefing']);
       }

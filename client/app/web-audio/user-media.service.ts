@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import {Observable} from 'rxjs/Observable';
+import {Observable, ReplaySubject, defer, from} from 'rxjs';
 import {switchAll, shareReplay} from 'rxjs/operators';
-import {ReplaySubject} from 'rxjs/ReplaySubject';
 
 @Injectable()
 export class UserMediaService {
@@ -15,9 +14,9 @@ export class UserMediaService {
 
   private getUserMedia(constraints: MediaStreamConstraints): Observable<MediaStream> {
     // we must defer the fromPromise to make it a "cold" observable. Otherwise errors get thrown before there are subscribers
-    return Observable.defer(() => {
+    return defer(() => {
       // TODO check for outdated userMedia methods
-      return Observable.fromPromise(navigator.mediaDevices.getUserMedia(constraints));
+      return from(navigator.mediaDevices.getUserMedia(constraints));
     });
   }
 

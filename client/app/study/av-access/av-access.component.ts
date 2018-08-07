@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import 'rxjs/add/operator/subscribeOn';
 import {Router} from '@angular/router';
 import {UserMediaService} from '../../web-audio/user-media.service';
 import {environment} from '../../../environments/environment';
@@ -11,7 +10,7 @@ import {environment} from '../../../environments/environment';
 })
 export class AvAccessComponent implements OnInit {
 
-  public access = 'denied';
+  public access = 'pending';
 
   constructor(private router: Router, private userMedia: UserMediaService) { }
 

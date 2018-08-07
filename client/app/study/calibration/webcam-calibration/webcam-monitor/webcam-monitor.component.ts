@@ -1,5 +1,5 @@
-import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {ISubscription} from 'rxjs/Subscription';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Subscription} from 'rxjs';
 import {UserMediaService} from '../../../../web-audio/user-media.service';
 
 @Component({
@@ -14,7 +14,7 @@ import {UserMediaService} from '../../../../web-audio/user-media.service';
 export class WebcamMonitorComponent implements OnInit, OnDestroy {
 
   @ViewChild('webcamout') el: ElementRef;
-  private subscription: ISubscription;
+  private subscription: Subscription;
   public loaded = false;
 
   constructor(private userMedia: UserMediaService) { }

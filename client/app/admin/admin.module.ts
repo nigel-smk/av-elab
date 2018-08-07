@@ -7,7 +7,6 @@ import { StudiesComponent } from './studies/studies.component';
 import { SharesComponent } from './shares/shares.component';
 import { ActivityLogComponent } from './activity-log/activity-log.component';
 import { AdminRoutingModule } from './admin-routing.module';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { InstructionsModalComponent } from './studies/instructions-modal/instructions-modal.component';
 import { DeleteModalComponent } from './studies/delete-modal/delete-modal.component';
 import {AdminAuthService} from '../shared/services/admin-auth.service';
@@ -17,7 +16,6 @@ import {AdminAuthGuardService} from './services/admin-auth-guard.service';
   imports: [
     CommonModule,
     SharedModule,
-    NgbModule,
     AdminRoutingModule
   ],
   declarations: [

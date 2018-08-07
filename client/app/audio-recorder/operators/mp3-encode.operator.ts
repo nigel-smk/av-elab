@@ -1,7 +1,5 @@
-import {Observable} from 'rxjs/Observable';
 import {takeWhile} from 'rxjs/operators';
-import {ISubscription} from 'rxjs/Subscription';
-import {using} from 'rxjs/observable/using';
+import {Observable, Unsubscribable, using} from 'rxjs/index';
 
 // TODO use WebWorker.eventlistener?
 
@@ -46,7 +44,7 @@ export function mp3Encode() {
   };
 }
 
-class WorkerResource implements ISubscription {
+class WorkerResource implements Unsubscribable {
 
   public worker: Worker;
   public closed = false;

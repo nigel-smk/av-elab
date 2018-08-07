@@ -1,13 +1,11 @@
-import {Observable} from 'rxjs/Observable';
-import {ConnectableObservable} from 'rxjs/Rx';
-import {ISubscription} from 'rxjs/Subscription';
-import {Subject} from 'rxjs/Subject';
+import {Observable, ConnectableObservable, Subscription, Subject} from 'rxjs';
 import {share, takeUntil} from 'rxjs/operators';
 import {mp3Encode} from '../audio-recorder/operators/mp3-encode.operator';
 import {toBlob} from '../audio-recorder/operators/to-blob.operator';
 import {aggregateBlobs} from '../audio-recorder/operators/aggregate-blobs.operator';
 import {environment} from '../../environments/environment';
 import {convertToPcmData} from '../audio-recorder/operators/convert-to-pcm-data.operator';
+import {publish} from 'rxjs/internal/operators';
 
 const pcmDataBufferSize = environment.pcmDataBufferSize;
 const driveUploadBufferSize = environment.driveUploadBufferSize;
@@ -18,7 +16,7 @@ export class RecordingSession {
   public mp3Complete$: Observable<Blob>;
 
   private streamControl: ConnectableObservable<Int8Array>;
-  private startStream: ISubscription;
+  private startStream: Subscription;
   private endStream: Subject<void> = new Subject<void>();
 
   constructor(mediaStream$: Observable<MediaStream>, audioContext$: Observable<AudioContext>) {
@@ -27,7 +25,7 @@ export class RecordingSession {
       mp3Encode()
     );
 
-    this.streamControl = mp3Data$.publish();
+    this.streamControl = mp3Data$.pipe(publish()) as ConnectableObservable<Int8Array>;
     this.mp3Chunk$ = this.streamControl.pipe(
       takeUntil(this.endStream), // TODO encoder should be bundled with pcmData$. Need to figure out how to have pcmData$ initialize only after subscription
       share(),

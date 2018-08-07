@@ -1,6 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
-import {ISubscription} from 'rxjs/Subscription';
+import {fromEvent, Subscription} from 'rxjs';
 import {SessionData} from '../../models/session-data';
 import {SessionDataService} from '../services/session-data.service';
 import {ImageCaptureService} from '../services/image-capture.service';
@@ -22,8 +21,8 @@ enum YTEvent {
 })
 export class StimulusComponent implements OnInit, OnDestroy {
 
-  public sessionDataSubscription: ISubscription;
-  private keypressSubscription: ISubscription;
+  public sessionDataSubscription: Subscription;
+  private keypressSubscription: Subscription;
   public data: SessionData;
   public player: YT.Player;
   // TODO fetch from environment
@@ -50,7 +49,7 @@ export class StimulusComponent implements OnInit, OnDestroy {
     this.audioCapture.start();
     this.imageCapture.start();
 
-    this.keypressSubscription = Observable.fromEvent(document, 'keypress').subscribe((event: KeyboardEvent) => {
+    this.keypressSubscription = fromEvent(document, 'keypress').subscribe((event: KeyboardEvent) => {
       if (event.keyCode == 32 && this.data) {
         this.onStimulusEnd()
       }

@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
-import {Observable} from 'rxjs/Observable';
-import {ReplaySubject} from 'rxjs/ReplaySubject';
+import {Observable, ReplaySubject, of, defer} from 'rxjs';
 import {shareReplay, switchAll} from 'rxjs/operators';
-import {defer} from 'rxjs/observable/defer';
-import {of} from 'rxjs/observable/of';
 
 @Injectable()
 export class AudioContextService {

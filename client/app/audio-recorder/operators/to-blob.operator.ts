@@ -1,4 +1,4 @@
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs/index';
 
 export function toBlob(bufferSize: number): (number) => Observable<Blob> {
   // TODO generalize to TypedArray

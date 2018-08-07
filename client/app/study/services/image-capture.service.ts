@@ -1,11 +1,9 @@
 import {Injectable, OnDestroy} from '@angular/core';
-import {ISubscription} from 'rxjs/Subscription';
-import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/observable/interval';
+import {interval, Subscription} from 'rxjs';
 import {Http, Headers} from '@angular/http';
 import {AuthService} from '../../shared/services/auth.service';
 import {UserMediaService} from '../../web-audio/user-media.service';
-import {switchMap} from 'rxjs/operators';
+import {switchMap, map} from 'rxjs/operators';
 
 @Injectable()
 export class ImageCaptureService implements OnDestroy {
@@ -13,7 +11,7 @@ export class ImageCaptureService implements OnDestroy {
   private videoElement: HTMLVideoElement = document.createElement('video');
   private canvasElement: HTMLCanvasElement = document.createElement('canvas');
   private snapCount = 0;
-  private subscription: ISubscription;
+  private subscription: Subscription;
 
   private headers: Headers;
 
@@ -38,11 +36,11 @@ export class ImageCaptureService implements OnDestroy {
         canvas.height = 200;
 
         // TODO set interval and canvas size and image type/quality in environment
-        return Observable.interval(2000).map(() => {
+        return interval(2000).pipe(map(() => {
           canvas.getContext('2d')
             .drawImage(video, 0, 0, canvas.width, canvas.height);
           return canvas.toDataURL('image/jpeg', 0.1);
-        });
+        }));
       })
     ).subscribe((snapshot) => {
       // send snapshot to server
